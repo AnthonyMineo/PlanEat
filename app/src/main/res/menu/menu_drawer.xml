@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="@string/menu_drawer_item_food_title">
+        <menu>
+            <item
+                android:id="@+id/menu_drawer_recipes"
+                android:icon="@drawable/baseline_restaurant_menu_black_48"
+                android:title="@string/menu_drawer_recipes_title" />
+            </menu>
+    </item>
+
+    <item android:title="@string/menu_drawer_item_tools_title">
+        <menu>
+            <item
+                android:id="@+id/menu_drawer_profil"
+                android:icon="@drawable/baseline_room_service_black_48"
+                android:title="@string/menu_drawer_profile_title" />
+
+            <item
+                android:id="@+id/menu_drawer_historic"
+                android:icon="@drawable/baseline_history_black_48"
+                android:title="@string/menu_drawer_historic_title" />
+        </menu>
+    </item>
+
+    <item android:title="@string/menu_drawer_item_others_title">
+        <menu>
+            <item
+                android:id="@+id/menu_drawer_parameters"
+                android:icon="@drawable/baseline_settings_black_48"
+                android:title="@string/menu_drawer_parameters_title" />
+            <item
+                android:id="@+id/menu_drawer_help"
+                android:icon="@drawable/baseline_help_black_48"
+                android:title="@string/menu_drawer_help_title" />
+        </menu>
+    </item>
+
+</menu>

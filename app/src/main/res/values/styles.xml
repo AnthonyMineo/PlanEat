@@ -1,16 +1,34 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/secondaryColor</item>
     </style>
 
-    <!-- Splash Screen theme-->
+    <!-- Splash Screen theme. -->
     <style name="AppTheme.Launcher">
         <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
+    <!-- Toolbar theme. -->
+    <style name="AppTheme.ToolbarTheme">
+        <!-- Color of the background -->
+        <item name="android:background">@color/primaryColor</item>
+        <!-- Color of the title text  -->
+        <item name="android:textColorPrimary">@color/primaryTextColor</item>
+        <!-- Color of the text of action (menu) items  -->
+        <item name="actionMenuTextColor">@color/primaryTextColor</item>
+        <!-- Tints the input fields like checkboxes and text fields -->
+        <item name="colorAccent">@color/secondaryColor</item>
+        <!-- Applies to views in their normal state -->
+        <item name="colorControlNormal">@color/primaryTextColor</item>
+        <!-- Applies to views in their activated state (i.e checked or switches) -->
+        <!-- <item name="colorControlActivated"></item> -->
+        <!-- Applied to framework control highlights (i.e ripples or list selectors) -->
+        <!-- <item name="colorControlHighlight"></item> -->
     </style>
 
 </resources>

@@ -1,3 +1,24 @@
 <resources>
+    <!-- App related -->
     <string name="app_name">PlanEat</string>
+    
+    <!-- Toolbar -->
+    <string name="toolbar_shopping_list_title">Shopping list</string>
+    <string name="toolbar_planning_title">Planning</string>
+    <string name="toolbar_meals_of_the_day_title">Meals</string>
+
+    <!-- Menu drawer. -->
+    <string name="menu_drawer_profile_title">Profile</string>
+    <string name="menu_drawer_recipes_title">Recipes</string>
+    <string name="menu_drawer_historic_title">Historic</string>
+    <string name="menu_drawer_parameters_title">Parameters</string>
+    <string name="menu_drawer_help_title">Help</string>
+
+    <string name="menu_drawer_item_food_title">Food</string>
+    <string name="menu_drawer_item_tools_title">Tools</string>
+    <string name="menu_drawer_item_others_title">Others</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
 </resources>
