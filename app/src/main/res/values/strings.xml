@@ -1,6 +1,6 @@
 <resources>
     <!-- App related -->
-    <string name="app_name">PlanEat</string>
+    <string name="app_name">Planeat</string>
     
     <!-- Toolbar -->
     <string name="toolbar_shopping_list_title">Shopping list</string>
