@@ -4,7 +4,9 @@ package com.denma.planeat.controllers.activities;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 
 import com.denma.planeat.R;
 import com.denma.planeat.controllers.BaseActivity;
+import com.denma.planeat.views.adapter.PageAdapter;
 
 import butterknife.BindView;
 
@@ -24,6 +27,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     DrawerLayout drawerLayout;
     @BindView(R.id.activity_main_nav_view)
     NavigationView navigationView;
+    @BindView(R.id.activity_main_view_pager)
+    ViewPager viewPager;
+
+    // FOR DATA
+    private PageAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +40,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         this.configureToolBar();
         this.configureDrawerLayout();
         this.configureNavigationView();
+        this.configureViewPager();
+
+        this.showFirstFragment();
     }
 
     // --------------------
@@ -64,9 +75,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    // - Configure ViewPager
+    private void configureViewPager() {
+        pagerAdapter = new PageAdapter(getSupportFragmentManager());
+        // - Set Adapter PageAdapter and glue it together
+        this.viewPager.setAdapter(pagerAdapter);
+    }
+
     // --------------------
     // ACTIONS
     // --------------------
+
+    // - Show first fragment
+    private void showFirstFragment(){
+        viewPager.setCurrentItem(1);
+    }
+
 
     // --------------------
     // MENUS

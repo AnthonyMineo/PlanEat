@@ -1,7 +1,7 @@
 <resources>
     <!-- App related -->
     <string name="app_name">Planeat</string>
-    
+
     <!-- Toolbar -->
     <string name="toolbar_shopping_list_title">Shopping list</string>
     <string name="toolbar_planning_title">Planning</string>
@@ -20,5 +20,8 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
