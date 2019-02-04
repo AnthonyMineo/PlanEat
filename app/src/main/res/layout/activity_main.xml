@@ -10,13 +10,14 @@
     tools:openDrawer="start">
 
     <!-- Main container -->
-    <LinearLayout
+    <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
         <!-- Toolbar -->
         <include
+            android:id="@+id/toolbar"
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -24,9 +25,22 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/activity_main_view_pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_above="@id/activity_main_bottom_navigation"/>
 
-    </LinearLayout>
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/activity_main_bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:itemIconTint="@drawable/bottom_navigation_colors"
+            app:itemTextColor="@drawable/bottom_navigation_colors"
+            android:background="@color/primaryColor"
+            app:menu="@menu/bottom_navigation_menu"
+            android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
 
     <!-- NavigationView -->
     <android.support.design.widget.NavigationView

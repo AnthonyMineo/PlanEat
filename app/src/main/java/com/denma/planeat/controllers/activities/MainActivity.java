@@ -3,8 +3,8 @@ package com.denma.planeat.controllers.activities;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -29,6 +29,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     NavigationView navigationView;
     @BindView(R.id.activity_main_view_pager)
     ViewPager viewPager;
+    @BindView(R.id.activity_main_bottom_navigation)
+    BottomNavigationView bottomNavigationView;
 
     // FOR DATA
     private PageAdapter pagerAdapter;
@@ -41,6 +43,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         this.configureDrawerLayout();
         this.configureNavigationView();
         this.configureViewPager();
+        this.configureBottomView();
 
         this.showFirstFragment();
     }
@@ -80,15 +83,60 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         pagerAdapter = new PageAdapter(getSupportFragmentManager());
         // - Set Adapter PageAdapter and glue it together
         this.viewPager.setAdapter(pagerAdapter);
+        this.viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(bottomNavigationView != null){
+                    bottomNavigationView.getMenu().getItem(position).setChecked(true);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+    // - Configure BottomNavigationView
+    private void configureBottomView(){
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return updateViewPagerCurrentItem(item.getItemId());
+            }
+        });
     }
 
     // --------------------
     // ACTIONS
     // --------------------
 
+    // - Update viewPager current item
+    private Boolean updateViewPagerCurrentItem(Integer integer){
+        switch (integer) {
+            case R.id.action_shopping_list:
+                viewPager.setCurrentItem(0);
+                break;
+            case R.id.action_planning:
+                viewPager.setCurrentItem(1);
+                break;
+            case R.id.action_meal_of_the_day:
+                viewPager.setCurrentItem(2);
+                break;
+        }
+        return true;
+    }
+
     // - Show first fragment
     private void showFirstFragment(){
         viewPager.setCurrentItem(1);
+        bottomNavigationView.setSelectedItemId(1);
     }
 
 

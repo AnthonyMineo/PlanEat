@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_shopping_list"
+        android:enabled="true"
+        android:icon="@drawable/baseline_list_alt_black_48"
+        android:title="@string/bottom_navigation_menu_shopping_list"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_planning"
+        android:enabled="true"
+        android:icon="@drawable/baseline_event_note_black_48"
+        android:title="@string/bottom_navigation_menu_planning"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_meal_of_the_day"
+        android:enabled="true"
+        android:icon="@drawable/baseline_room_service_black_48"
+        android:title="@string/bottom_navigation_menu_meal_of_the_day"
+        app:showAsAction="ifRoom" />
+</menu>

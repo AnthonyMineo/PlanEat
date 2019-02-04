@@ -1,8 +1,8 @@
 <resources>
-    <!-- App related -->
+    <!-- App related. -->
     <string name="app_name">Planeat</string>
 
-    <!-- Toolbar -->
+    <!-- Toolbar. -->
     <string name="toolbar_shopping_list_title">Shopping list</string>
     <string name="toolbar_planning_title">Planning</string>
     <string name="toolbar_meals_of_the_day_title">Meals</string>
@@ -21,7 +21,9 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Bottom navigation view. -->
+    <string name="bottom_navigation_menu_shopping_list">Shopping List</string>
+    <string name="bottom_navigation_menu_planning">Planning</string>
+    <string name="bottom_navigation_menu_meal_of_the_day">Meals</string>
 
 </resources>
