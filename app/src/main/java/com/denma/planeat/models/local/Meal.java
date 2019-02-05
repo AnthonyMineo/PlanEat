@@ -8,10 +8,8 @@ public class Meal {
     private int dayTiming;
 
     // --------------------
-    // CONSTRUCTORS
+    // CONSTRUCTOR
     // --------------------
-
-    public Meal() { }
 
     public Meal(Recipe recipe, int dayTiming) {
         this.recipe = recipe;

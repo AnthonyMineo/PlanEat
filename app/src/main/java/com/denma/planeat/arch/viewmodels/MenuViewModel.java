@@ -1,6 +1,7 @@
 package com.denma.planeat.arch.viewmodels;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModel;
 
 import com.denma.planeat.arch.repositories.MenuRepository;
 import com.denma.planeat.models.local.Menu;
@@ -10,7 +11,7 @@ import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
 
-public class MenuViewModel {
+public class MenuViewModel extends ViewModel {
 
     // --- REPOSITORIES ---
     private MenuRepository menuDataSource;

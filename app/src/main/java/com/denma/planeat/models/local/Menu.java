@@ -3,6 +3,7 @@ package com.denma.planeat.models.local;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.List;
@@ -11,15 +12,14 @@ import java.util.List;
 public class Menu {
 
     @PrimaryKey
+    @NonNull
     private String eatingDate;
     @Nullable
     private List<Meal> mealList;
 
     // --------------------
-    // CONSTRUCTORS
+    // CONSTRUCTOR
     // --------------------
-
-    public Menu() { }
 
     public Menu(@Nullable List<Meal> mealList, String eatingDate) {
         this.mealList = mealList;
