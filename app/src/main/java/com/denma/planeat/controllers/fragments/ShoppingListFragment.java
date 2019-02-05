@@ -2,6 +2,7 @@ package com.denma.planeat.controllers.fragments;
 
 
 import android.os.Bundle;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,5 +47,8 @@ public class ShoppingListFragment extends BaseFragment {
         return R.layout.fragment_shopping_list;
     }
 
+    // --------------------
+    // CONFIGURATIONS
+    // --------------------
 
 }

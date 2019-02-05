@@ -5,7 +5,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/fragment_list_recycler_view"
+        android:id="@+id/fragment_planning_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
