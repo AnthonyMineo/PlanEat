@@ -28,14 +28,14 @@ public class PlanningAdapter extends RecyclerView.Adapter<PlanningViewHolder>{
     public PlanningViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // CREATE VIEW HOLDER AND INFLATING ITS XML LAYOUT
         this.context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(this.context);
         View view = inflater.inflate(R.layout.plannig_recycle_item, parent, false);
         return new PlanningViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PlanningViewHolder holder, int position) {
-        holder.updateWithRecipe(menuList.get(position));
+        holder.updateWithRecipe(menuList.get(position), context);
     }
 
     @Override
