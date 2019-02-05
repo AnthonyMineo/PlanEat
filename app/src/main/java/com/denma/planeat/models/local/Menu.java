@@ -1,12 +1,19 @@
 package com.denma.planeat.models.local;
 
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.Nullable;
+
 import java.util.List;
 
+@Entity
 public class Menu {
 
-    private List<Meal> mealList;
+    @PrimaryKey
     private String eatingDate;
+    @Nullable
+    private List<Meal> mealList;
 
     // --------------------
     // CONSTRUCTORS
@@ -14,7 +21,7 @@ public class Menu {
 
     public Menu() { }
 
-    public Menu(List<Meal> mealList, String eatingDate) {
+    public Menu(@Nullable List<Meal> mealList, String eatingDate) {
         this.mealList = mealList;
         this.eatingDate = eatingDate;
     }
@@ -23,6 +30,7 @@ public class Menu {
     // GETTERS
     // --------------------
 
+    @Nullable
     public List<Meal> getMealList() { return mealList; }
     public String getEatingDate() { return eatingDate; }
 
@@ -30,6 +38,6 @@ public class Menu {
     // SETTERS
     // --------------------
 
+    public void setMealList(@Nullable List<Meal> mealList) { this.mealList = mealList; }
     public void setEatingDate(String eatingDate) { this.eatingDate = eatingDate; }
-    public void setMealList(List<Meal> mealList) { this.mealList = mealList; }
 }
