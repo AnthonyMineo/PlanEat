@@ -36,8 +36,8 @@ public class PlanningViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void updateWithRecipe(Menu menu, Context context){
-        this.day_name.setText(menu.getEatingDate().substring(0,3));
-        this.day_number.setText(menu.getEatingDate().substring(3));
+        this.day_name.setText(menu.getEatingDate().substring(0,3).toUpperCase());
+        this.day_number.setText(menu.getEatingDate().substring(4));
 
         if(menu.getMealList().size() == 0){
             Glide.with(context).load(R.drawable.no_meal_yet).into(this.breakfast);
