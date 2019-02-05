@@ -1,10 +1,12 @@
 package com.denma.planeat.controllers.activities;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -13,12 +15,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.denma.planeat.R;
+
 import com.denma.planeat.controllers.BaseActivity;
+
 import com.denma.planeat.views.adapter.PageAdapter;
 
-import butterknife.BindView;
+import javax.inject.Inject;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+import butterknife.BindView;
+import dagger.android.AndroidInjection;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
+
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, HasSupportFragmentInjector {
 
     // FOR DESIGN
     @BindView(R.id.toolbar)
@@ -35,16 +44,32 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     // FOR DATA
     private PageAdapter pagerAdapter;
 
+    // FOR INJECTION
+    @Inject
+    DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
+    @Override
+    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
+        return dispatchingAndroidInjector;
+    }
+
+    // --------------------
+    // ON CREATE
+    // --------------------
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
+
+        // Configuration
+        this.configureDagger();
         this.configureToolBar();
         this.configureDrawerLayout();
         this.configureNavigationView();
         this.configureViewPager();
         this.configureBottomView();
 
+        // Action
         this.showFirstFragment();
     }
 
@@ -60,6 +85,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     // --------------------
     // CONFIGURATIONS
     // --------------------
+
+    // - Configure Dagger2
+    private void configureDagger(){
+        AndroidInjection.inject(this);
+    }
 
     // - Configure Toolbar
     private void configureToolBar() {
@@ -136,7 +166,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     // - Show first fragment
     private void showFirstFragment(){
         viewPager.setCurrentItem(1);
-        bottomNavigationView.setSelectedItemId(1);
+        bottomNavigationView.setSelectedItemId(R.id.action_planning);
     }
 
 

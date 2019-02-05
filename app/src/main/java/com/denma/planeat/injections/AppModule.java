@@ -58,6 +58,10 @@ public class AppModule {
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("eatingDate", "MAR05");
                 db.insert("Menu", OnConflictStrategy.IGNORE, contentValues);
+
+                ContentValues contentValues1 = new ContentValues();
+                contentValues1.put("eatingDate", "MER06");
+                db.insert("Menu", OnConflictStrategy.IGNORE, contentValues1);
             }
         };
     }

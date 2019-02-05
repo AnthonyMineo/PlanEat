@@ -1,7 +1,11 @@
 package com.denma.planeat.controllers.fragments;
 
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,11 +13,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.denma.planeat.R;
+import com.denma.planeat.arch.viewmodels.MenuViewModel;
 import com.denma.planeat.controllers.BaseFragment;
+import com.denma.planeat.models.local.Menu;
 import com.denma.planeat.utils.ItemClickSupport;
 import com.denma.planeat.views.adapter.PlanningAdapter;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
+import dagger.android.support.AndroidSupportInjection;
 
 public class PlanningFragment extends BaseFragment {
 
@@ -22,6 +33,9 @@ public class PlanningFragment extends BaseFragment {
     RecyclerView recyclerView;
 
     // FOR DATA
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+    private MenuViewModel menuViewModel;
     private PlanningAdapter planningAdapter;
 
     // --------------------
@@ -48,7 +62,10 @@ public class PlanningFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
+        // Configuration
+        this.configureDagger();
         this.configureRecyclerView();
+        this.configureViewModel();
 
         return view;
     }
@@ -66,6 +83,11 @@ public class PlanningFragment extends BaseFragment {
     // CONFIGURATIONS
     // --------------------
 
+    // - Configure Dagger2
+    private void configureDagger() {
+        AndroidSupportInjection.inject(this);
+    }
+
     // - Configure RecyclerView, Adapter, LayoutManager & glue it together
     private void configureRecyclerView() {
         // - Create adapter passing the list of Restaurants
@@ -82,5 +104,23 @@ public class PlanningFragment extends BaseFragment {
 
                     }
                 });
+    }
+
+    private void configureViewModel(){
+        menuViewModel = ViewModelProviders.of(this, viewModelFactory).get(MenuViewModel.class);
+        menuViewModel.getAllMenu().observe(this, new Observer<List<Menu>>() {
+            @Override
+            public void onChanged(@Nullable List<Menu> menus) {
+                updateMenu(menus);
+            }
+        });
+    }
+
+    // --------------------
+    // ACTIONS
+    // --------------------
+
+    private void updateMenu(List<Menu> menus){
+        planningAdapter.updateData(menus);
     }
 }

@@ -34,6 +34,8 @@ public class PlanningViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void updateWithRecipe(Menu menu){
+        this.day_name.setText(menu.getEatingDate().substring(0,3));
+        this.day_number.setText(menu.getEatingDate().substring(3));
 
     }
 }
