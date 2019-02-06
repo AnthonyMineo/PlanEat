@@ -6,6 +6,8 @@
     <string name="toolbar_shopping_list_title">Shopping list</string>
     <string name="toolbar_planning_title">Planning</string>
     <string name="toolbar_meals_of_the_day_title">Meals</string>
+    <string name="toolbar_menu_add_title">Add</string>
+    <string name="toolbar_search_title">Choose your meal</string>
 
     <!-- Menu drawer. -->
     <string name="menu_drawer_profile_title">Profile</string>

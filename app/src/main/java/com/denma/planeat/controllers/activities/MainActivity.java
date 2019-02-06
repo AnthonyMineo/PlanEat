@@ -1,6 +1,7 @@
 package com.denma.planeat.controllers.activities;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,6 +12,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.denma.planeat.R;
@@ -39,6 +42,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     ViewPager viewPager;
     @BindView(R.id.activity_main_bottom_navigation)
     BottomNavigationView bottomNavigationView;
+    private MenuItem addMenu;
+
 
     // FOR DATA
     private PageAdapter pagerAdapter;
@@ -122,6 +127,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             public void onPageSelected(int position) {
                 if(bottomNavigationView != null){
                     bottomNavigationView.getMenu().getItem(position).setChecked(true);
+                    if(addMenu != null){
+                        if(position == 2){
+                            addMenu.setVisible(true);
+                        } else {
+                            addMenu.setVisible(false);
+                        }
+                    }
                 }
             }
 
@@ -172,6 +184,32 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     // --------------------
     // MENUS
     // --------------------
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // - Inflate the menu and add it to the Toolbar
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_tools, menu);
+
+        this.addMenu = menu.findItem(R.id.toolbar_menu_add);
+        this.addMenu.setVisible(false);
+
+        return true;
+    }
+
+    // - Handle actions on menu items
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.toolbar_menu_add:
+                // - Launch SearchActivity
+                Intent intentAdd = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(intentAdd);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
