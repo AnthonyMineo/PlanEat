@@ -6,6 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,8 @@ public class Menu {
 
     @PrimaryKey
     @NonNull
-    private String eatingDate;
+    private int eatingDate;
+    private String eatingDateString;
     @Nullable
     private List<Meal> mealList;
 
@@ -21,9 +23,10 @@ public class Menu {
     // CONSTRUCTOR
     // --------------------
 
-    public Menu(@Nullable List<Meal> mealList, String eatingDate) {
+    public Menu(@Nullable List<Meal> mealList, int eatingDate, String eatingDateString) {
         this.mealList = mealList;
         this.eatingDate = eatingDate;
+        this.eatingDateString = eatingDateString;
     }
 
     // --------------------
@@ -32,12 +35,13 @@ public class Menu {
 
     @Nullable
     public List<Meal> getMealList() { return mealList; }
-    public String getEatingDate() { return eatingDate; }
-
+    public int getEatingDate() { return eatingDate; }
+    public String getEatingDateString() { return eatingDateString; }
     // --------------------
     // SETTERS
     // --------------------
 
     public void setMealList(@Nullable List<Meal> mealList) { this.mealList = mealList; }
-    public void setEatingDate(String eatingDate) { this.eatingDate = eatingDate; }
+    public void setEatingDate(int eatingDate) { this.eatingDate = eatingDate; }
+    public void setEatingDateString(String eatingDateString) { this.eatingDateString = eatingDateString; }
 }

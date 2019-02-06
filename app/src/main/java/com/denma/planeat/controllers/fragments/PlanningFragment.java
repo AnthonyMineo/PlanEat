@@ -17,6 +17,7 @@ import com.denma.planeat.arch.viewmodels.MenuViewModel;
 import com.denma.planeat.controllers.BaseFragment;
 import com.denma.planeat.models.local.Menu;
 import com.denma.planeat.utils.ItemClickSupport;
+import com.denma.planeat.utils.TimeAndDateUtils;
 import com.denma.planeat.views.adapter.PlanningAdapter;
 
 import java.util.List;
@@ -107,8 +108,9 @@ public class PlanningFragment extends BaseFragment {
     }
 
     private void configureViewModel(){
+        int todayDate = TimeAndDateUtils.formatDateToInt_yyyyMMdd(TimeAndDateUtils.getDateWithGapFromToday(0));
         menuViewModel = ViewModelProviders.of(this, viewModelFactory).get(MenuViewModel.class);
-        menuViewModel.getAllMenu().observe(this, new Observer<List<Menu>>() {
+        menuViewModel.getMenuFrom2WeeksRange(todayDate).observe(this, new Observer<List<Menu>>() {
             @Override
             public void onChanged(@Nullable List<Menu> menus) {
                 updateMenu(menus);

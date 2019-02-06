@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.denma.planeat.R;
 import com.denma.planeat.models.local.Menu;
+import com.denma.planeat.utils.TimeAndDateUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,8 +37,8 @@ public class PlanningViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void updateWithMenu(Menu menu, Context context){
-        this.day_name.setText(menu.getEatingDate().substring(0,3).toUpperCase());
-        this.day_number.setText(menu.getEatingDate().substring(4));
+        this.day_name.setText(menu.getEatingDateString().substring(0,3).toUpperCase());
+        this.day_number.setText(menu.getEatingDateString().substring(4));
 
         if(menu.getMealList().size() == 0){
             Glide.with(context).load(R.drawable.no_meal_yet).into(this.breakfast);

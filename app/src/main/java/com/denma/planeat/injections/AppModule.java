@@ -56,61 +56,12 @@ public class AppModule {
             public void onCreate(@NonNull SupportSQLiteDatabase db) {
                 super.onCreate(db);
 
-                ContentValues contentValues = new ContentValues();
-                contentValues.put("eatingDate", TimeAndDateUtils.getDateWithGapFromToday(0));
-                db.insert("Menu", OnConflictStrategy.IGNORE, contentValues);
-
-                ContentValues contentValues1 = new ContentValues();
-                contentValues1.put("eatingDate", TimeAndDateUtils.getDateWithGapFromToday(1));
-                db.insert("Menu", OnConflictStrategy.IGNORE, contentValues1);
-
-                ContentValues contentValues2 = new ContentValues();
-                contentValues2.put("eatingDate", TimeAndDateUtils.getDateWithGapFromToday(2));
-                db.insert("Menu", OnConflictStrategy.IGNORE, contentValues2);
-
-                ContentValues contentValues3 = new ContentValues();
-                contentValues3.put("eatingDate", TimeAndDateUtils.getDateWithGapFromToday(3));
-                db.insert("Menu", OnConflictStrategy.IGNORE, contentValues3);
-
-                ContentValues contentValues4 = new ContentValues();
-                contentValues4.put("eatingDate", TimeAndDateUtils.getDateWithGapFromToday(4));
-                db.insert("Menu", OnConflictStrategy.IGNORE, contentValues4);
-
-                ContentValues contentValues5 = new ContentValues();
-                contentValues5.put("eatingDate", TimeAndDateUtils.getDateWithGapFromToday(5));
-                db.insert("Menu", OnConflictStrategy.IGNORE, contentValues5);
-
-                ContentValues contentValues6 = new ContentValues();
-                contentValues6.put("eatingDate", TimeAndDateUtils.getDateWithGapFromToday(6));
-                db.insert("Menu", OnConflictStrategy.IGNORE, contentValues6);
-
-                ContentValues contentValues7 = new ContentValues();
-                contentValues7.put("eatingDate", TimeAndDateUtils.getDateWithGapFromToday(7));
-                db.insert("Menu", OnConflictStrategy.IGNORE, contentValues7);
-
-                ContentValues contentValues8 = new ContentValues();
-                contentValues8.put("eatingDate", TimeAndDateUtils.getDateWithGapFromToday(8));
-                db.insert("Menu", OnConflictStrategy.IGNORE, contentValues8);
-
-                ContentValues contentValues9 = new ContentValues();
-                contentValues9.put("eatingDate", TimeAndDateUtils.getDateWithGapFromToday(9));
-                db.insert("Menu", OnConflictStrategy.IGNORE, contentValues9);
-
-                ContentValues contentValues10 = new ContentValues();
-                contentValues10.put("eatingDate", TimeAndDateUtils.getDateWithGapFromToday(10));
-                db.insert("Menu", OnConflictStrategy.IGNORE, contentValues10);
-
-                ContentValues contentValues11 = new ContentValues();
-                contentValues11.put("eatingDate", TimeAndDateUtils.getDateWithGapFromToday(11));
-                db.insert("Menu", OnConflictStrategy.IGNORE, contentValues11);
-
-                ContentValues contentValues12 = new ContentValues();
-                contentValues12.put("eatingDate", TimeAndDateUtils.getDateWithGapFromToday(12));
-                db.insert("Menu", OnConflictStrategy.IGNORE, contentValues12);
-
-                ContentValues contentValues13 = new ContentValues();
-                contentValues13.put("eatingDate", TimeAndDateUtils.getDateWithGapFromToday(13));
-                db.insert("Menu", OnConflictStrategy.IGNORE, contentValues13);
+                for(int i=0; i<14; i++){
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put("eatingDate", TimeAndDateUtils.formatDateToInt_yyyyMMdd(TimeAndDateUtils.getDateWithGapFromToday(i)));
+                    contentValues.put("eatingDateString", TimeAndDateUtils.formatDateToString_EEEdd(TimeAndDateUtils.getDateWithGapFromToday(i)));
+                    db.insert("Menu", OnConflictStrategy.IGNORE, contentValues);
+                }
             }
         };
     }
