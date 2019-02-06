@@ -35,7 +35,7 @@ public class PlanningAdapter extends RecyclerView.Adapter<PlanningViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull PlanningViewHolder holder, int position) {
-        holder.updateWithRecipe(menuList.get(position), context);
+        holder.updateWithMenu(this.menuList.get(position), this.context);
     }
 
     @Override

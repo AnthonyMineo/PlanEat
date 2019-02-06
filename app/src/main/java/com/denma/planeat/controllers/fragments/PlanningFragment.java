@@ -90,8 +90,8 @@ public class PlanningFragment extends BaseFragment {
 
     // - Configure RecyclerView, Adapter, LayoutManager & glue it together
     private void configureRecyclerView() {
-        // - Create adapter passing the list of Restaurants
-        this.planningAdapter= new PlanningAdapter();
+        // - Create adapter
+        this.planningAdapter = new PlanningAdapter();
         // - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.planningAdapter);
         // - Set layout manager to position the items

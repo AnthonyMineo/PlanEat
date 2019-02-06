@@ -8,4 +8,6 @@
     <dimen name="planning_date_width">60dp</dimen>
     <dimen name="planning_small_padding">3dp</dimen>
     <dimen name="planning_medium_padding">5dp</dimen>
+    <dimen name="meal_of_the_day_small_margin">3dp</dimen>
+    <dimen name="meal_of_the_day_image_height">200dp</dimen>
 </resources>

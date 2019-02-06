@@ -35,7 +35,7 @@ public class PlanningViewHolder extends RecyclerView.ViewHolder{
         ButterKnife.bind(this, itemView);
     }
 
-    public void updateWithRecipe(Menu menu, Context context){
+    public void updateWithMenu(Menu menu, Context context){
         this.day_name.setText(menu.getEatingDate().substring(0,3).toUpperCase());
         this.day_number.setText(menu.getEatingDate().substring(4));
 
