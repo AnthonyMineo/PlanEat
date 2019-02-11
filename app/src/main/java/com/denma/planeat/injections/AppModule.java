@@ -13,6 +13,9 @@ import com.denma.planeat.arch.repositories.MenuRepository;
 import com.denma.planeat.models.database.MenuDao;
 import com.denma.planeat.models.database.PlaneatDB;
 import com.denma.planeat.utils.TimeAndDateUtils;
+import com.denma.planeat.utils.api.EdamamService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 import java.io.File;
@@ -23,6 +26,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module(includes = ViewModelModule.class)
 public class AppModule {
@@ -80,5 +85,26 @@ public class AppModule {
     @Singleton
     MenuRepository provideMenuRepository(MenuDao menuDao){
         return new MenuRepository(menuDao);
+    }
+
+    // --- NETWORK INJECTION ---
+    private static String EDAMAM_URL = "https://api.edamam.com/";
+
+    @Provides
+    Gson provideGson() { return new GsonBuilder().create(); }
+
+    @Provides
+    Retrofit provideRetrofit(Gson gson){
+        Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .baseUrl(EDAMAM_URL)
+                .build();
+        return retrofit;
+    }
+
+    @Provides
+    @Singleton
+    EdamamService provideEdamamService(Retrofit restAdapter){
+        return restAdapter.create(EdamamService.class);
     }
 }

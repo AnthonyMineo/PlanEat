@@ -11,9 +11,20 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField 'String', "Edamam_ApiKey", Edamam_ApiKey
+            resValue 'string', "edamam_api_key", Edamam_ApiKey
+            buildConfigField 'String', "Edamam_AppId", Edamam_AppId
+            resValue 'string', "edamam_app_id", Edamam_AppId
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField 'String', "Edamam_ApiKey", Edamam_ApiKey
+            resValue 'string', "edamam_api_key", Edamam_ApiKey
+            buildConfigField 'String', "Edamam_AppId", Edamam_AppId
+            resValue 'string', "edamam_app_id", Edamam_AppId
         }
     }
 }
