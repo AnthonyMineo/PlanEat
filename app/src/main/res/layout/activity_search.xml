@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controllers.activities.SearchActivity">
+    android:orientation="vertical">
 
     <!-- Toolbar -->
     <include
@@ -11,4 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-</android.support.constraint.ConstraintLayout>
+    <FrameLayout
+        android:id="@+id/activity_search_fragment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
