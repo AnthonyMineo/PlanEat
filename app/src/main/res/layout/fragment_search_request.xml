@@ -2,17 +2,163 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/search_request_edit_text"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_margin="@dimen/general_small_margin"
+        android:inputType="textAutoComplete"
+        android:hint="@string/edit_text_hint" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/general_medium_padding"
+        android:layout_marginBottom="@dimen/general_small_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/diet_label"
+            android:textColor="@android:color/black"
+            android:gravity="center"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"
+            android:layout_marginBottom="@dimen/general_small_margin"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radio_balanced"
+                android:layout_width="@dimen/item_width"
+                android:layout_height="wrap_content"
+                android:text="@string/diet_filter_balanced"/>
+
+            <RadioButton
+                android:id="@+id/radio_high_protein"
+                android:layout_width="@dimen/item_width"
+                android:layout_height="wrap_content"
+                android:text="@string/diet_filter_high_protein"/>
+
+            <RadioButton
+                android:id="@+id/radio_low_fat"
+                android:layout_width="@dimen/item_width"
+                android:layout_height="wrap_content"
+                android:text="@string/diet_filter_low_fat"/>
+
+
+            <RadioButton
+                android:id="@+id/radio_low_carbs"
+                android:layout_width="@dimen/item_width"
+                android:layout_height="wrap_content"
+                android:text="@string/diet_filter_low_carbs"/>
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/general_medium_padding"
+        android:layout_marginBottom="@dimen/general_small_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/health_label"
+            android:textColor="@android:color/black"
+            android:gravity="center"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"
+            android:layout_marginBottom="@dimen/general_small_margin"/>
+
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <RadioButton
+                android:id="@+id/radio_vegetarian"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/health_filter_vegetarian" />
+
+
+            <RadioButton
+                android:id="@+id/radio_vegan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/health_filter_vegan"/>
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <CheckBox
+                android:id="@+id/check_box_sugar_conscious"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/health_filter_sugar_conscious" />
+
+            <CheckBox
+                android:id="@+id/check_box_alcohol_free"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/health_filter_alcohol_free"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <CheckBox
+                android:id="@+id/check_box_peanut_free"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/health_filter_peanut_free" />
+
+            <CheckBox
+                android:id="@+id/check_box_tree_nut_free"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/health_filter_tree_nut_free"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/search_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="test" />
+        android:layout_gravity="center"
+        android:text="@string/submit_search_text" />
 
 </LinearLayout>

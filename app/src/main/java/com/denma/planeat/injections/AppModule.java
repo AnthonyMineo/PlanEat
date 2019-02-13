@@ -58,17 +58,26 @@ public class AppModule {
     private static RoomDatabase.Callback prepopulateDatabase(){
         return new RoomDatabase.Callback() {
             @Override
+            public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                super.onOpen(db);
+                createEmptyMenuForNext14Days(db);
+            }
+
+            @Override
             public void onCreate(@NonNull SupportSQLiteDatabase db) {
                 super.onCreate(db);
-
-                for(int i=0; i<14; i++){
-                    ContentValues contentValues = new ContentValues();
-                    contentValues.put("eatingDate", TimeAndDateUtils.formatDateToInt_yyyyMMdd(TimeAndDateUtils.getDateWithGapFromToday(i)));
-                    contentValues.put("eatingDateString", TimeAndDateUtils.formatDateToString_EEEdd(TimeAndDateUtils.getDateWithGapFromToday(i)));
-                    db.insert("Menu", OnConflictStrategy.IGNORE, contentValues);
-                }
+                createEmptyMenuForNext14Days(db);
             }
         };
+    }
+
+    static void createEmptyMenuForNext14Days(@NonNull SupportSQLiteDatabase db){
+        for(int i=0; i<15; i++){
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("eatingDate", TimeAndDateUtils.formatDateToInt_yyyyMMdd(TimeAndDateUtils.getDateWithGapFromToday(i)));
+            contentValues.put("eatingDateString", TimeAndDateUtils.formatDateToString_EEEdd(TimeAndDateUtils.getDateWithGapFromToday(i)));
+            db.insert("Menu", OnConflictStrategy.IGNORE, contentValues);
+        }
     }
 
     @Provides

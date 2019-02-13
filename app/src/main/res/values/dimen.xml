@@ -10,4 +10,17 @@
     <dimen name="planning_medium_padding">5dp</dimen>
     <dimen name="meal_of_the_day_small_margin">3dp</dimen>
     <dimen name="meal_of_the_day_image_height">200dp</dimen>
+
+    <!-- General padding / margin. -->
+    <dimen name="general_small_padding">5dp</dimen>
+    <dimen name="general_medium_padding">10dp</dimen>
+    <dimen name="general_large_padding">20dp</dimen>
+
+    <dimen name="general_small_margin">10dp</dimen>
+    <dimen name="general_medium_margin">20dp</dimen>
+    <dimen name="general_large_margin">30dp</dimen>
+
+    <!-- Search resquest. -->
+    <dimen name="item_width">150dp</dimen>
+    <dimen name="image_size">70dp</dimen>
 </resources>
