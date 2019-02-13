@@ -24,11 +24,11 @@ public class MenuRepository {
     public LiveData<Menu> getMenuByDate(int eatingDate){ return this.menuDao.getMenuByDate(eatingDate); }
 
     // --- CREATE ---
-    public void createMenu(Menu menu){ menuDao.insertMenu(menu); }
+    public void createMenu(Menu menu){ this.menuDao.insertMenu(menu); }
 
     // --- DELETE ---
-    public void deleteMenu(int eatingDate){ menuDao.deleteMenu(eatingDate); }
+    public void deleteMenu(int eatingDate){ this.menuDao.deleteMenu(eatingDate); }
 
     // --- UPDATE ---
-    public void updateMenu(Menu menu){ menuDao.updateMenu(menu); }
+    public void updateMenu(Menu menu){ this.menuDao.updateMenu(menu); }
 }

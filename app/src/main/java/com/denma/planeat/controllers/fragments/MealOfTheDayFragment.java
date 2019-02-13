@@ -91,11 +91,8 @@ public class MealOfTheDayFragment extends BaseFragment {
         this.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         ItemClickSupport.addTo(recyclerView, R.layout.plannig_recycle_item)
-                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-                    @Override
-                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                .setOnItemClickListener((recyclerView, position, v) -> {
 
-                    }
                 });
     }
 

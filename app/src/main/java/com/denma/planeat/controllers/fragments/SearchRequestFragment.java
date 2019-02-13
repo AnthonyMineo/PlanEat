@@ -1,6 +1,8 @@
 package com.denma.planeat.controllers.fragments;
 
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,11 +14,18 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 
 import com.denma.planeat.R;
+import com.denma.planeat.arch.repositories.ResponseRepository;
+import com.denma.planeat.arch.viewmodels.MenuViewModel;
+import com.denma.planeat.arch.viewmodels.ResponseViewModel;
 import com.denma.planeat.controllers.BaseFragment;
 import com.denma.planeat.controllers.activities.SearchActivity;
+import com.denma.planeat.utils.TimeAndDateUtils;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import dagger.android.support.AndroidSupportInjection;
 
 
 public class SearchRequestFragment extends BaseFragment {
@@ -46,6 +55,10 @@ public class SearchRequestFragment extends BaseFragment {
     CheckBox treeNutFree;
 
     // FOR DATA
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+    private ResponseViewModel responseViewModel;
+
     public OnSearchClickListener callback;
     public void setOnSearchClickListener(SearchActivity activity) {
         callback = activity;
@@ -72,6 +85,8 @@ public class SearchRequestFragment extends BaseFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         // Configuration
+        this.configureDagger();
+        this.configureViewModel();
 
         return view;
     }
@@ -89,6 +104,15 @@ public class SearchRequestFragment extends BaseFragment {
     // CONFIGURATIONS
     // --------------------
 
+    // - Configure Dagger2
+    private void configureDagger() {
+        AndroidSupportInjection.inject(this);
+    }
+
+    private void configureViewModel(){
+        responseViewModel = ViewModelProviders.of(this, viewModelFactory).get(ResponseViewModel.class);
+    }
+
 
     // --------------------
     // ACTIONS
@@ -96,6 +120,10 @@ public class SearchRequestFragment extends BaseFragment {
 
     @OnClick(R.id.search_button)
     public void doTheSearch(){
+        String query = "";
+        String diet = "";
+        String health = "";
+        responseViewModel.updateResponseFromAPI(query, diet, health);
         callback.onSearchClick();
     }
 

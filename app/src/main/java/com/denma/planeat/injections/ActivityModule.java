@@ -5,6 +5,7 @@ Activity Builder
  */
 
 import com.denma.planeat.controllers.activities.MainActivity;
+import com.denma.planeat.controllers.activities.SearchActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -13,5 +14,8 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class ActivityModule {
     @ContributesAndroidInjector
     abstract MainActivity contributeMainActivity();
+
+    @ContributesAndroidInjector
+    abstract SearchActivity contributeSearchActivity();
 }
 

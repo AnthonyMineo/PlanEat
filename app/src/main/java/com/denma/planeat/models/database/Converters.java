@@ -3,6 +3,7 @@ package com.denma.planeat.models.database;
 import android.arch.persistence.room.TypeConverter;
 
 import com.denma.planeat.models.local.Meal;
+import com.denma.planeat.models.remote.Hit;
 import com.denma.planeat.models.remote.Recipe;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -74,6 +75,21 @@ public class Converters {
     @TypeConverter
     public static String ListStringToString(List<String> stringList) {
         return gson.toJson(stringList);
+    }
+
+    // --- FOR LIST HIT ---
+    @TypeConverter
+    public static List<Hit> stringToListHit(String data) {
+        if (data == null) {
+            return Collections.emptyList();
+        }
+        Type locationType = new TypeToken<List<Hit>>() {}.getType();
+        return gson.fromJson(data, locationType);
+    }
+
+    @TypeConverter
+    public static String ListHitToString(List<Hit> hits) {
+        return gson.toJson(hits);
     }
 
 }

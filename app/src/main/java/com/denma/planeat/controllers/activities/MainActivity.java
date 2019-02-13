@@ -146,12 +146,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     // - Configure BottomNavigationView
     private void configureBottomView(){
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return updateViewPagerCurrentItem(item.getItemId());
-            }
-        });
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> updateViewPagerCurrentItem(item.getItemId()));
     }
 
     // --------------------

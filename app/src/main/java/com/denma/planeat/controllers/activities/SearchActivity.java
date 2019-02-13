@@ -12,9 +12,15 @@ import com.denma.planeat.controllers.BaseActivity;
 import com.denma.planeat.controllers.fragments.SearchRequestFragment;
 import com.denma.planeat.controllers.fragments.SearchResponseFragment;
 
-import butterknife.BindView;
+import javax.inject.Inject;
 
-public class SearchActivity extends BaseActivity implements SearchRequestFragment.OnSearchClickListener {
+import butterknife.BindView;
+import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
+
+public class SearchActivity extends BaseActivity implements SearchRequestFragment.OnSearchClickListener, HasSupportFragmentInjector {
 
     // FOR DESIGN
     @BindView(R.id.toolbar)
@@ -26,13 +32,24 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
     SearchRequestFragment requestFragment;
     SearchResponseFragment responseFragment;
 
+    // FOR INJECTION
+    @Inject
+    DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
+    @Override
+    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
+        return dispatchingAndroidInjector;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Configuration
+        this.configureDagger();
         this.configureToolBar();
         this.configureFragment();
 
+        // Actions
         this.showRequestFragment();
 
     }
@@ -49,6 +66,11 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
     // --------------------
     // CONFIGURATIONS
     // --------------------
+
+    // - Configure Dagger2
+    private void configureDagger(){
+        AndroidInjection.inject(this);
+    }
 
     // - Configure Toolbar
     private void configureToolBar() {

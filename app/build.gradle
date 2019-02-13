@@ -27,6 +27,11 @@ android {
             resValue 'string', "edamam_app_id", Edamam_AppId
         }
     }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {

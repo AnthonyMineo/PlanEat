@@ -26,16 +26,19 @@ public class MenuViewModel extends ViewModel {
     }
 
     // --- GET ---
-    public LiveData<List<Menu>> getAllMenu(){ return menuDataSource.getAllMenu(); }
+    public LiveData<List<Menu>> getAllMenu(){ return this.menuDataSource.getAllMenu(); }
     public LiveData<List<Menu>> getMenuFrom2WeeksRange(int todayDate){ return this.menuDataSource.getMenuFrom2WeeksRange(todayDate); }
-    public LiveData<Menu> getMenuByDate(int eatingDate){ return menuDataSource.getMenuByDate(eatingDate); }
+    public LiveData<Menu> getMenuByDate(int eatingDate){ return this.menuDataSource.getMenuByDate(eatingDate); }
 
     // --- CREATE ---
-    public void createMenu(Menu menu){ menuDataSource.createMenu(menu);}
+    public void createMenu(final Menu menu){ executor.execute(() -> MenuViewModel.this.menuDataSource.createMenu(menu));
+    }
 
     // --- DELETE ---
-    public void deleteMenu(int eatingDate){ menuDataSource.deleteMenu(eatingDate); }
+    public void deleteMenu(final int eatingDate){ executor.execute(() -> MenuViewModel.this.menuDataSource.deleteMenu(eatingDate));
+    }
 
     // --- UPDATE ---
-    public void updateMenu(Menu menu){ menuDataSource.updateMenu(menu); }
+    public void updateMenu(final Menu menu){ executor.execute(() -> MenuViewModel.this.menuDataSource.updateMenu(menu));
+    }
 }

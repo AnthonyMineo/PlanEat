@@ -10,8 +10,11 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.denma.planeat.arch.repositories.MenuRepository;
+import com.denma.planeat.arch.repositories.ResponseRepository;
 import com.denma.planeat.models.database.MenuDao;
 import com.denma.planeat.models.database.PlaneatDB;
+import com.denma.planeat.models.database.ResponseDao;
+import com.denma.planeat.models.remote.Response;
 import com.denma.planeat.utils.TimeAndDateUtils;
 import com.denma.planeat.utils.api.EdamamService;
 import com.google.gson.Gson;
@@ -19,6 +22,7 @@ import com.google.gson.GsonBuilder;
 
 
 import java.io.File;
+import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -74,8 +78,9 @@ public class AppModule {
     static void createEmptyMenuForNext14Days(@NonNull SupportSQLiteDatabase db){
         for(int i=0; i<15; i++){
             ContentValues contentValues = new ContentValues();
-            contentValues.put("eatingDate", TimeAndDateUtils.formatDateToInt_yyyyMMdd(TimeAndDateUtils.getDateWithGapFromToday(i)));
-            contentValues.put("eatingDateString", TimeAndDateUtils.formatDateToString_EEEdd(TimeAndDateUtils.getDateWithGapFromToday(i)));
+            Date dateWithGap = TimeAndDateUtils.getDateWithGapFromToday(i);
+            contentValues.put("eatingDate", TimeAndDateUtils.formatDateToInt_yyyyMMdd(dateWithGap));
+            contentValues.put("eatingDateString", TimeAndDateUtils.formatDateToString_EEEdd(dateWithGap));
             db.insert("Menu", OnConflictStrategy.IGNORE, contentValues);
         }
     }
@@ -83,6 +88,10 @@ public class AppModule {
     @Provides
     @Singleton
     MenuDao provideMenuDao(PlaneatDB db) { return db.menuDao(); }
+
+    @Provides
+    @Singleton
+    ResponseDao provideResponseDao(PlaneatDB db){ return db.responseDao(); }
 
     // --- REPOSITORY INJECTION ---
     @Provides
@@ -95,6 +104,10 @@ public class AppModule {
     MenuRepository provideMenuRepository(MenuDao menuDao){
         return new MenuRepository(menuDao);
     }
+
+    @Provides
+    @Singleton
+    ResponseRepository provideResponseRepository(ResponseDao responseDao, Executor executor, EdamamService edamamService) { return new ResponseRepository(responseDao, executor, edamamService); }
 
     // --- NETWORK INJECTION ---
     private static String EDAMAM_URL = "https://api.edamam.com/";

@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
 import com.denma.planeat.arch.viewmodels.MenuViewModel;
+import com.denma.planeat.arch.viewmodels.ResponseViewModel;
 
 import dagger.Binds;
 import dagger.Module;
@@ -17,6 +18,12 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MenuViewModel.class)
     abstract ViewModel bindMenuViewModel(MenuViewModel menuViewModel);
+
+    // Provide a MenuViewModel for binding it
+    @Binds
+    @IntoMap
+    @ViewModelKey(ResponseViewModel.class)
+    abstract ViewModel bindResponseViewModel(ResponseViewModel responseViewModel);
 
     // Dagger 2 will provide our ViewModel Factory
     @Binds

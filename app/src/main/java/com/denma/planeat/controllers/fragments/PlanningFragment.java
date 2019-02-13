@@ -1,11 +1,9 @@
 package com.denma.planeat.controllers.fragments;
 
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -99,23 +97,15 @@ public class PlanningFragment extends BaseFragment {
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         ItemClickSupport.addTo(recyclerView, R.layout.plannig_recycle_item)
-                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-                    @Override
-                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                .setOnItemClickListener((recyclerView, position, v) -> {
 
-                    }
                 });
     }
 
     private void configureViewModel(){
         int todayDate = TimeAndDateUtils.formatDateToInt_yyyyMMdd(TimeAndDateUtils.getDateWithGapFromToday(0));
         menuViewModel = ViewModelProviders.of(this, viewModelFactory).get(MenuViewModel.class);
-        menuViewModel.getMenuFrom2WeeksRange(todayDate).observe(this, new Observer<List<Menu>>() {
-            @Override
-            public void onChanged(@Nullable List<Menu> menus) {
-                updateMenu(menus);
-            }
-        });
+        menuViewModel.getMenuFrom2WeeksRange(todayDate).observe(this, menus -> updateMenu(menus));
     }
 
     // --------------------
