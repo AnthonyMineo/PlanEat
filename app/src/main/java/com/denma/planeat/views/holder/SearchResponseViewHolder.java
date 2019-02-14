@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.denma.planeat.R;
 import com.denma.planeat.models.remote.Recipe;
 
@@ -18,8 +19,6 @@ public class SearchResponseViewHolder extends RecyclerView.ViewHolder {
     ImageView recipeImage;
     @BindView(R.id.search_response_recipe_name)
     TextView recipeName;
-    @BindView(R.id.search_response_cooking_time)
-    TextView recipeCookingTime;
 
     public SearchResponseViewHolder(View itemView) {
         super(itemView);
@@ -28,5 +27,11 @@ public class SearchResponseViewHolder extends RecyclerView.ViewHolder {
 
     public void updateWithRecipe(Recipe recipe, Context context){
 
+        try{
+            Glide.with(context).load(recipe.getImage()).into(recipeImage);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        recipeName.setText(recipe.getLabel());
     }
 }

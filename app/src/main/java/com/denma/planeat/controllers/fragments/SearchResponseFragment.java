@@ -4,12 +4,15 @@ package com.denma.planeat.controllers.fragments;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.denma.planeat.R;
 import com.denma.planeat.arch.viewmodels.ResponseViewModel;
@@ -32,6 +35,8 @@ import dagger.android.support.AndroidSupportInjection;
 public class SearchResponseFragment extends BaseFragment {
 
     // FOR DESIGN
+    @BindView(R.id.error_text_view)
+    TextView errorText;
     @BindView(R.id.fragment_search_response_recycler_view)
     RecyclerView recyclerView;
 
@@ -101,7 +106,7 @@ public class SearchResponseFragment extends BaseFragment {
 
     private void configureViewModel(){
         responseViewModel = ViewModelProviders.of(this, viewModelFactory).get(ResponseViewModel.class);
-        responseViewModel.getResponse().observe(this, response -> updateUI(response));
+        responseViewModel.getResponse().observe(this, this::updateUI);
     }
 
     // --------------------
@@ -110,10 +115,15 @@ public class SearchResponseFragment extends BaseFragment {
 
     private void updateUI(Response response){
         List<Recipe> recipeList = new ArrayList<>();
-        for(Hit hit : response.getHits()){
-            recipeList.add(hit.getRecipe());
+        if(response.getHits().size() != 0){
+            this.errorText.setVisibility(View.GONE);
+            for(Hit hit : response.getHits()){
+                recipeList.add(hit.getRecipe());
+            }
+            searchResponseAdapter.updateData(recipeList);
+        } else {
+            this.errorText.setVisibility(View.VISIBLE);
         }
-        searchResponseAdapter.updateData(recipeList);
     }
 
 }

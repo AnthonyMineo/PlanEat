@@ -160,7 +160,7 @@ public class SearchRequestFragment extends BaseFragment {
                 break;
             default:
                 // no selection has be done
-                dietChoice = "";
+                dietChoice = null;
                 break;
         }
         return dietChoice;
@@ -180,34 +180,34 @@ public class SearchRequestFragment extends BaseFragment {
                 break;
             default:
                 // no selection has be done
-                healthChoice = "";
+                healthChoice = null;
                 break;
         }
 
         // - 2 add more from checkboxes
         if(this.sugarConscious.isChecked()){
-            if(healthChoice.equals("")){
+            if(healthChoice == null){
                 healthChoice = "sugar-conscious";
             } else {
                 healthChoice += "&health=sugar-conscious";
             }
         }
         if(this.alcoholFree.isChecked()){
-            if(healthChoice.equals("")){
+            if(healthChoice == null){
                 healthChoice = "alcohol-free";
             } else {
                 healthChoice += "&health=alcohol-free";
             }
         }
         if(this.peanutFree.isChecked()){
-            if(healthChoice.equals("")){
+            if(healthChoice == null){
                 healthChoice = "peanut-free";
             } else {
                 healthChoice += "&health=peanut-free";
             }
         }
         if(this.treeNutFree.isChecked()){
-            if(healthChoice.equals("")){
+            if(healthChoice == null){
                 healthChoice = "tree-nut-free";
             } else {
                 healthChoice += "&health=tree-nut-free";

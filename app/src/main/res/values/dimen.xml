@@ -23,4 +23,7 @@
     <!-- Search resquest. -->
     <dimen name="item_width">150dp</dimen>
     <dimen name="image_size">70dp</dimen>
+
+    <!-- Text size. -->
+    <dimen name="error_search_no_result_text_size">30sp</dimen>
 </resources>

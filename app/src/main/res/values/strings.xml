@@ -47,8 +47,9 @@
     <string name="submit_search_text">Search</string>
 
     <!-- Errors. -->
-    <string name="error_text_empty">Key word empty, you need to enter a querie.</string>
-    <string name="error_text_too_short">Key word is too short (less than 3 characters)</string>
+    <string name="error_text_empty">Key word empty, you need to enter a query.</string>
+    <string name="error_text_too_short">Key word is too short (less than 3 characters).</string>
+    <string name="error_research_no_result">Sorry ! There is no result for your search.</string>
 
 
 </resources>

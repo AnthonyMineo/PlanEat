@@ -105,7 +105,7 @@ public class PlanningFragment extends BaseFragment {
     private void configureViewModel(){
         int todayDate = TimeAndDateUtils.formatDateToInt_yyyyMMdd(TimeAndDateUtils.getDateWithGapFromToday(0));
         menuViewModel = ViewModelProviders.of(this, viewModelFactory).get(MenuViewModel.class);
-        menuViewModel.getMenuFrom2WeeksRange(todayDate).observe(this, menus -> updateMenu(menus));
+        menuViewModel.getMenuFrom2WeeksRange(todayDate).observe(this, this::updateMenu);
     }
 
     // --------------------
