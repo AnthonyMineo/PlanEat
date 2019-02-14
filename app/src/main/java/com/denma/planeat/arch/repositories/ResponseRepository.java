@@ -1,9 +1,9 @@
 package com.denma.planeat.arch.repositories;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
-import com.denma.planeat.models.database.ResponseDao;
 import com.denma.planeat.models.remote.Response;
 import com.denma.planeat.utils.api.EdamamService;
 
@@ -16,29 +16,22 @@ import retrofit2.Callback;
 
 public class ResponseRepository {
 
-    private final ResponseDao responseDao;
     private final Executor executor;
     private EdamamService edamamService;
+    private final MutableLiveData<Response> currentResponse = new MutableLiveData<Response>();
 
     // --- CONSTRUCTOR ---
     @Inject
-    public ResponseRepository(ResponseDao responseDao, Executor executor, EdamamService edamamService){
-        this.responseDao = responseDao;
+    public ResponseRepository(Executor executor, EdamamService edamamService){
         this.executor = executor;
         this.edamamService = edamamService;
     }
 
     // --- GET ---
-    public LiveData<Response> getResponse(){ return this.responseDao.getResponse(); }
+    public LiveData<Response> getResponse(){ return this.currentResponse; }
 
     // --- CREATE ---
-    public void createResponse(Response response){ this.responseDao.insertResponse(response); }
-
-    // --- DELETE ---
-    public void deleteResponse(){ this.responseDao.deleteResponse(); }
-
-    // --- UPDATE ---
-    public void updateResponse(Response response){ this.responseDao.updateResponse(response); }
+    public void setResponse(Response response){ this.currentResponse.setValue(response); }
 
     // --- REMOTE DATA UPDATE ---
     public void updateResponseFromAPI(final String query, final String diet, final String health) {
@@ -49,14 +42,10 @@ public class ResponseRepository {
                     if(response.isSuccessful() && response.body() != null){
                         if (response.body().getHits() != null){
                             // the request return true results
-                            executor.execute(() -> {
-                                responseDao.insertResponse(response.body());
-                            });
+                            setResponse(response.body());
                         } else {
                             // Error, params are incorrect and the response is hits empty
-                            executor.execute(() -> {
-                                responseDao.insertResponse(new Response());
-                            });
+                            setResponse(new Response());
                         }
                     }
                 }

@@ -13,8 +13,6 @@ import com.denma.planeat.arch.repositories.MenuRepository;
 import com.denma.planeat.arch.repositories.ResponseRepository;
 import com.denma.planeat.models.database.MenuDao;
 import com.denma.planeat.models.database.PlaneatDB;
-import com.denma.planeat.models.database.ResponseDao;
-import com.denma.planeat.models.remote.Response;
 import com.denma.planeat.utils.TimeAndDateUtils;
 import com.denma.planeat.utils.api.EdamamService;
 import com.google.gson.Gson;
@@ -89,10 +87,6 @@ public class AppModule {
     @Singleton
     MenuDao provideMenuDao(PlaneatDB db) { return db.menuDao(); }
 
-    @Provides
-    @Singleton
-    ResponseDao provideResponseDao(PlaneatDB db){ return db.responseDao(); }
-
     // --- REPOSITORY INJECTION ---
     @Provides
     Executor provideExecutor(){
@@ -107,7 +101,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    ResponseRepository provideResponseRepository(ResponseDao responseDao, Executor executor, EdamamService edamamService) { return new ResponseRepository(responseDao, executor, edamamService); }
+    ResponseRepository provideResponseRepository(Executor executor, EdamamService edamamService) { return new ResponseRepository(executor, edamamService); }
 
     // --- NETWORK INJECTION ---
     private static String EDAMAM_URL = "https://api.edamam.com/";

@@ -13,7 +13,6 @@ import javax.inject.Inject;
 
 public class ResponseViewModel extends ViewModel {
 
-
     // --- REPOSITORIES ---
     private ResponseRepository responseDataSource;
     private Executor executor;
@@ -29,13 +28,8 @@ public class ResponseViewModel extends ViewModel {
    public LiveData<Response> getResponse(){ return this.responseDataSource.getResponse(); }
 
     // --- CREATE ---
-    public void createResponse(Response response){ executor.execute(() -> this.responseDataSource.createResponse(response)); }
+    public void setResponse(Response response){ executor.execute(() -> this.responseDataSource.setResponse(response)); }
 
-    // --- DELETE ---
-    public void deleteResponse(){ executor.execute(() -> this.responseDataSource.deleteResponse()); }
-
-    // --- UPDATE ---
-    public void updateResponse(Response response){ executor.execute(() -> this.responseDataSource.updateResponse(response)); }
 
     // --- REMOTE DATA UPDATE ---
     public void updateResponseFromAPI(String query, String diet, String health){ this.responseDataSource.updateResponseFromAPI(query, diet, health); }

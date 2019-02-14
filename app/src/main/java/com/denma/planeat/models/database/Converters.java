@@ -76,20 +76,4 @@ public class Converters {
     public static String ListStringToString(List<String> stringList) {
         return gson.toJson(stringList);
     }
-
-    // --- FOR LIST HIT ---
-    @TypeConverter
-    public static List<Hit> stringToListHit(String data) {
-        if (data == null) {
-            return Collections.emptyList();
-        }
-        Type locationType = new TypeToken<List<Hit>>() {}.getType();
-        return gson.fromJson(data, locationType);
-    }
-
-    @TypeConverter
-    public static String ListHitToString(List<Hit> hits) {
-        return gson.toJson(hits);
-    }
-
 }
