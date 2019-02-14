@@ -24,14 +24,23 @@ public class ResponseViewModel extends ViewModel {
         this.executor = executor;
     }
 
+    // FOR RESPONSE
+
     // --- GET ---
-   public LiveData<Response> getResponse(){ return this.responseDataSource.getResponse(); }
+    public LiveData<Response> getResponse(){ return this.responseDataSource.getResponse(); }
 
     // --- CREATE ---
-    public void setResponse(Response response){ executor.execute(() -> this.responseDataSource.setResponse(response)); }
-
+    public void setResponse(Response response){ this.responseDataSource.setResponse(response); }
 
     // --- REMOTE DATA UPDATE ---
     public void updateResponseFromAPI(String query, String diet, String health){ this.responseDataSource.updateResponseFromAPI(query, diet, health); }
+
+    // FOR RECIPE
+
+    // --- GET ---
+    public LiveData<Recipe> getRecipe(){ return this.responseDataSource.getRecipe(); }
+
+    // --- CREATE ---
+    public void setRecipe(Recipe recipe){this.responseDataSource.setRecipe(recipe); }
 
 }

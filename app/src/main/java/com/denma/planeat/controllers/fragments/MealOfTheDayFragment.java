@@ -57,8 +57,8 @@ public class MealOfTheDayFragment extends BaseFragment {
 
         // Configuration
         this.configureDagger();
-        this.configureViewModel();
         this.configureRecyclerView();
+        this.configureViewModel();
 
         return view;
     }
@@ -81,8 +81,6 @@ public class MealOfTheDayFragment extends BaseFragment {
         AndroidSupportInjection.inject(this);
     }
 
-    private void configureViewModel(){ }
-
     // - Configure RecyclerView, Adapter, LayoutManager & glue it together
     private void configureRecyclerView() {
         // - Create adapter
@@ -97,6 +95,8 @@ public class MealOfTheDayFragment extends BaseFragment {
 
                 });
     }
+
+    private void configureViewModel(){ }
 
     // --------------------
     // ACTIONS

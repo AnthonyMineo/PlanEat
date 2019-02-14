@@ -4,6 +4,7 @@ Fragment Builder
  */
 import com.denma.planeat.controllers.fragments.MealOfTheDayFragment;
 import com.denma.planeat.controllers.fragments.PlanningFragment;
+import com.denma.planeat.controllers.fragments.RecipeFragment;
 import com.denma.planeat.controllers.fragments.SearchRequestFragment;
 import com.denma.planeat.controllers.fragments.SearchResponseFragment;
 import com.denma.planeat.controllers.fragments.ShoppingListFragment;
@@ -27,4 +28,7 @@ public abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract SearchResponseFragment contributeSearchResposeFragment();
+
+    @ContributesAndroidInjector
+    abstract RecipeFragment contributeRecipeFragment();
 }

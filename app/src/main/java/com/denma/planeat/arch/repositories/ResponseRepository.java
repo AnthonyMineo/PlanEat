@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
+import com.denma.planeat.models.remote.Recipe;
 import com.denma.planeat.models.remote.Response;
 import com.denma.planeat.utils.api.EdamamService;
 
@@ -19,6 +20,7 @@ public class ResponseRepository {
     private final Executor executor;
     private EdamamService edamamService;
     private final MutableLiveData<Response> currentResponse = new MutableLiveData<Response>();
+    private final MutableLiveData<Recipe> currentRecipe = new MutableLiveData<Recipe>();
 
     // --- CONSTRUCTOR ---
     @Inject
@@ -26,6 +28,8 @@ public class ResponseRepository {
         this.executor = executor;
         this.edamamService = edamamService;
     }
+
+    // FOR RESPONSE
 
     // --- GET ---
     public LiveData<Response> getResponse(){ return this.currentResponse; }
@@ -57,5 +61,13 @@ public class ResponseRepository {
             });
         });
     }
+
+    // FOR RECIPE
+
+    // --- GET ---
+    public LiveData<Recipe> getRecipe(){ return this.currentRecipe; }
+
+    // --- CREATE ---
+    public void setRecipe(Recipe recipe){ this.currentRecipe.setValue(recipe); }
 
 }

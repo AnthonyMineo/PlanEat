@@ -13,7 +13,7 @@ public class Recipe {
     @SerializedName("image")
     @Expose
     private String image;
-    @SerializedName("urlSource")
+    @SerializedName("url")
     @Expose
     private String urlSource;
     @SerializedName("dietLabels")

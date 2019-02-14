@@ -74,8 +74,8 @@ public class SearchResponseFragment extends BaseFragment {
 
         // Configuration
         this.configureDagger();
-        this.configureViewModel();
         this.configureRecyclerView();
+        this.configureViewModel();
 
         return view;
     }
@@ -110,6 +110,7 @@ public class SearchResponseFragment extends BaseFragment {
         ItemClickSupport.addTo(recyclerView, R.layout.search_recycle_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
                     // update selected recipe on view model
+                    responseViewModel.setRecipe(searchResponseAdapter.getRecipe(position));
                     callback.onRecipeClick();
                 });
     }

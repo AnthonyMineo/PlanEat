@@ -63,8 +63,8 @@ public class PlanningFragment extends BaseFragment {
 
         // Configuration
         this.configureDagger();
-        this.configureViewModel();
         this.configureRecyclerView();
+        this.configureViewModel();
 
         return view;
     }
@@ -87,12 +87,6 @@ public class PlanningFragment extends BaseFragment {
         AndroidSupportInjection.inject(this);
     }
 
-    private void configureViewModel(){
-        int todayDate = TimeAndDateUtils.formatDateToInt_yyyyMMdd(TimeAndDateUtils.getDateWithGapFromToday(0));
-        menuViewModel = ViewModelProviders.of(this, viewModelFactory).get(MenuViewModel.class);
-        menuViewModel.getMenuFrom2WeeksRange(todayDate).observe(this, this::updateMenu);
-    }
-
     // - Configure RecyclerView, Adapter, LayoutManager & glue it together
     private void configureRecyclerView() {
         // - Create adapter
@@ -106,6 +100,12 @@ public class PlanningFragment extends BaseFragment {
                 .setOnItemClickListener((recyclerView, position, v) -> {
 
                 });
+    }
+
+    private void configureViewModel(){
+        int todayDate = TimeAndDateUtils.formatDateToInt_yyyyMMdd(TimeAndDateUtils.getDateWithGapFromToday(0));
+        menuViewModel = ViewModelProviders.of(this, viewModelFactory).get(MenuViewModel.class);
+        menuViewModel.getMenuFrom2WeeksRange(todayDate).observe(this, this::updateMenu);
     }
 
     // --------------------
