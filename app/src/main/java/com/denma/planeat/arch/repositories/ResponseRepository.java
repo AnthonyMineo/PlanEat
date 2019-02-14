@@ -47,9 +47,17 @@ public class ResponseRepository {
                 @Override
                 public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                     if(response.isSuccessful() && response.body() != null){
-                        executor.execute(() -> {
-                            responseDao.insertResponse(response.body());
-                        });
+                        if (response.body().getHits() != null){
+                            // the request return true results
+                            executor.execute(() -> {
+                                responseDao.insertResponse(response.body());
+                            });
+                        } else {
+                            // Error, params are incorrect and the response is hits empty
+                            executor.execute(() -> {
+                                responseDao.insertResponse(new Response());
+                            });
+                        }
                     }
                 }
 

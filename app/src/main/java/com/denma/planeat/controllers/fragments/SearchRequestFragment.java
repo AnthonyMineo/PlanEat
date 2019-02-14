@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.denma.planeat.R;
 import com.denma.planeat.arch.repositories.ResponseRepository;
@@ -33,18 +36,10 @@ public class SearchRequestFragment extends BaseFragment {
     // FOR DESIGN
     @BindView(R.id.search_request_edit_text)
     EditText keyWord;
-    @BindView(R.id.radio_balanced)
-    RadioButton balanced;
-    @BindView(R.id.radio_high_protein)
-    RadioButton highProtein;
-    @BindView(R.id.radio_low_fat)
-    RadioButton lowFat;
-    @BindView(R.id.radio_low_carbs)
-    RadioButton lowCarbs;
-    @BindView(R.id.radio_vegetarian)
-    RadioButton vegetarian;
-    @BindView(R.id.radio_vegan)
-    RadioButton vegan;
+    @BindView(R.id.radio_group_diet)
+    RadioGroup dietGroup;
+    @BindView(R.id.radio_group_health)
+    RadioGroup healthGroup;
     @BindView(R.id.check_box_sugar_conscious)
     CheckBox sugarConscious;
     @BindView(R.id.check_box_alcohol_free)
@@ -120,11 +115,106 @@ public class SearchRequestFragment extends BaseFragment {
 
     @OnClick(R.id.search_button)
     public void doTheSearch(){
-        String query = "";
-        String diet = "";
-        String health = "";
+        String query = queryAttribution();
+        // error you need to change/add a query
+        if(query.equals("0")){
+            Toast.makeText(this.getActivity(), getResources().getText(R.string.error_text_empty), Toast.LENGTH_SHORT).show();
+            return;
+        } else if (query.equals("-1")){
+            Toast.makeText(this.getActivity(), getResources().getText(R.string.error_text_too_short), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String diet = dietAttribution();
+        String health = healthAttribution();
         responseViewModel.updateResponseFromAPI(query, diet, health);
         callback.onSearchClick();
+    }
+
+    private String queryAttribution(){
+        if(this.keyWord.getText().length() >= 3){
+            return this.keyWord.getText().toString();
+        } else if(this.keyWord.length() == 0){
+            // Error, the text is empty
+            return "0";
+        } else {
+            // Error, the text is too short
+            return "-1";
+        }
+    }
+
+    private String dietAttribution(){
+        int radioButtonId = dietGroup.getCheckedRadioButtonId();
+        String dietChoice;
+        switch(radioButtonId){
+            case R.id.radio_balanced:
+                dietChoice = "balanced";
+                break;
+            case R.id.radio_high_protein:
+                dietChoice = "high-protein";
+                break;
+            case R.id.radio_low_fat:
+                dietChoice = "low-fat";
+                break;
+            case R.id.radio_low_carb:
+                dietChoice = "low-carb";
+                break;
+            default:
+                // no selection has be done
+                dietChoice = "";
+                break;
+        }
+        return dietChoice;
+    }
+
+    private String healthAttribution(){
+        int radioButtonId = healthGroup.getCheckedRadioButtonId();
+        String healthChoice;
+
+        // - 1 init from radio group
+        switch(radioButtonId){
+            case R.id.radio_vegan:
+                healthChoice = "vegan";
+                break;
+            case R.id.radio_vegetarian:
+                healthChoice = "vegetarian";
+                break;
+            default:
+                // no selection has be done
+                healthChoice = "";
+                break;
+        }
+
+        // - 2 add more from checkboxes
+        if(this.sugarConscious.isChecked()){
+            if(healthChoice.equals("")){
+                healthChoice = "sugar-conscious";
+            } else {
+                healthChoice += "&health=sugar-conscious";
+            }
+        }
+        if(this.alcoholFree.isChecked()){
+            if(healthChoice.equals("")){
+                healthChoice = "alcohol-free";
+            } else {
+                healthChoice += "&health=alcohol-free";
+            }
+        }
+        if(this.peanutFree.isChecked()){
+            if(healthChoice.equals("")){
+                healthChoice = "peanut-free";
+            } else {
+                healthChoice += "&health=peanut-free";
+            }
+        }
+        if(this.treeNutFree.isChecked()){
+            if(healthChoice.equals("")){
+                healthChoice = "tree-nut-free";
+            } else {
+                healthChoice += "&health=tree-nut-free";
+            }
+        }
+
+        return healthChoice;
     }
 
 }

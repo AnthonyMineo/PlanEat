@@ -34,6 +34,7 @@
             android:layout_marginBottom="@dimen/general_small_margin"/>
 
         <RadioGroup
+            android:id="@+id/radio_group_diet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -57,7 +58,7 @@
 
 
             <RadioButton
-                android:id="@+id/radio_low_carbs"
+                android:id="@+id/radio_low_carb"
                 android:layout_width="@dimen/item_width"
                 android:layout_height="wrap_content"
                 android:text="@string/diet_filter_low_carbs"/>
@@ -88,6 +89,7 @@
 
 
         <RadioGroup
+            android:id="@+id/radio_group_health"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

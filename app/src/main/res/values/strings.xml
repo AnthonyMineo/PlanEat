@@ -34,7 +34,7 @@
     <string name="diet_filter_balanced">Balanced</string>
     <string name="diet_filter_high_protein">Hight protein</string>
     <string name="diet_filter_low_fat">Low fat</string>
-    <string name="diet_filter_low_carbs">Low carbs</string>
+    <string name="diet_filter_low_carbs">Low carb</string>
 
     <string name="health_label">HEALTH</string>
     <string name="health_filter_vegan">Vegan</string>
@@ -45,6 +45,10 @@
     <string name="health_filter_alcohol_free">Alcohol free</string>
 
     <string name="submit_search_text">Search</string>
+
+    <!-- Errors. -->
+    <string name="error_text_empty">Key word empty, you need to enter a querie.</string>
+    <string name="error_text_too_short">Key word is too short (less than 3 characters)</string>
 
 
 </resources>
