@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:theme="@style/AppTheme"
+    android:orientation="vertical"
+    android:padding="@dimen/general_large_padding">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/day_timing"
+        android:textColor="@android:color/black"
+        android:gravity="center"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"
+        android:layout_marginBottom="@dimen/general_small_margin"/>
+
+    <RadioGroup
+        android:id="@+id/radio_group_day_timing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/general_small_margin">
+
+        <RadioButton
+            android:id="@+id/radio_breakfast"
+            android:layout_width="@dimen/item_width"
+            android:layout_height="wrap_content"
+            android:text="@string/day_timing_breakfast"/>
+
+        <RadioButton
+            android:id="@+id/radio_after_morning"
+            android:layout_width="@dimen/item_width"
+            android:layout_height="wrap_content"
+            android:text="@string/day_timing_after_morning"/>
+
+        <RadioButton
+            android:id="@+id/radio_lunch"
+            android:layout_width="@dimen/item_width"
+            android:layout_height="wrap_content"
+            android:text="@string/day_timing_lunch"/>
+
+        <RadioButton
+            android:id="@+id/radio_afternoon"
+            android:layout_width="@dimen/item_width"
+            android:layout_height="wrap_content"
+            android:text="@string/day_timing_afternoon"/>
+
+        <RadioButton
+            android:id="@+id/radio_dinner"
+            android:layout_width="@dimen/item_width"
+            android:layout_height="wrap_content"
+            android:text="@string/day_timing_dinner"/>
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/eating_date" />
+
+        <TextView
+            android:id="@+id/eating_date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+
+        <ImageView
+            android:id="@+id/eating_date_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_drop_down_black_24dp"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/primaryTextColor">
+    </FrameLayout>
+
+</LinearLayout>

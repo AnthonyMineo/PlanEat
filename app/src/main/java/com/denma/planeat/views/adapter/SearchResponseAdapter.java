@@ -41,6 +41,8 @@ public class SearchResponseAdapter extends RecyclerView.Adapter<SearchResponseVi
         return this.recipeList.size();
     }
 
+    public Recipe getRecipe(int position){ return this.recipeList.get(position); }
+
     public void updateData(List<Recipe> recipeList){
         this.recipeList = recipeList;
         this.notifyDataSetChanged();

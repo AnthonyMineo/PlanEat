@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.denma.planeat.R;
 import com.denma.planeat.arch.viewmodels.ResponseViewModel;
 import com.denma.planeat.controllers.BaseFragment;
+import com.denma.planeat.controllers.activities.SearchActivity;
 import com.denma.planeat.models.remote.Hit;
 import com.denma.planeat.models.remote.Recipe;
 import com.denma.planeat.models.remote.Response;
@@ -46,6 +47,14 @@ public class SearchResponseFragment extends BaseFragment {
     private ResponseViewModel responseViewModel;
     private SearchResponseAdapter searchResponseAdapter;
 
+    public OnRecipeClickListener callback;
+    public void setOnRecipeClickListener(SearchActivity activity) {
+        callback = activity;
+    }
+    public interface OnRecipeClickListener {
+        void onRecipeClick();
+    }
+
     // --------------------
     // CONSTRUCTORS
     // --------------------
@@ -65,8 +74,8 @@ public class SearchResponseFragment extends BaseFragment {
 
         // Configuration
         this.configureDagger();
-        this.configureRecyclerView();
         this.configureViewModel();
+        this.configureRecyclerView();
 
         return view;
     }
@@ -100,7 +109,8 @@ public class SearchResponseFragment extends BaseFragment {
 
         ItemClickSupport.addTo(recyclerView, R.layout.search_recycle_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
-
+                    // update selected recipe on view model
+                    callback.onRecipeClick();
                 });
     }
 

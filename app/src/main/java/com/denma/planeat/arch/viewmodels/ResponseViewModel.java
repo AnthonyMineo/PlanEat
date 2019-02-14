@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.denma.planeat.arch.repositories.ResponseRepository;
+import com.denma.planeat.models.remote.Recipe;
 import com.denma.planeat.models.remote.Response;
 
 import java.util.concurrent.Executor;
@@ -38,4 +39,5 @@ public class ResponseViewModel extends ViewModel {
 
     // --- REMOTE DATA UPDATE ---
     public void updateResponseFromAPI(String query, String diet, String health){ this.responseDataSource.updateResponseFromAPI(query, diet, health); }
+
 }
