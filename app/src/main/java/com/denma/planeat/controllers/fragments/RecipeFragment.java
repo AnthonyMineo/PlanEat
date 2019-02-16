@@ -4,7 +4,6 @@ package com.denma.planeat.controllers.fragments;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +76,7 @@ public class RecipeFragment extends BaseFragment {
 
     private void configureViewModel(){
         responseViewModel = ViewModelProviders.of(this, viewModelFactory).get(ResponseViewModel.class);
-        responseViewModel.getRecipe().observe(this, this::updateUI);
+        responseViewModel.getCurrentRecipe().observe(this, this::updateUI);
     }
 
     private void configureWebView(){

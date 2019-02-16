@@ -83,7 +83,6 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
 
     // - Configure Toolbar
     private void configureToolBar() {
-        toolbar.setTitle(getResources().getString(R.string.toolbar_search_title));
         setSupportActionBar(toolbar);
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
@@ -126,6 +125,7 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
             // Add the fragment to the FrameLayout container
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.activity_search_fragment_layout, requestFragment).commit();
+            this.toolbar.setTitle(getResources().getString(R.string.toolbar_search_title));
         }
     }
 

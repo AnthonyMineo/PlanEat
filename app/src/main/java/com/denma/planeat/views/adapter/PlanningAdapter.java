@@ -43,6 +43,8 @@ public class PlanningAdapter extends RecyclerView.Adapter<PlanningViewHolder>{
         return this.menuList.size();
     }
 
+    public Menu getMenu(int position){ return this.menuList.get(position); }
+
     public void updateData(List<Menu> menuList){
         this.menuList = menuList;
         this.notifyDataSetChanged();

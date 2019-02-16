@@ -98,7 +98,7 @@ public class PlanningFragment extends BaseFragment {
 
         ItemClickSupport.addTo(recyclerView, R.layout.plannig_recycle_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
-
+                    menuViewModel.setCurrentMenu(planningAdapter.getMenu(position));
                 });
     }
 

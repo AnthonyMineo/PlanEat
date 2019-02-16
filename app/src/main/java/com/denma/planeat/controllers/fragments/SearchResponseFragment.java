@@ -4,11 +4,8 @@ package com.denma.planeat.controllers.fragments;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,7 +107,7 @@ public class SearchResponseFragment extends BaseFragment {
         ItemClickSupport.addTo(recyclerView, R.layout.search_recycle_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
                     // update selected recipe on view model
-                    responseViewModel.setRecipe(searchResponseAdapter.getRecipe(position));
+                    responseViewModel.setCurrentRecipe(searchResponseAdapter.getRecipe(position));
                     callback.onRecipeClick();
                 });
     }

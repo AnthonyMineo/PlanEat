@@ -3,6 +3,7 @@ package com.denma.planeat.injections;
 Fragment Builder
  */
 import com.denma.planeat.controllers.fragments.MealOfTheDayFragment;
+import com.denma.planeat.controllers.fragments.ModalFragment;
 import com.denma.planeat.controllers.fragments.PlanningFragment;
 import com.denma.planeat.controllers.fragments.RecipeFragment;
 import com.denma.planeat.controllers.fragments.SearchRequestFragment;
@@ -31,4 +32,7 @@ public abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract RecipeFragment contributeRecipeFragment();
+
+    @ContributesAndroidInjector
+    abstract ModalFragment contributeModalFragment();
 }

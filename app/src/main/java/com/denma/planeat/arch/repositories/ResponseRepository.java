@@ -65,9 +65,9 @@ public class ResponseRepository {
     // FOR RECIPE
 
     // --- GET ---
-    public LiveData<Recipe> getRecipe(){ return this.currentRecipe; }
+    public LiveData<Recipe> getCurrentRecipe(){ return this.currentRecipe; }
 
     // --- CREATE ---
-    public void setRecipe(Recipe recipe){ this.currentRecipe.setValue(recipe); }
+    public void setCurrentRecipe(Recipe recipe){ this.currentRecipe.setValue(recipe); }
 
 }

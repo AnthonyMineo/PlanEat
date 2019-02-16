@@ -25,6 +25,7 @@ public class MenuViewModel extends ViewModel {
         this.executor = executor;
     }
 
+    // FOR MENU
     // --- GET ---
     public LiveData<List<Menu>> getAllMenu(){ return this.menuDataSource.getAllMenu(); }
     public LiveData<List<Menu>> getMenuFrom2WeeksRange(int todayDate){ return this.menuDataSource.getMenuFrom2WeeksRange(todayDate); }
@@ -41,4 +42,11 @@ public class MenuViewModel extends ViewModel {
     // --- UPDATE ---
     public void updateMenu(final Menu menu){ executor.execute(() -> MenuViewModel.this.menuDataSource.updateMenu(menu));
     }
+
+    // FOR CURRENT MENU
+    // --- GET ---
+    public LiveData<Menu> getCurrentMenu(){ return this.menuDataSource.getCurrentMenu(); }
+
+    // --- CREATE ---
+    public void setCurrentMenu(Menu menu){ this.menuDataSource.setCurrentMenu(menu); }
 }

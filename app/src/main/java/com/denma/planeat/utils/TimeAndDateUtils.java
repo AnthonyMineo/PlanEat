@@ -30,4 +30,13 @@ public class TimeAndDateUtils {
         return dateFormat.format(date);
     }
 
+    public static String formatIntDateToStringToShow(int intDate){
+        String stringDate = String.valueOf(intDate);
+        String year = stringDate.substring(0, 4);
+        String month = stringDate.substring(4, 6);
+        String day = stringDate.substring(6);
+        stringDate = day + "/" + month + "/" + year;
+        return stringDate;
+    }
+
 }

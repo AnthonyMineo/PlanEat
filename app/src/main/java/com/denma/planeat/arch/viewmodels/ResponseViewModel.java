@@ -35,12 +35,11 @@ public class ResponseViewModel extends ViewModel {
     // --- REMOTE DATA UPDATE ---
     public void updateResponseFromAPI(String query, String diet, String health){ this.responseDataSource.updateResponseFromAPI(query, diet, health); }
 
-    // FOR RECIPE
-
+    // FOR CURRENT RECIPE
     // --- GET ---
-    public LiveData<Recipe> getRecipe(){ return this.responseDataSource.getRecipe(); }
+    public LiveData<Recipe> getCurrentRecipe(){ return this.responseDataSource.getCurrentRecipe(); }
 
     // --- CREATE ---
-    public void setRecipe(Recipe recipe){this.responseDataSource.setRecipe(recipe); }
+    public void setCurrentRecipe(Recipe recipe){this.responseDataSource.setCurrentRecipe(recipe); }
 
 }
