@@ -66,7 +66,6 @@ public class MealOfTheDayFragment extends BaseFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         // Configuration
-        Log.e("ICI", "COUCOU");
         this.configureDagger();
         this.configureRecyclerView();
         this.configureViewModel();

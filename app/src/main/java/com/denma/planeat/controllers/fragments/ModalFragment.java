@@ -236,7 +236,6 @@ public class ModalFragment extends BottomSheetDialogFragment {
         menuToUpdate.getMealList().add(mealToSave);
         menuViewModel.updateMenu(menuToUpdate);
         this.updated = true;
-        getActivity().finish();
     }
 
 }

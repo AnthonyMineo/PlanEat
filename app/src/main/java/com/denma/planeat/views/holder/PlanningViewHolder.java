@@ -2,6 +2,7 @@ package com.denma.planeat.views.holder;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,25 +42,32 @@ public class PlanningViewHolder extends RecyclerView.ViewHolder{
         this.day_name.setText(menu.getEatingDateString().substring(0,3).toUpperCase());
         this.day_number.setText(menu.getEatingDateString().substring(4));
 
+        this.breakfast.setImageDrawable(null);
+        this.after_morning.setImageDrawable(null);
+        this.lunch.setImageDrawable(null);
+        this.afternoon.setImageDrawable(null);
+        this.dinner.setImageDrawable(null);
+
         if(menu.getMealList().size() == 0){
-            Glide.with(context).load(R.drawable.no_meal_yet).into(this.breakfast);
+            // show a message to the user
         } else {
             for(Meal meal : menu.getMealList()){
+                String url = meal.getRecipe().getImage();
                 switch (meal.getDayTiming()){
                     case 1:
-                        Glide.with(context).load(meal.getRecipe().getImage()).into(this.breakfast);
+                        Glide.with(context).load(url).into(this.breakfast);
                         break;
                     case 2:
-                        Glide.with(context).load(meal.getRecipe().getImage()).into(this.after_morning);
+                        Glide.with(context).load(url).into(this.after_morning);
                         break;
                     case 3:
-                        Glide.with(context).load(meal.getRecipe().getImage()).into(this.lunch);
+                        Glide.with(context).load(url).into(this.lunch);
                         break;
                     case 4:
-                        Glide.with(context).load(meal.getRecipe().getImage()).into(this.afternoon);
+                        Glide.with(context).load(url).into(this.afternoon);
                         break;
                     case 5:
-                        Glide.with(context).load(meal.getRecipe().getImage()).into(this.dinner);
+                        Glide.with(context).load(url).into(this.dinner);
                         break;
                 }
             }
