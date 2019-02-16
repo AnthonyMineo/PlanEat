@@ -9,7 +9,8 @@
     <dimen name="planning_small_padding">3dp</dimen>
     <dimen name="planning_medium_padding">5dp</dimen>
     <dimen name="meal_of_the_day_small_margin">3dp</dimen>
-    <dimen name="meal_of_the_day_image_height">200dp</dimen>
+    <dimen name="meal_of_the_day_medium_margin">5dp</dimen>
+    <dimen name="meal_of_the_day_image_height">180dp</dimen>
 
     <!-- General padding / margin. -->
     <dimen name="general_small_padding">5dp</dimen>

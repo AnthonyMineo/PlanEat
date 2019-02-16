@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.denma.planeat.R;
 import com.denma.planeat.arch.viewmodels.MenuViewModel;
 import com.denma.planeat.controllers.BaseFragment;
+import com.denma.planeat.controllers.activities.MainActivity;
 import com.denma.planeat.models.local.Menu;
 import com.denma.planeat.utils.ItemClickSupport;
 import com.denma.planeat.utils.TimeAndDateUtils;
@@ -36,6 +37,14 @@ public class PlanningFragment extends BaseFragment {
     ViewModelProvider.Factory viewModelFactory;
     private MenuViewModel menuViewModel;
     private PlanningAdapter planningAdapter;
+
+    public OnMenuClickListener callback;
+    public void setOnMenuClickListener(MainActivity activity) {
+        callback = activity;
+    }
+    public interface OnMenuClickListener {
+        void onMenuClick();
+    }
 
     // --------------------
     // CONSTRUCTORS
@@ -99,6 +108,7 @@ public class PlanningFragment extends BaseFragment {
         ItemClickSupport.addTo(recyclerView, R.layout.plannig_recycle_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
                     menuViewModel.setCurrentMenu(planningAdapter.getMenu(position));
+                    callback.onMenuClick();
                 });
     }
 

@@ -2,22 +2,29 @@ package com.denma.planeat.controllers.fragments;
 
 
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.denma.planeat.R;
+import com.denma.planeat.arch.viewmodels.MenuViewModel;
 import com.denma.planeat.controllers.BaseFragment;
+import com.denma.planeat.models.local.Menu;
 import com.denma.planeat.utils.ItemClickSupport;
 import com.denma.planeat.views.adapter.MealOfTheDayAdapter;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import dagger.android.support.AndroidSupportInjection;
@@ -29,6 +36,9 @@ public class MealOfTheDayFragment extends BaseFragment {
     RecyclerView recyclerView;
 
     // FOR DATA
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+    private MenuViewModel menuViewModel;
     private MealOfTheDayAdapter mealOfTheDayAdapter;
 
     // --------------------
@@ -56,6 +66,7 @@ public class MealOfTheDayFragment extends BaseFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         // Configuration
+        Log.e("ICI", "COUCOU");
         this.configureDagger();
         this.configureRecyclerView();
         this.configureViewModel();
@@ -96,12 +107,17 @@ public class MealOfTheDayFragment extends BaseFragment {
                 });
     }
 
-    private void configureViewModel(){ }
+    private void configureViewModel(){
+        menuViewModel = ViewModelProviders.of(this, viewModelFactory).get(MenuViewModel.class);
+        menuViewModel.getCurrentMenu().observe(this, this::updateMeal);
+    }
 
     // --------------------
     // ACTIONS
     // --------------------
 
-    private void updateMeal(){ }
+    private void updateMeal(Menu currentMenu){
+        mealOfTheDayAdapter.updateData(currentMenu.getMealList());
+    }
 
 }

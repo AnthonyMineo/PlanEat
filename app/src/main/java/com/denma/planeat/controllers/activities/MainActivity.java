@@ -20,6 +20,9 @@ import com.denma.planeat.R;
 
 import com.denma.planeat.controllers.BaseActivity;
 
+import com.denma.planeat.controllers.fragments.MealOfTheDayFragment;
+import com.denma.planeat.controllers.fragments.PlanningFragment;
+import com.denma.planeat.controllers.fragments.ShoppingListFragment;
 import com.denma.planeat.views.adapter.PageAdapter;
 
 import javax.inject.Inject;
@@ -29,7 +32,7 @@ import dagger.android.AndroidInjection;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, HasSupportFragmentInjector {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, PlanningFragment.OnMenuClickListener, HasSupportFragmentInjector {
 
     // FOR DESIGN
     @BindView(R.id.toolbar)
@@ -149,6 +152,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> updateViewPagerCurrentItem(item.getItemId()));
     }
 
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        if (fragment instanceof PlanningFragment) {
+            PlanningFragment planningFragment = (PlanningFragment) fragment;
+            planningFragment.setOnMenuClickListener(this);
+        }
+    }
+
     // --------------------
     // ACTIONS
     // --------------------
@@ -175,6 +186,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         bottomNavigationView.setSelectedItemId(R.id.action_planning);
     }
 
+    @Override
+    public void onMenuClick() {
+        viewPager.setCurrentItem(2);
+    }
 
     // --------------------
     // MENUS
