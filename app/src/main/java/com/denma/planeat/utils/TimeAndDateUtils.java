@@ -1,5 +1,7 @@
 package com.denma.planeat.utils;
 
+import android.util.Log;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -37,6 +39,15 @@ public class TimeAndDateUtils {
         String day = stringDate.substring(6);
         stringDate = day + "/" + month + "/" + year;
         return stringDate;
+    }
+
+    public static int formatStringDateToShowToIntToSave(String dateToShow){
+        String day = dateToShow.substring(0,2);
+        String month = dateToShow.substring(3, 5);
+        String year = dateToShow.substring(6);
+        int dateToSave = Integer.valueOf(year + month + day);
+
+        return dateToSave;
     }
 
 }

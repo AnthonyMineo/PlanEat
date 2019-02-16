@@ -182,18 +182,22 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.chooseMenu.setVisible(false);
                 onBackPressed();
-                if(responseFragment.isVisible())
-                    this.toolbar.setTitle(getResources().getString(R.string.toolbar_response_title));
-                if(requestFragment.isVisible())
-                    toolbar.setTitle(getResources().getString(R.string.toolbar_search_title));
                 break;
             case R.id.toolbar_menu_choose:
                 ModalFragment.newInstance().show(this.getSupportFragmentManager(), "MODAL");
+                break;
         }
         return true;
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.chooseMenu.setVisible(false);
+        if(responseFragment.isVisible())
+            this.toolbar.setTitle(getResources().getString(R.string.toolbar_response_title));
+        if(requestFragment.isVisible())
+            toolbar.setTitle(getResources().getString(R.string.toolbar_search_title));
+    }
 }

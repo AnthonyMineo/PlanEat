@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.denma.planeat.R;
+import com.denma.planeat.models.local.Meal;
 import com.denma.planeat.models.local.Menu;
 import com.denma.planeat.utils.TimeAndDateUtils;
 
@@ -42,6 +43,26 @@ public class PlanningViewHolder extends RecyclerView.ViewHolder{
 
         if(menu.getMealList().size() == 0){
             Glide.with(context).load(R.drawable.no_meal_yet).into(this.breakfast);
+        } else {
+            for(Meal meal : menu.getMealList()){
+                switch (meal.getDayTiming()){
+                    case 1:
+                        Glide.with(context).load(meal.getRecipe().getImage()).into(this.breakfast);
+                        break;
+                    case 2:
+                        Glide.with(context).load(meal.getRecipe().getImage()).into(this.after_morning);
+                        break;
+                    case 3:
+                        Glide.with(context).load(meal.getRecipe().getImage()).into(this.lunch);
+                        break;
+                    case 4:
+                        Glide.with(context).load(meal.getRecipe().getImage()).into(this.afternoon);
+                        break;
+                    case 5:
+                        Glide.with(context).load(meal.getRecipe().getImage()).into(this.dinner);
+                        break;
+                }
+            }
         }
 
     }

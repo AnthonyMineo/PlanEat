@@ -13,6 +13,7 @@ import com.denma.planeat.arch.repositories.MenuRepository;
 import com.denma.planeat.arch.repositories.ResponseRepository;
 import com.denma.planeat.models.database.MenuDao;
 import com.denma.planeat.models.database.PlaneatDB;
+import com.denma.planeat.models.local.Meal;
 import com.denma.planeat.utils.TimeAndDateUtils;
 import com.denma.planeat.utils.api.EdamamService;
 import com.google.gson.Gson;
@@ -20,7 +21,9 @@ import com.google.gson.GsonBuilder;
 
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -77,9 +80,11 @@ public class AppModule {
         for(int i=0; i<15; i++){
             ContentValues contentValues = new ContentValues();
             Date dateWithGap = TimeAndDateUtils.getDateWithGapFromToday(i);
+            List<Meal> listMeal = new ArrayList<>();
+            contentValues.put("mealList", String.valueOf(listMeal));
             contentValues.put("eatingDate", TimeAndDateUtils.formatDateToInt_yyyyMMdd(dateWithGap));
             contentValues.put("eatingDateString", TimeAndDateUtils.formatDateToString_EEEdd(dateWithGap));
-            db.insert("Menu", OnConflictStrategy.IGNORE, contentValues);
+            db.insert("Menu", OnConflictStrategy.FAIL, contentValues);
         }
     }
 

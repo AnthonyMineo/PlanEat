@@ -27,7 +27,7 @@ public interface MenuDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insertMenu(Menu menu);
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     int updateMenu(Menu menu);
 
     @Query("DELETE FROM Menu WHERE eatingDate = :eatingDate")

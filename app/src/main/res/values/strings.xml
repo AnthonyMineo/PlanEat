@@ -52,6 +52,8 @@
     <string name="error_text_empty">Key word empty, you need to enter a query.</string>
     <string name="error_text_too_short">Key word is too short (less than 3 characters).</string>
     <string name="error_research_no_result">Sorry ! There is no result for your search.</string>
+    <string name="error_day_timing_empty">You must choose a day timing for your meal.</string>
+    <string name="error_eating_date_empty">You must choose a date for you meal.</string>
 
     <!-- Model bottom sheet. -->
     <string name="day_timing">Day timing of your meal :</string>
@@ -61,5 +63,8 @@
     <string name="day_timing_lunch">Lunch</string>
     <string name="day_timing_afternoon">Afternoon</string>
     <string name="day_timing_dinner">Dinner</string>
+    <string name="save_meal_button">Save this meal</string>
+    <string name="overwrite_dialog_title">Warning</string>
+    <string name="overwrite_dialog_text">You already have a meal programmed for this specific day timing at this date. Would you overwrite it ?</string>
 
 </resources>
