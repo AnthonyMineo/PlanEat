@@ -19,7 +19,15 @@ public class MealOfTheDayAdapter extends RecyclerView.Adapter<MealOfTheDayViewHo
     private Context context;
     private List<Meal> mealList;
 
-    public MealOfTheDayAdapter() { this.mealList = new ArrayList<>(); }
+    public deleteButtonListener onDeleteButtonListener;
+    public interface deleteButtonListener {
+        void deleteButtonOnClick(Meal meal);
+    }
+
+    public MealOfTheDayAdapter(deleteButtonListener onDeleteButtonListener) {
+        this.mealList = new ArrayList<>();
+        this.onDeleteButtonListener = onDeleteButtonListener;
+    }
 
     @NonNull
     @Override
@@ -33,7 +41,7 @@ public class MealOfTheDayAdapter extends RecyclerView.Adapter<MealOfTheDayViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MealOfTheDayViewHolder holder, int position) {
-        holder.updateWithMeal(this.mealList.get(position), this.context);
+        holder.updateWithMeal(this.mealList.get(position), this.context, this.onDeleteButtonListener);
     }
 
     @Override

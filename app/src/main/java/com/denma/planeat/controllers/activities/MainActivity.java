@@ -18,6 +18,7 @@ import android.view.MenuItem;
 
 import com.denma.planeat.R;
 
+import com.denma.planeat.arch.viewmodels.MenuViewModel;
 import com.denma.planeat.controllers.BaseActivity;
 
 import com.denma.planeat.controllers.fragments.MealOfTheDayFragment;

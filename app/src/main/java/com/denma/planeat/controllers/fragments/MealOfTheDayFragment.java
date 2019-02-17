@@ -1,6 +1,8 @@
 package com.denma.planeat.controllers.fragments;
 
 
+import android.app.AlertDialog;
+import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
@@ -18,6 +20,7 @@ import android.view.ViewGroup;
 import com.denma.planeat.R;
 import com.denma.planeat.arch.viewmodels.MenuViewModel;
 import com.denma.planeat.controllers.BaseFragment;
+import com.denma.planeat.models.local.Meal;
 import com.denma.planeat.models.local.Menu;
 import com.denma.planeat.utils.ItemClickSupport;
 import com.denma.planeat.views.adapter.MealOfTheDayAdapter;
@@ -40,6 +43,8 @@ public class MealOfTheDayFragment extends BaseFragment {
     ViewModelProvider.Factory viewModelFactory;
     private MenuViewModel menuViewModel;
     private MealOfTheDayAdapter mealOfTheDayAdapter;
+    // necessary to stay with the same menu when upload in order to trigger the observer
+    private Menu currentMenu;
 
     // --------------------
     // CONSTRUCTORS
@@ -94,7 +99,9 @@ public class MealOfTheDayFragment extends BaseFragment {
     // - Configure RecyclerView, Adapter, LayoutManager & glue it together
     private void configureRecyclerView() {
         // - Create adapter
-        this.mealOfTheDayAdapter = new MealOfTheDayAdapter();
+        this.mealOfTheDayAdapter = new MealOfTheDayAdapter(meal -> {
+            showDialog(meal);
+        });
         // - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.mealOfTheDayAdapter);
         // - Set layout manager to position the items
@@ -108,15 +115,40 @@ public class MealOfTheDayFragment extends BaseFragment {
 
     private void configureViewModel(){
         menuViewModel = ViewModelProviders.of(this, viewModelFactory).get(MenuViewModel.class);
-        menuViewModel.getCurrentMenu().observe(this, this::updateMeal);
+        menuViewModel.getCurrentMenu().observe(this, this::updateMealFromDB);
     }
 
     // --------------------
     // ACTIONS
     // --------------------
 
+    private void updateMealFromDB(Menu currentMenu){
+        menuViewModel.getMenuByDate(currentMenu.getEatingDate()).observe(this, this::updateMeal);
+    }
+
     private void updateMeal(Menu currentMenu){
         mealOfTheDayAdapter.updateData(currentMenu.getMealList());
+        this.currentMenu = currentMenu;
+    }
+
+    private void showDialog(Meal meal){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+        builder.setTitle(getResources().getString(R.string.delete_meal_dialog_title))
+                .setMessage(getResources().getString(R.string.delete_meal_dialog_text))
+                .setCancelable(false)
+                .setPositiveButton("Yes", (dialog, id) -> {
+                    deleteMealFromCurrentMenu(meal);
+                })
+                .setNegativeButton("No", (dialog, id) -> {
+                    dialog.cancel();
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void deleteMealFromCurrentMenu(Meal meal){
+        this.currentMenu.getMealList().remove(meal);
+        menuViewModel.updateMenu(currentMenu);
     }
 
 }
