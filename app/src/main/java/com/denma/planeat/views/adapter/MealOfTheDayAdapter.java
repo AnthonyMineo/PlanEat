@@ -47,6 +47,8 @@ public class MealOfTheDayAdapter extends RecyclerView.Adapter<MealOfTheDayViewHo
     @Override
     public int getItemCount() { return this.mealList.size(); }
 
+    public Meal getMeal(int position){ return this.mealList.get(position); }
+
     public void updateData(List<Meal> mealList){
         this.mealList = mealList;
         this.notifyDataSetChanged();

@@ -192,6 +192,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         viewPager.setCurrentItem(2);
     }
 
+    private void launchSearchActivity(){
+        // - Launch SearchActivity
+        Intent intentAdd = new Intent(MainActivity.this, SearchActivity.class);
+        startActivity(intentAdd);
+    }
+
     // --------------------
     // MENUS
     // --------------------
@@ -212,9 +218,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.toolbar_menu_add:
-                // - Launch SearchActivity
-                Intent intentAdd = new Intent(MainActivity.this, SearchActivity.class);
-                startActivity(intentAdd);
+                launchSearchActivity();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -224,7 +228,21 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
+        int id = item.getItemId();
+
+        switch (id){
+            case R.id.menu_drawer_recipes :
+                launchSearchActivity();
+                break;
+            case R.id.menu_drawer_historic:
+                break;
+            case R.id.menu_drawer_parameters:
+                break;
+            default:
+                break;
+        }
+        this.drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     // - Handle back click to close menu

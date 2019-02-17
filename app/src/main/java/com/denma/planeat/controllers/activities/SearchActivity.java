@@ -49,6 +49,10 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
         return dispatchingAndroidInjector;
     }
 
+    // --------------------
+    // ON CREATE
+    // --------------------
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +64,6 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
 
         // Actions
         this.showRequestFragment();
-
     }
 
     // --------------------

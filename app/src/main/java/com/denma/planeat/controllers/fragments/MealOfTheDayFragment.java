@@ -6,6 +6,7 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -19,7 +20,10 @@ import android.view.ViewGroup;
 
 import com.denma.planeat.R;
 import com.denma.planeat.arch.viewmodels.MenuViewModel;
+import com.denma.planeat.arch.viewmodels.ResponseViewModel;
 import com.denma.planeat.controllers.BaseFragment;
+import com.denma.planeat.controllers.activities.MainActivity;
+import com.denma.planeat.controllers.activities.RecipeActivity;
 import com.denma.planeat.models.local.Meal;
 import com.denma.planeat.models.local.Menu;
 import com.denma.planeat.utils.ItemClickSupport;
@@ -42,6 +46,7 @@ public class MealOfTheDayFragment extends BaseFragment {
     @Inject
     ViewModelProvider.Factory viewModelFactory;
     private MenuViewModel menuViewModel;
+    private ResponseViewModel responseViewModel;
     private MealOfTheDayAdapter mealOfTheDayAdapter;
     // necessary to stay with the same menu when upload in order to trigger the observer
     private Menu currentMenu;
@@ -109,11 +114,15 @@ public class MealOfTheDayFragment extends BaseFragment {
 
         ItemClickSupport.addTo(recyclerView, R.layout.plannig_recycle_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
-
+                    responseViewModel.setCurrentRecipe(mealOfTheDayAdapter.getMeal(position).getRecipe());
+                    // - Launch RecipeActivity
+                    Intent intentAdd = new Intent(getContext() , RecipeActivity.class);
+                    startActivity(intentAdd);
                 });
     }
 
     private void configureViewModel(){
+        responseViewModel = ViewModelProviders.of(this, viewModelFactory).get(ResponseViewModel.class);
         menuViewModel = ViewModelProviders.of(this, viewModelFactory).get(MenuViewModel.class);
         menuViewModel.getCurrentMenu().observe(this, this::updateMealFromDB);
     }
