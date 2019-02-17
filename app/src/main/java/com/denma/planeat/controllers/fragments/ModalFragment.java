@@ -21,7 +21,7 @@ import com.denma.planeat.R;
 import com.denma.planeat.arch.viewmodels.MenuViewModel;
 import com.denma.planeat.arch.viewmodels.ResponseViewModel;
 import com.denma.planeat.models.local.Meal;
-import com.denma.planeat.models.local.Menu;
+import com.denma.planeat.models.local.FoodMenu;
 import com.denma.planeat.models.remote.Recipe;
 import com.denma.planeat.utils.TimeAndDateUtils;
 
@@ -115,8 +115,8 @@ public class ModalFragment extends BottomSheetDialogFragment {
     // ACTIONS
     // --------------------
 
-    private void updateUI(Menu currentMenu){
-        String dateToDisplay = TimeAndDateUtils.formatIntDateToStringToShow(currentMenu.getEatingDate());
+    private void updateUI(FoodMenu currentFoodMenu){
+        String dateToDisplay = TimeAndDateUtils.formatIntDateToStringToShow(currentFoodMenu.getEatingDate());
         this.eatingDate.setText(dateToDisplay);
     }
 
@@ -167,24 +167,24 @@ public class ModalFragment extends BottomSheetDialogFragment {
         menuViewModel.getMenuByDate(eatingDateInt).observe(this, menuToUpdate -> updateMenu(menuToUpdate, mealToSave, eatingDateInt));
     }
 
-    private void updateMenu(Menu menuToUpdate, Meal mealToSave, int eatingDateInt){
+    private void updateMenu(FoodMenu foodMenuToUpdate, Meal mealToSave, int eatingDateInt){
         // Necessary to avoid the update to trigger the observer
         if(!this.updated){
             int existed = 0;
             int indexOfExisted = -1;
 
             // Check if a meal with same day timing already existed in the menu
-            for(Meal meal : menuToUpdate.getMealList()){
+            for(Meal meal : foodMenuToUpdate.getMealList()){
                 if(meal.getDayTiming() == mealToSave.getDayTiming()){
                     existed++;
-                    indexOfExisted = menuToUpdate.getMealList().indexOf(meal);
+                    indexOfExisted = foodMenuToUpdate.getMealList().indexOf(meal);
                 }
             }
             if(existed > 0){
                 // ask if user want to overwrite it
-                showDialog(menuToUpdate, indexOfExisted, mealToSave);
+                showDialog(foodMenuToUpdate, indexOfExisted, mealToSave);
             } else {
-                updateAndClose(menuToUpdate, mealToSave);
+                updateAndClose(foodMenuToUpdate, mealToSave);
             }
         }
     }
@@ -216,14 +216,14 @@ public class ModalFragment extends BottomSheetDialogFragment {
         return dayIndice;
     }
 
-    private void showDialog(Menu menuToUpdate, int indexOfExisted, Meal mealToSave){
+    private void showDialog(FoodMenu foodMenuToUpdate, int indexOfExisted, Meal mealToSave){
         AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
         builder.setTitle(getResources().getString(R.string.overwrite_dialog_title))
                 .setMessage(getResources().getString(R.string.overwrite_dialog_text))
                 .setCancelable(false)
                 .setPositiveButton("Yes", (dialog, id) -> {
-                    menuToUpdate.getMealList().remove(indexOfExisted);
-                    updateAndClose(menuToUpdate, mealToSave);
+                    foodMenuToUpdate.getMealList().remove(indexOfExisted);
+                    updateAndClose(foodMenuToUpdate, mealToSave);
                 })
                 .setNegativeButton("No", (dialog, id) -> {
                     dialog.cancel();
@@ -232,9 +232,9 @@ public class ModalFragment extends BottomSheetDialogFragment {
         alert.show();
     }
 
-    private void updateAndClose(Menu menuToUpdate, Meal mealToSave){
-        menuToUpdate.getMealList().add(mealToSave);
-        menuViewModel.updateMenu(menuToUpdate);
+    private void updateAndClose(FoodMenu foodMenuToUpdate, Meal mealToSave){
+        foodMenuToUpdate.getMealList().add(mealToSave);
+        menuViewModel.updateMenu(foodMenuToUpdate);
         this.updated = true;
         getActivity().finish();
     }

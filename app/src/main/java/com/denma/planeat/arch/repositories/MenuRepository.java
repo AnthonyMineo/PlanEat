@@ -4,9 +4,10 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.denma.planeat.models.database.MenuDao;
-import com.denma.planeat.models.local.Menu;
+import com.denma.planeat.models.local.FoodMenu;
+import com.denma.planeat.utils.StorageHelper;
 
-import java.util.Date;
+import java.io.File;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,32 +15,35 @@ import javax.inject.Inject;
 public class MenuRepository {
 
     private final MenuDao menuDao;
-    private final MutableLiveData<Menu> currentMenu = new MutableLiveData<Menu>();
+    private final MutableLiveData<FoodMenu> currentMenu = new MutableLiveData<FoodMenu>();
 
     // --- CONSTRUCTOR ---
     @Inject
-    public MenuRepository(MenuDao menuDao) { this.menuDao = menuDao; }
+    public MenuRepository(MenuDao menuDao) {
+        this.menuDao = menuDao;
+    }
 
     // DAO
     // --- GET ---
-    public LiveData<List<Menu>> getAllMenu(){ return this.menuDao.getAllMenu(); }
-    public LiveData<List<Menu>> getMenuFrom2WeeksRange(int todayDate){ return this.menuDao.getMenuFrom2WeeksRange(todayDate); }
-    public LiveData<Menu> getMenuByDate(int eatingDate){ return this.menuDao.getMenuByDate(eatingDate); }
+    public LiveData<List<FoodMenu>> getAllMenu(){ return this.menuDao.getAllMenu(); }
+    public LiveData<List<FoodMenu>> getMenuFrom2WeeksRange(int todayDate){ return this.menuDao.getMenuFrom2WeeksRange(todayDate); }
+    public LiveData<FoodMenu> getMenuByDate(int eatingDate){ return this.menuDao.getMenuByDate(eatingDate); }
 
     // --- CREATE ---
-    public void createMenu(Menu menu){ this.menuDao.insertMenu(menu); }
+    public void createMenu(FoodMenu foodMenu){ this.menuDao.insertMenu(foodMenu); }
 
     // --- DELETE ---
     public void deleteMenu(int eatingDate){ this.menuDao.deleteMenu(eatingDate); }
 
     // --- UPDATE ---
-    public void updateMenu(Menu menu){ this.menuDao.updateMenu(menu); }
+    public void updateMenu(FoodMenu foodMenu){ this.menuDao.updateMenu(foodMenu); }
 
 
     // FOR CURRENT MENU
     // --- GET ---
-    public LiveData<Menu> getCurrentMenu(){ return this.currentMenu; }
+    public LiveData<FoodMenu> getCurrentMenu(){ return this.currentMenu; }
 
     // --- CREATE ---
-    public void setCurrentMenu(Menu menu){ this.currentMenu.setValue(menu); }
+    public void setCurrentMenu(FoodMenu foodMenu){ this.currentMenu.setValue(foodMenu); }
+
 }

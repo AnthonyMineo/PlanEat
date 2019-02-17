@@ -21,7 +21,7 @@
         <item name="android:background">@color/primaryColor</item>
         <!-- Color of the title text  -->
         <item name="android:textColorPrimary">@color/primaryTextColor</item>
-        <!-- Color of the text of action (menu) items  -->
+        <!-- Color of the text of action (foodMenu) items  -->
         <item name="actionMenuTextColor">@color/primaryTextColor</item>
         <!-- Tints the input fields like checkboxes and text fields -->
         <item name="colorAccent">@color/secondaryColor</item>

@@ -3,13 +3,12 @@ package com.denma.planeat.views.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.denma.planeat.R;
-import com.denma.planeat.models.local.Menu;
+import com.denma.planeat.models.local.FoodMenu;
 import com.denma.planeat.views.holder.PlanningViewHolder;
 
 import java.util.ArrayList;
@@ -18,10 +17,10 @@ import java.util.List;
 public class PlanningAdapter extends RecyclerView.Adapter<PlanningViewHolder>{
 
     private Context context;
-    private List<Menu> menuList;
+    private List<FoodMenu> mFoodMenuList;
 
     public PlanningAdapter() {
-        this.menuList = new ArrayList<>();
+        this.mFoodMenuList = new ArrayList<>();
     }
 
     @NonNull
@@ -36,18 +35,18 @@ public class PlanningAdapter extends RecyclerView.Adapter<PlanningViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull PlanningViewHolder holder, int position) {
-        holder.updateWithMenu(this.menuList.get(position), this.context);
+        holder.updateWithMenu(this.mFoodMenuList.get(position), this.context);
     }
 
     @Override
     public int getItemCount() {
-        return this.menuList.size();
+        return this.mFoodMenuList.size();
     }
 
-    public Menu getMenu(int position){ return this.menuList.get(position); }
+    public FoodMenu getMenu(int position){ return this.mFoodMenuList.get(position); }
 
-    public void updateData(List<Menu> menuList){
-        this.menuList = menuList;
+    public void updateData(List<FoodMenu> foodMenuList){
+        this.mFoodMenuList = foodMenuList;
         this.notifyDataSetChanged();
     }
 }

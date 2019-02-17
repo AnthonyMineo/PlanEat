@@ -9,4 +9,11 @@
         android:title="@string/toolbar_menu_add_title">
     </item>
 
+    <item
+        android:id="@+id/toolbar_menu_list"
+        android:icon="@drawable/baseline_list_alt_black_48"
+        app:showAsAction="ifRoom"
+        android:title="@string/toolbar_menu_list_title">
+    </item>
+
 </menu>

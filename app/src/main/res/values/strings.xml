@@ -7,11 +7,12 @@
     <string name="toolbar_planning_title">Planning</string>
     <string name="toolbar_meals_of_the_day_title">Meals</string>
     <string name="toolbar_menu_add_title">Add</string>
+    <string name="toolbar_menu_list_title">List</string>
     <string name="toolbar_search_title">Search for you meal</string>
     <string name="toolbar_response_title">Choose your meal</string>
     <string name="toolbar_recipe_title">Recipe</string>
 
-    <!-- Menu drawer. -->
+    <!-- FoodMenu drawer. -->
     <string name="menu_drawer_profile_title">Profile</string>
     <string name="menu_drawer_recipes_title">Recipes</string>
     <string name="menu_drawer_historic_title">Historic</string>
@@ -54,12 +55,17 @@
     <string name="error_research_no_result">Sorry ! There is no result for your search.</string>
     <string name="error_day_timing_empty">You must choose a day timing for your meal.</string>
     <string name="error_eating_date_empty">You must choose a date for you meal.</string>
+    <string name="error_reading_shopping_list">A reading error occur</string>
+    <string name="error_writing_shopping_list">A writing error occur</string>
 
     <!-- Warning. -->
     <string name="delete_meal_dialog_title">Careful</string>
     <string name="delete_meal_dialog_text">Are you sure to want to delete this meal ?</string>
     <string name="overwrite_dialog_title">Warning</string>
     <string name="overwrite_dialog_text">You already have a meal programmed for this specific day timing at this date. Would you overwrite it ?</string>
+
+    <!-- Done. -->
+    <string name="saved_list_int_storage">Your shopping list has been saved</string>
 
     <!-- Model bottom sheet. -->
     <string name="day_timing">Day timing of your meal :</string>

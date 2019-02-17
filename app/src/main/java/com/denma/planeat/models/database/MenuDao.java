@@ -7,30 +7,29 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.denma.planeat.models.local.Menu;
+import com.denma.planeat.models.local.FoodMenu;
 
-import java.util.Date;
 import java.util.List;
 
 @Dao
 public interface MenuDao {
 
-    @Query("SELECT * FROM Menu")
-    LiveData<List<Menu>> getAllMenu();
+    @Query("SELECT * FROM FoodMenu")
+    LiveData<List<FoodMenu>> getAllMenu();
 
-    @Query(("SELECT * FROM Menu WHERE eatingDate >= :todayDate"))
-    LiveData<List<Menu>> getMenuFrom2WeeksRange(int todayDate);
+    @Query(("SELECT * FROM FoodMenu WHERE eatingDate >= :todayDate"))
+    LiveData<List<FoodMenu>> getMenuFrom2WeeksRange(int todayDate);
 
-    @Query("SELECT * FROM Menu WHERE eatingDate = :eatingDate")
-    LiveData<Menu> getMenuByDate(int eatingDate);
+    @Query("SELECT * FROM FoodMenu WHERE eatingDate = :eatingDate")
+    LiveData<FoodMenu> getMenuByDate(int eatingDate);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insertMenu(Menu menu);
+    long insertMenu(FoodMenu foodMenu);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    int updateMenu(Menu menu);
+    int updateMenu(FoodMenu foodMenu);
 
-    @Query("DELETE FROM Menu WHERE eatingDate = :eatingDate")
+    @Query("DELETE FROM FoodMenu WHERE eatingDate = :eatingDate")
     int deleteMenu(int eatingDate);
 
 }

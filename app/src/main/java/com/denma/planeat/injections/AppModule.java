@@ -37,19 +37,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module(includes = ViewModelModule.class)
 public class AppModule {
 
-    // --- CONTEXT INJECTION ---
-    @Provides
-    @Singleton
-    Context provideAppContext(Application application){
-        return application;
-    }
-
-    // --- INTERN STORAGE INJECTION ---
-    @Provides
-    File provideDestination(Context context){
-        return context.getFilesDir();
-    }
-
     // --- DB INJECTION ---
     @Provides
     @Singleton
@@ -84,7 +71,7 @@ public class AppModule {
             contentValues.put("mealList", String.valueOf(listMeal));
             contentValues.put("eatingDate", TimeAndDateUtils.formatDateToInt_yyyyMMdd(dateWithGap));
             contentValues.put("eatingDateString", TimeAndDateUtils.formatDateToString_EEEdd(dateWithGap));
-            db.insert("Menu", OnConflictStrategy.FAIL, contentValues);
+            db.insert("FoodMenu", OnConflictStrategy.FAIL, contentValues);
         }
     }
 

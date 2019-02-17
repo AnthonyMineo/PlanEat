@@ -1,6 +1,8 @@
 package com.denma.planeat.controllers.activities;
 
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,10 +23,16 @@ import com.denma.planeat.R;
 import com.denma.planeat.arch.viewmodels.MenuViewModel;
 import com.denma.planeat.controllers.BaseActivity;
 
-import com.denma.planeat.controllers.fragments.MealOfTheDayFragment;
 import com.denma.planeat.controllers.fragments.PlanningFragment;
-import com.denma.planeat.controllers.fragments.ShoppingListFragment;
+
+import com.denma.planeat.models.local.FoodMenu;
+import com.denma.planeat.models.local.Meal;
+import com.denma.planeat.utils.StorageHelper;
+import com.denma.planeat.utils.TimeAndDateUtils;
 import com.denma.planeat.views.adapter.PageAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -47,9 +55,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @BindView(R.id.activity_main_bottom_navigation)
     BottomNavigationView bottomNavigationView;
     private MenuItem addMenu;
+    private MenuItem listMenu;
 
 
     // FOR DATA
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+    private MenuViewModel menuViewModel;
     private PageAdapter pagerAdapter;
 
     // FOR INJECTION
@@ -76,6 +88,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         this.configureNavigationView();
         this.configureViewPager();
         this.configureBottomView();
+        this.configureViewModel();
 
         // Action
         this.showFirstFragment();
@@ -133,8 +146,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     bottomNavigationView.getMenu().getItem(position).setChecked(true);
                     if(addMenu != null){
                         if(position == 2){
+                            listMenu.setVisible(false);
                             addMenu.setVisible(true);
                         } else {
+                            listMenu.setVisible(true);
                             addMenu.setVisible(false);
                         }
                     }
@@ -151,6 +166,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     // - Configure BottomNavigationView
     private void configureBottomView(){
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> updateViewPagerCurrentItem(item.getItemId()));
+    }
+
+    private void configureViewModel(){
+        menuViewModel = ViewModelProviders.of(this, viewModelFactory).get(MenuViewModel.class);
     }
 
     @Override
@@ -198,6 +217,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         startActivity(intentAdd);
     }
 
+    private void updateShoppingList(List<FoodMenu> foodMenuList){
+        List<String> shoppingList = new ArrayList<>();
+        for(FoodMenu menu : foodMenuList){
+            for(Meal meal : menu.getMealList()){
+                shoppingList.addAll(meal.getRecipe().getIngredientLines());
+            }
+        }
+        String fileName = "From : " + TimeAndDateUtils.formatDateToString_EEEdd(TimeAndDateUtils.getDateWithGapFromToday(0));
+        StorageHelper.setShoppingListInStorage(getFilesDir(), this, fileName, shoppingList);
+    }
+
     // --------------------
     // MENUS
     // --------------------
@@ -210,6 +240,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         this.addMenu = menu.findItem(R.id.toolbar_menu_add);
         this.addMenu.setVisible(false);
+        this.listMenu = menu.findItem(R.id.toolbar_menu_list);
 
         return true;
     }
@@ -219,6 +250,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         switch (item.getItemId()) {
             case R.id.toolbar_menu_add:
                 launchSearchActivity();
+                return true;
+            case R.id.toolbar_menu_list:
+                // do someting about the list
+                int todayDate = TimeAndDateUtils.formatDateToInt_yyyyMMdd(TimeAndDateUtils.getDateWithGapFromToday(0));
+                menuViewModel.getMenuFrom2WeeksRange(todayDate).observe(this, this::updateShoppingList);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

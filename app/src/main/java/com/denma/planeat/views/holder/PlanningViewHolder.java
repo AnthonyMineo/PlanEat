@@ -2,7 +2,6 @@ package com.denma.planeat.views.holder;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,8 +9,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.denma.planeat.R;
 import com.denma.planeat.models.local.Meal;
-import com.denma.planeat.models.local.Menu;
-import com.denma.planeat.utils.TimeAndDateUtils;
+import com.denma.planeat.models.local.FoodMenu;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,9 +36,9 @@ public class PlanningViewHolder extends RecyclerView.ViewHolder{
         ButterKnife.bind(this, itemView);
     }
 
-    public void updateWithMenu(Menu menu, Context context){
-        this.day_name.setText(menu.getEatingDateString().substring(0,3).toUpperCase());
-        this.day_number.setText(menu.getEatingDateString().substring(4));
+    public void updateWithMenu(FoodMenu foodMenu, Context context){
+        this.day_name.setText(foodMenu.getEatingDateString().substring(0,3).toUpperCase());
+        this.day_number.setText(foodMenu.getEatingDateString().substring(4));
 
         this.breakfast.setImageDrawable(null);
         this.after_morning.setImageDrawable(null);
@@ -48,10 +46,10 @@ public class PlanningViewHolder extends RecyclerView.ViewHolder{
         this.afternoon.setImageDrawable(null);
         this.dinner.setImageDrawable(null);
 
-        if(menu.getMealList().size() == 0){
+        if(foodMenu.getMealList().size() == 0){
             // show a message to the user
         } else {
-            for(Meal meal : menu.getMealList()){
+            for(Meal meal : foodMenu.getMealList()){
                 String url = meal.getRecipe().getImage();
                 switch (meal.getDayTiming()){
                     case 1:

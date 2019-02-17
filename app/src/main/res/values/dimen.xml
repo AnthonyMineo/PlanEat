@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Menu drawer. -->
+    <!-- FoodMenu drawer. -->
     <dimen name="nav_header_height">180dp</dimen>
 
     <!-- Recycle item. -->

@@ -4,9 +4,8 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.denma.planeat.arch.repositories.MenuRepository;
-import com.denma.planeat.models.local.Menu;
+import com.denma.planeat.models.local.FoodMenu;
 
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -27,12 +26,12 @@ public class MenuViewModel extends ViewModel {
 
     // FOR MENU
     // --- GET ---
-    public LiveData<List<Menu>> getAllMenu(){ return this.menuDataSource.getAllMenu(); }
-    public LiveData<List<Menu>> getMenuFrom2WeeksRange(int todayDate){ return this.menuDataSource.getMenuFrom2WeeksRange(todayDate); }
-    public LiveData<Menu> getMenuByDate(int eatingDate){ return this.menuDataSource.getMenuByDate(eatingDate); }
+    public LiveData<List<FoodMenu>> getAllMenu(){ return this.menuDataSource.getAllMenu(); }
+    public LiveData<List<FoodMenu>> getMenuFrom2WeeksRange(int todayDate){ return this.menuDataSource.getMenuFrom2WeeksRange(todayDate); }
+    public LiveData<FoodMenu> getMenuByDate(int eatingDate){ return this.menuDataSource.getMenuByDate(eatingDate); }
 
     // --- CREATE ---
-    public void createMenu(final Menu menu){ executor.execute(() -> MenuViewModel.this.menuDataSource.createMenu(menu));
+    public void createMenu(final FoodMenu foodMenu){ executor.execute(() -> MenuViewModel.this.menuDataSource.createMenu(foodMenu));
     }
 
     // --- DELETE ---
@@ -40,13 +39,13 @@ public class MenuViewModel extends ViewModel {
     }
 
     // --- UPDATE ---
-    public void updateMenu(final Menu menu){ executor.execute(() -> MenuViewModel.this.menuDataSource.updateMenu(menu));
+    public void updateMenu(final FoodMenu foodMenu){ executor.execute(() -> MenuViewModel.this.menuDataSource.updateMenu(foodMenu));
     }
 
     // FOR CURRENT MENU
     // --- GET ---
-    public LiveData<Menu> getCurrentMenu(){ return this.menuDataSource.getCurrentMenu(); }
+    public LiveData<FoodMenu> getCurrentMenu(){ return this.menuDataSource.getCurrentMenu(); }
 
     // --- CREATE ---
-    public void setCurrentMenu(Menu menu){ this.menuDataSource.setCurrentMenu(menu); }
+    public void setCurrentMenu(FoodMenu foodMenu){ this.menuDataSource.setCurrentMenu(foodMenu); }
 }

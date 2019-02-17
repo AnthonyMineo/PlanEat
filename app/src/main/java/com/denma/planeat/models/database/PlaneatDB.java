@@ -5,10 +5,9 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 
 
-import com.denma.planeat.models.local.Menu;
-import com.denma.planeat.models.remote.Response;
+import com.denma.planeat.models.local.FoodMenu;
 
-@Database(entities = {Menu.class}, version = 1, exportSchema = false)
+@Database(entities = {FoodMenu.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class PlaneatDB extends RoomDatabase {
 

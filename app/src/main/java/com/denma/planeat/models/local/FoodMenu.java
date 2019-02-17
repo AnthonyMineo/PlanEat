@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity
-public class Menu {
+public class FoodMenu {
 
     @PrimaryKey
     @NonNull
@@ -25,7 +25,7 @@ public class Menu {
     // CONSTRUCTOR
     // --------------------
 
-    public Menu(@Nullable List<Meal> mealList, int eatingDate, String eatingDateString) {
+    public FoodMenu(@Nullable List<Meal> mealList, int eatingDate, String eatingDateString) {
         this.mealList = mealList;
         this.eatingDate = eatingDate;
         this.eatingDateString = eatingDateString;

@@ -14,7 +14,7 @@ import com.denma.planeat.R;
 import com.denma.planeat.arch.viewmodels.MenuViewModel;
 import com.denma.planeat.controllers.BaseFragment;
 import com.denma.planeat.controllers.activities.MainActivity;
-import com.denma.planeat.models.local.Menu;
+import com.denma.planeat.models.local.FoodMenu;
 import com.denma.planeat.utils.ItemClickSupport;
 import com.denma.planeat.utils.TimeAndDateUtils;
 import com.denma.planeat.views.adapter.PlanningAdapter;
@@ -122,7 +122,7 @@ public class PlanningFragment extends BaseFragment {
     // ACTIONS
     // --------------------
 
-    private void updateMenu(List<Menu> menus){
-        planningAdapter.updateData(menus);
+    private void updateMenu(List<FoodMenu> foodMenus){
+        planningAdapter.updateData(foodMenus);
     }
 }

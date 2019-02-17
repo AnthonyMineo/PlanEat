@@ -2,17 +2,12 @@ package com.denma.planeat.controllers.fragments;
 
 
 import android.app.AlertDialog;
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 
 import android.view.View;
@@ -22,14 +17,11 @@ import com.denma.planeat.R;
 import com.denma.planeat.arch.viewmodels.MenuViewModel;
 import com.denma.planeat.arch.viewmodels.ResponseViewModel;
 import com.denma.planeat.controllers.BaseFragment;
-import com.denma.planeat.controllers.activities.MainActivity;
 import com.denma.planeat.controllers.activities.RecipeActivity;
+import com.denma.planeat.models.local.FoodMenu;
 import com.denma.planeat.models.local.Meal;
-import com.denma.planeat.models.local.Menu;
 import com.denma.planeat.utils.ItemClickSupport;
 import com.denma.planeat.views.adapter.MealOfTheDayAdapter;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -49,7 +41,7 @@ public class MealOfTheDayFragment extends BaseFragment {
     private ResponseViewModel responseViewModel;
     private MealOfTheDayAdapter mealOfTheDayAdapter;
     // necessary to stay with the same menu when upload in order to trigger the observer
-    private Menu currentMenu;
+    private FoodMenu mCurrentFoodMenu;
 
     // --------------------
     // CONSTRUCTORS
@@ -131,13 +123,13 @@ public class MealOfTheDayFragment extends BaseFragment {
     // ACTIONS
     // --------------------
 
-    private void updateMealFromDB(Menu currentMenu){
-        menuViewModel.getMenuByDate(currentMenu.getEatingDate()).observe(this, this::updateMeal);
+    private void updateMealFromDB(FoodMenu currentFoodMenu){
+        menuViewModel.getMenuByDate(currentFoodMenu.getEatingDate()).observe(this, this::updateMeal);
     }
 
-    private void updateMeal(Menu currentMenu){
-        mealOfTheDayAdapter.updateData(currentMenu.getMealList());
-        this.currentMenu = currentMenu;
+    private void updateMeal(FoodMenu currentFoodMenu){
+        mealOfTheDayAdapter.updateData(currentFoodMenu.getMealList());
+        this.mCurrentFoodMenu = currentFoodMenu;
     }
 
     private void showDialog(Meal meal){
@@ -156,8 +148,8 @@ public class MealOfTheDayFragment extends BaseFragment {
     }
 
     private void deleteMealFromCurrentMenu(Meal meal){
-        this.currentMenu.getMealList().remove(meal);
-        menuViewModel.updateMenu(currentMenu);
+        this.mCurrentFoodMenu.getMealList().remove(meal);
+        menuViewModel.updateMenu(mCurrentFoodMenu);
     }
 
 }
