@@ -45,6 +45,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".controllers.activities.MainActivity" />
         </activity>
+        <!-- SHOPPING LIST ACTIVITY -->
+        <activity android:name=".controllers.activities.ShoppingListActivity"
+            android:label="Shopping"
+            android:parentActivityName=".controllers.activities.MainActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".controllers.activities.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

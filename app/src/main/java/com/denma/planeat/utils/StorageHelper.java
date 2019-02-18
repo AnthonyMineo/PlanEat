@@ -1,7 +1,7 @@
 package com.denma.planeat.utils;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.denma.planeat.R;
@@ -37,9 +37,8 @@ public class StorageHelper {
 
     private static List<String> readOnInternalStorage(Context context, File file){
         List<String> result = null;
-
         if (file.exists()) {
-            FileInputStream fis;
+            FileInputStream fis = null;
             try {
                 fis = new FileInputStream(file);
                 ObjectInputStream ois = new ObjectInputStream(fis);
@@ -49,6 +48,7 @@ public class StorageHelper {
                     e.printStackTrace();
                 } finally {
                     ois.close();
+                    fis.close();
                 }
             }
             catch (IOException e) {
@@ -65,9 +65,12 @@ public class StorageHelper {
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             try {
                 oos.writeObject(shoppingList);
+                oos.flush();
+                fos.getFD().sync();
             } finally {
                 oos.close();
-                Toast.makeText(context, context.getString(R.string.saved_list_int_storage), Toast.LENGTH_LONG).show();
+                fos.close();
+                Toast.makeText(context, context.getString(R.string.saved_list_in_storage), Toast.LENGTH_LONG).show();
             }
         } catch (IOException e) {
             Toast.makeText(context, context.getString(R.string.error_writing_shopping_list), Toast.LENGTH_LONG).show();

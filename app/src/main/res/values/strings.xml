@@ -65,7 +65,7 @@
     <string name="overwrite_dialog_text">You already have a meal programmed for this specific day timing at this date. Would you overwrite it ?</string>
 
     <!-- Done. -->
-    <string name="saved_list_int_storage">Your shopping list has been saved</string>
+    <string name="saved_list_in_storage">Your shopping list has been saved</string>
 
     <!-- Model bottom sheet. -->
     <string name="day_timing">Day timing of your meal :</string>

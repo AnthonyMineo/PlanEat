@@ -14,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -213,8 +214,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void launchSearchActivity(){
         // - Launch SearchActivity
-        Intent intentAdd = new Intent(MainActivity.this, SearchActivity.class);
-        startActivity(intentAdd);
+        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+        startActivity(intent);
     }
 
     private void updateShoppingList(List<FoodMenu> foodMenuList){
