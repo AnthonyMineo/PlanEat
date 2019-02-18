@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -74,11 +75,12 @@ public class ShoppingListActivity extends BaseActivity {
         String listToDiplay = null;
         for (String lign : shoppingList){
             if(listToDiplay == null){
-                listToDiplay = lign + "\n";
+                listToDiplay = "- " + lign + "\n";
             }else{
-                listToDiplay += lign + "\n";
+                listToDiplay += "- " + lign + "\n";
             }
         }
+        this.shoppingText.setMovementMethod(new ScrollingMovementMethod());
         this.shoppingText.setText(listToDiplay);
     }
 

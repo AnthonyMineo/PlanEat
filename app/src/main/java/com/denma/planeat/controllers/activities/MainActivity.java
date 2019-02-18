@@ -149,9 +149,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         if(position == 2){
                             listMenu.setVisible(false);
                             addMenu.setVisible(true);
-                        } else {
+                        } else if (position == 1) {
                             listMenu.setVisible(true);
                             addMenu.setVisible(false);
+                        } else {
+                            addMenu.setVisible(false);
+                            listMenu.setVisible(false);
                         }
                     }
                 }
@@ -240,8 +243,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         menuInflater.inflate(R.menu.menu_tools, menu);
 
         this.addMenu = menu.findItem(R.id.toolbar_menu_add);
-        this.addMenu.setVisible(false);
         this.listMenu = menu.findItem(R.id.toolbar_menu_list);
+        if(viewPager.getCurrentItem() == 1){
+            this.addMenu.setVisible(false);
+            this.listMenu.setVisible(true);
+        } else if(viewPager.getCurrentItem() == 2){
+            this.listMenu.setVisible(false);
+            this.addMenu.setVisible(true);
+        } else {
+            this.addMenu.setVisible(false);
+            this.listMenu.setVisible(false);
+        }
 
         return true;
     }
@@ -261,7 +273,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
