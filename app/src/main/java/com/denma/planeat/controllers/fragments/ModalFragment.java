@@ -7,7 +7,6 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +19,8 @@ import android.widget.Toast;
 import com.denma.planeat.R;
 import com.denma.planeat.arch.viewmodels.MenuViewModel;
 import com.denma.planeat.arch.viewmodels.ResponseViewModel;
-import com.denma.planeat.models.local.Meal;
 import com.denma.planeat.models.local.FoodMenu;
+import com.denma.planeat.models.local.Meal;
 import com.denma.planeat.models.remote.Recipe;
 import com.denma.planeat.utils.TimeAndDateUtils;
 

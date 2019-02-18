@@ -4,25 +4,18 @@ package com.denma.planeat.controllers.fragments;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.denma.planeat.R;
-import com.denma.planeat.arch.repositories.ResponseRepository;
-import com.denma.planeat.arch.viewmodels.MenuViewModel;
 import com.denma.planeat.arch.viewmodels.ResponseViewModel;
 import com.denma.planeat.controllers.BaseFragment;
 import com.denma.planeat.controllers.activities.SearchActivity;
-import com.denma.planeat.utils.TimeAndDateUtils;
 
 import javax.inject.Inject;
 
@@ -126,7 +119,7 @@ public class SearchRequestFragment extends BaseFragment {
         }
         String diet = dietAttribution();
         String health = healthAttribution();
-        responseViewModel.updateResponseFromAPI(query, diet, health);
+        responseViewModel.updateResponseFromAPI(query, diet, health, getActivity(), getString(R.string.error_no_internet));
         callback.onSearchClick();
     }
 

@@ -4,7 +4,6 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 
-
 import com.denma.planeat.models.local.FoodMenu;
 
 @Database(entities = {FoodMenu.class}, version = 1, exportSchema = false)

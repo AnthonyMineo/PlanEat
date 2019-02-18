@@ -14,7 +14,6 @@ import com.denma.planeat.views.adapter.MealOfTheDayAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 
 public class MealOfTheDayViewHolder extends RecyclerView.ViewHolder  {

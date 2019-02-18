@@ -14,18 +14,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.denma.planeat.R;
-
 import com.denma.planeat.arch.viewmodels.MenuViewModel;
 import com.denma.planeat.controllers.BaseActivity;
-
 import com.denma.planeat.controllers.fragments.PlanningFragment;
-
 import com.denma.planeat.models.local.FoodMenu;
 import com.denma.planeat.models.local.Meal;
 import com.denma.planeat.utils.StorageHelper;
@@ -137,9 +134,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         this.viewPager.setAdapter(pagerAdapter);
         this.viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
             @Override
             public void onPageSelected(int position) {
@@ -161,9 +156,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
+            public void onPageScrollStateChanged(int state) {}
         });
     }
 
@@ -282,9 +275,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.menu_drawer_recipes :
                 launchSearchActivity();
                 break;
+            case R.id.menu_drawer_profil:
+                Toast.makeText(this, getResources().getString(R.string.error_not_available_yet), Toast.LENGTH_SHORT).show();
+                break;
             case R.id.menu_drawer_historic:
+                Toast.makeText(this, getResources().getString(R.string.error_not_available_yet), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu_drawer_parameters:
+                Toast.makeText(this, getResources().getString(R.string.error_not_available_yet), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.menu_drawer_help:
+                Toast.makeText(this, getResources().getString(R.string.error_not_available_yet), Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;

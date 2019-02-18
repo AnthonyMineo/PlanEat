@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.denma.planeat.R;
-import com.denma.planeat.models.local.Meal;
 import com.denma.planeat.models.local.FoodMenu;
+import com.denma.planeat.models.local.Meal;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

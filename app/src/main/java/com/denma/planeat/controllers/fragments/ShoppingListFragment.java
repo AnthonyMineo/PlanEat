@@ -3,20 +3,16 @@ package com.denma.planeat.controllers.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.denma.planeat.R;
 import com.denma.planeat.controllers.BaseFragment;
-import com.denma.planeat.controllers.activities.MainActivity;
 import com.denma.planeat.controllers.activities.ShoppingListActivity;
 import com.denma.planeat.utils.ItemClickSupport;
-import com.denma.planeat.utils.StorageHelper;
 import com.denma.planeat.views.adapter.ShoppingListAdapter;
 
 import java.io.File;

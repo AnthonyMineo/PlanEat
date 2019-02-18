@@ -57,6 +57,8 @@
     <string name="error_eating_date_empty">You must choose a date for you meal.</string>
     <string name="error_reading_shopping_list">A reading error occur</string>
     <string name="error_writing_shopping_list">A writing error occur</string>
+    <string name="error_not_available_yet">Available soon !</string>
+    <string name="error_no_internet">No internet available !</string>
 
     <!-- Warning. -->
     <string name="delete_meal_dialog_title">Careful</string>

@@ -6,7 +6,6 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.ContentValues;
-import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.denma.planeat.arch.repositories.MenuRepository;
@@ -19,8 +18,6 @@ import com.denma.planeat.utils.api.EdamamService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

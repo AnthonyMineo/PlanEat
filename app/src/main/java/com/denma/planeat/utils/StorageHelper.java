@@ -1,11 +1,9 @@
 package com.denma.planeat.utils;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.denma.planeat.R;
-
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +11,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
 import java.util.List;
 
 public class StorageHelper {

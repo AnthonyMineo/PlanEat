@@ -128,6 +128,7 @@ public class SearchResponseFragment extends BaseFragment {
             for(Hit hit : response.getHits()){
                 recipeList.add(hit.getRecipe());
             }
+            this.recyclerView.setVisibility(View.VISIBLE);
             searchResponseAdapter.updateData(recipeList);
         } else {
             this.errorText.setVisibility(View.VISIBLE);

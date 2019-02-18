@@ -2,6 +2,7 @@ package com.denma.planeat.arch.viewmodels;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
+import android.content.Context;
 
 import com.denma.planeat.arch.repositories.ResponseRepository;
 import com.denma.planeat.models.remote.Recipe;
@@ -33,7 +34,9 @@ public class ResponseViewModel extends ViewModel {
     public void setResponse(Response response){ this.responseDataSource.setResponse(response); }
 
     // --- REMOTE DATA UPDATE ---
-    public void updateResponseFromAPI(String query, String diet, String health){ this.responseDataSource.updateResponseFromAPI(query, diet, health); }
+    public void updateResponseFromAPI(String query, String diet, String health, Context context, String message){
+        this.responseDataSource.updateResponseFromAPI(query, diet, health, context, message);
+    }
 
     // FOR CURRENT RECIPE
     // --- GET ---

@@ -15,15 +15,11 @@ import com.denma.planeat.controllers.fragments.ModalFragment;
 import com.denma.planeat.controllers.fragments.RecipeFragment;
 import com.denma.planeat.controllers.fragments.SearchRequestFragment;
 import com.denma.planeat.controllers.fragments.SearchResponseFragment;
-import com.denma.planeat.models.remote.Recipe;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import dagger.android.AndroidInjection;
-import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 

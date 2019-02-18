@@ -5,9 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.denma.planeat.models.database.MenuDao;
 import com.denma.planeat.models.local.FoodMenu;
-import com.denma.planeat.utils.StorageHelper;
 
-import java.io.File;
 import java.util.List;
 
 import javax.inject.Inject;

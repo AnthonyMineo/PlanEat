@@ -2,7 +2,8 @@ package com.denma.planeat.arch.repositories;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.util.Log;
+import android.content.Context;
+import android.widget.Toast;
 
 import com.denma.planeat.models.remote.Recipe;
 import com.denma.planeat.models.remote.Response;
@@ -38,7 +39,7 @@ public class ResponseRepository {
     public void setResponse(Response response){ this.currentResponse.setValue(response); }
 
     // --- REMOTE DATA UPDATE ---
-    public void updateResponseFromAPI(final String query, final String diet, final String health) {
+    public void updateResponseFromAPI(final String query, final String diet, final String health, Context context, String message) {
         executor.execute(() -> {
             edamamService.getRecipes(query, diet, health).enqueue(new Callback<Response>() {
                 @Override
@@ -48,7 +49,6 @@ public class ResponseRepository {
                             // the request return true results
                             setResponse(response.body());
                         } else {
-                            // Error, params are incorrect and the response is hits empty
                             setResponse(new Response());
                         }
                     }
@@ -56,7 +56,7 @@ public class ResponseRepository {
 
                 @Override
                 public void onFailure(Call<Response> call, Throwable t) {
-                    Log.e("TAG", "FAILED from network !");
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                 }
             });
         });

@@ -3,14 +3,12 @@ package com.denma.planeat.models.database;
 import android.arch.persistence.room.TypeConverter;
 
 import com.denma.planeat.models.local.Meal;
-import com.denma.planeat.models.remote.Hit;
 import com.denma.planeat.models.remote.Recipe;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 
