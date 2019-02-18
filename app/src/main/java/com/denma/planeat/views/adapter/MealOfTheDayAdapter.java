@@ -50,7 +50,44 @@ public class MealOfTheDayAdapter extends RecyclerView.Adapter<MealOfTheDayViewHo
     public Meal getMeal(int position){ return this.mealList.get(position); }
 
     public void updateData(List<Meal> mealList){
-        this.mealList = mealList;
+        this.mealList = orderList(mealList);
         this.notifyDataSetChanged();
+    }
+
+    private List<Meal> orderList(List<Meal> mealList){
+
+        List<Meal> orderedList = new ArrayList<>();
+        Meal m1 = null, m2 = null, m3 = null, m4 = null, m5 = null;
+        for(Meal meal : mealList){
+            switch (meal.getDayTiming()){
+                case 1:
+                    m1 = meal;
+                    break;
+                case 2:
+                    m2 = meal;
+                    break;
+                case 3:
+                    m3 = meal;
+                    break;
+                case 4:
+                    m4 = meal;
+                    break;
+                case 5:
+                    m5 = meal;
+                    break;
+            }
+        }
+        if(m1 != null)
+            orderedList.add(m1);
+        if(m2 != null)
+            orderedList.add(m2);
+        if(m3 != null)
+            orderedList.add(m3);
+        if(m4 != null)
+            orderedList.add(m4);
+        if(m5 != null)
+            orderedList.add(m5);
+
+        return orderedList;
     }
 }

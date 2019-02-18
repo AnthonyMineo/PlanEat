@@ -135,4 +135,10 @@ public class SearchResponseFragment extends BaseFragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.recyclerView.setVisibility(View.GONE);
+        this.errorText.setVisibility(View.GONE);
+    }
 }

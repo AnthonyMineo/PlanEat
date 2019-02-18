@@ -32,9 +32,13 @@ public class MealOfTheDayViewHolder extends RecyclerView.ViewHolder  {
     }
 
     public void updateWithMeal(Meal meal, Context context, MealOfTheDayAdapter.deleteButtonListener onDeleteButtonListener) {
-        Glide.with(context).load(meal.getRecipe().getImage()).into(this.mainImage);
-        this.mealLabel.setText(meal.getRecipe().getLabel());
-        deleteMeal.setOnClickListener(view -> onDeleteButtonListener.deleteButtonOnClick(meal));
+        try{
+            Glide.with(context).load(meal.getRecipe().getImage()).into(this.mainImage);
+            this.mealLabel.setText(meal.getRecipe().getLabel());
+            deleteMeal.setOnClickListener(view -> onDeleteButtonListener.deleteButtonOnClick(meal));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }
