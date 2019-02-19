@@ -39,7 +39,7 @@ public class ResponseRepository {
     public void setResponse(Response response){ this.currentResponse.setValue(response); }
 
     // --- REMOTE DATA UPDATE ---
-    public void updateResponseFromAPI(final String query, final String diet, final String health, Context context, String message) {
+    public void updateResponseFromAPI(final String query, final String diet, final String health) {
         executor.execute(() -> {
             edamamService.getRecipes(query, diet, health).enqueue(new Callback<Response>() {
                 @Override
@@ -55,9 +55,7 @@ public class ResponseRepository {
                 }
 
                 @Override
-                public void onFailure(Call<Response> call, Throwable t) {
-                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-                }
+                public void onFailure(Call<Response> call, Throwable t) { }
             });
         });
     }

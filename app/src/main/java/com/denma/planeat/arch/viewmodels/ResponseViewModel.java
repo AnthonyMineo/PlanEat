@@ -34,8 +34,8 @@ public class ResponseViewModel extends ViewModel {
     public void setResponse(Response response){ this.responseDataSource.setResponse(response); }
 
     // --- REMOTE DATA UPDATE ---
-    public void updateResponseFromAPI(String query, String diet, String health, Context context, String message){
-        this.responseDataSource.updateResponseFromAPI(query, diet, health, context, message);
+    public void updateResponseFromAPI(String query, String diet, String health){
+        this.responseDataSource.updateResponseFromAPI(query, diet, health);
     }
 
     // FOR CURRENT RECIPE

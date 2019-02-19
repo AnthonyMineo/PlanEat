@@ -16,6 +16,7 @@ import com.denma.planeat.R;
 import com.denma.planeat.arch.viewmodels.ResponseViewModel;
 import com.denma.planeat.controllers.BaseFragment;
 import com.denma.planeat.controllers.activities.SearchActivity;
+import com.denma.planeat.utils.InternetUtils;
 
 import javax.inject.Inject;
 
@@ -119,8 +120,12 @@ public class SearchRequestFragment extends BaseFragment {
         }
         String diet = dietAttribution();
         String health = healthAttribution();
-        responseViewModel.updateResponseFromAPI(query, diet, health, getActivity(), getString(R.string.error_no_internet));
-        callback.onSearchClick();
+        if(InternetUtils.isInternetAvailable(getActivity())){
+            responseViewModel.updateResponseFromAPI(query, diet, health);
+            callback.onSearchClick();
+        } else {
+            Toast.makeText(getActivity(), getString(R.string.error_no_internet), Toast.LENGTH_LONG).show();
+        }
     }
 
     private String queryAttribution(){
