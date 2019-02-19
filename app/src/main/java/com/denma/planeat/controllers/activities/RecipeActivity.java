@@ -4,7 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.denma.planeat.R;
 import com.denma.planeat.controllers.BaseActivity;
@@ -20,6 +24,8 @@ import dagger.android.support.HasSupportFragmentInjector;
 public class RecipeActivity extends BaseActivity implements HasSupportFragmentInjector {
 
     // FOR DESIGN
+    @BindView(R.id.activity_recipe_layout)
+    LinearLayout mainLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.activity_recipe_fragment_layout)
@@ -49,6 +55,7 @@ public class RecipeActivity extends BaseActivity implements HasSupportFragmentIn
         this.configureToolBar();
 
         // Actions
+        this.alphaViewAnimation(mainLayout, 100);
         this.showRecipeFragment();
     }
 
@@ -84,6 +91,13 @@ public class RecipeActivity extends BaseActivity implements HasSupportFragmentIn
     // --------------------
     // ACTIONS
     // --------------------
+
+    private void alphaViewAnimation(View view, int startDelay){
+        Animation animation = new AlphaAnimation(0.0f, 1.0f);
+        animation.setDuration(500);
+        animation.setStartOffset(startDelay);
+        view.startAnimation(animation);
+    }
 
     private void showRecipeFragment(){
         if(fragmentLayout != null){

@@ -7,7 +7,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.denma.planeat.R;
 import com.denma.planeat.controllers.BaseActivity;
@@ -26,6 +30,8 @@ import dagger.android.support.HasSupportFragmentInjector;
 public class SearchActivity extends BaseActivity implements SearchRequestFragment.OnSearchClickListener, SearchResponseFragment.OnRecipeClickListener, HasSupportFragmentInjector {
 
     // FOR DESIGN
+    @BindView(R.id.activity_search_layout)
+    LinearLayout mainLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.activity_search_fragment_layout)
@@ -59,6 +65,7 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
         this.configureFragment();
 
         // Actions
+        this.alphaViewAnimation(mainLayout, 100);
         this.showRequestFragment();
     }
 
@@ -119,6 +126,13 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
     // --------------------
     // ACTIONS
     // --------------------
+
+    private void alphaViewAnimation(View view, int startDelay){
+        Animation animation = new AlphaAnimation(0.0f, 1.0f);
+        animation.setDuration(500);
+        animation.setStartOffset(startDelay);
+        view.startAnimation(animation);
+    }
 
     private void showRequestFragment(){
         if(fragmentLayout != null){

@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.denma.planeat.R;
@@ -17,6 +21,8 @@ import butterknife.BindView;
 public class ShoppingListActivity extends BaseActivity {
 
     // FOR DESIGN
+    @BindView(R.id.activity_shopping_list_layout)
+    LinearLayout mainLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.activity_shopping_text_view)
@@ -33,9 +39,12 @@ public class ShoppingListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Configuration
         this.configureToolBar();
         this.showShoppingList();
 
+        // Actions
+        this.alphaViewAnimation(mainLayout, 100);
     }
 
     // --------------------
@@ -67,6 +76,13 @@ public class ShoppingListActivity extends BaseActivity {
     // --------------------
     // ACTIONS
     // --------------------
+
+    private void alphaViewAnimation(View view, int startDelay){
+        Animation animation = new AlphaAnimation(0.0f, 1.0f);
+        animation.setDuration(500);
+        animation.setStartOffset(startDelay);
+        view.startAnimation(animation);
+    }
 
     private void showShoppingList(){
         List<String> shoppingList = StorageHelper.getShoppingListFromStorage(getFilesDir(), this, fileName);
