@@ -1,0 +1,59 @@
+{
+  "hits": [
+    {
+      "recipe": {
+        "label": "Riz au lait",
+        "image": "https://www.edamam.com/web-img/133/133b4b0e3ac2fac6a1021b68f19d0994.jpg",
+        "url": "https://food52.com/recipes/415-riz-au-lait",
+        "dietLabels": [
+          "Balanced"
+        ],
+        "healthLabels": [
+          "Vegetarian",
+          "Peanut-Free",
+          "Tree-Nut-Free",
+          "Alcohol-Free"
+        ],
+        "ingredientLines": [
+          "4 cups whole milk",
+          "1/3 cup arborio rice",
+          "1/3 cup sugar",
+          "1 vanilla bean"
+        ],
+        "ingredients": [
+          {
+            "text": "4 cups whole milk",
+            "weight": 976.0
+          },
+          {
+            "text": "1/3 cup arborio rice",
+            "weight": 66.66666666666666
+          },
+          {
+            "text": "1/3 cup sugar",
+            "weight": 66.66666666666666
+          },
+          {
+            "text": "1 vanilla bean",
+            "weight": 5.0
+          }
+        ],
+        "calories": 1106.4266666666667,
+        "totalWeight": 1114.3333333333335,
+        "totalTime": 84.0,
+        "digest": [
+          {
+            "label": "Fat",
+            "total": 32.06966666666666,
+            "unit": "g"
+          },
+          {
+            "label": "Carbs",
+            "total": 166.9005,
+            "unit": "g"
+          }
+        ]
+      }
+    }
+  ]
+}
