@@ -23,10 +23,10 @@ public interface MenuDao {
     @Query("SELECT * FROM FoodMenu WHERE eatingDate = :eatingDate")
     LiveData<FoodMenu> getMenuByDate(int eatingDate);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     long insertMenu(FoodMenu foodMenu);
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Update
     int updateMenu(FoodMenu foodMenu);
 
     @Query("DELETE FROM FoodMenu WHERE eatingDate = :eatingDate")
