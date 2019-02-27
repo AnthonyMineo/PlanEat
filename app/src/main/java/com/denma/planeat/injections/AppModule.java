@@ -31,6 +31,9 @@ import dagger.Provides;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.denma.planeat.utils.ConstantsKt.APP_DB_NAME;
+import static com.denma.planeat.utils.ConstantsKt.EDAMAM_URL;
+
 @Module(includes = ViewModelModule.class)
 public class AppModule {
 
@@ -39,7 +42,7 @@ public class AppModule {
     @Singleton
     PlaneatDB provideDatabase(Application application){
         return Room.databaseBuilder(application,
-                PlaneatDB.class, "PlaneatDB.db")
+                PlaneatDB.class, APP_DB_NAME)
                 .addCallback(prepopulateDatabase())
                 .build();
     }
@@ -93,7 +96,6 @@ public class AppModule {
     ResponseRepository provideResponseRepository(Executor executor, EdamamService edamamService) { return new ResponseRepository(executor, edamamService); }
 
     // --- NETWORK INJECTION ---
-    private static String EDAMAM_URL = "https://api.edamam.com/";
 
     @Provides
     Gson provideGson() { return new GsonBuilder().create(); }

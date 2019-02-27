@@ -13,9 +13,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
-public class StorageHelper {
+import static com.denma.planeat.utils.ConstantsKt.FOLDER_NAME;
 
-    private static final String FOLDER_NAME = "ShoppingList";
+public class StorageHelper {
 
     public static List<String> getShoppingListFromStorage(File rootDestination, Context context, String fileName){
         File file = createOrGetFile(rootDestination, fileName);

@@ -20,7 +20,8 @@
         <!-- MAIN ACTIVITY -->
         <activity
             android:name=".controllers.activities.MainActivity"
-            android:theme="@style/AppTheme.Launcher">
+            android:theme="@style/AppTheme.Launcher"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +32,8 @@
         <activity
             android:name=".controllers.activities.SearchActivity"
             android:label="Search"
-            android:parentActivityName=".controllers.activities.MainActivity">
+            android:parentActivityName=".controllers.activities.MainActivity"
+            android:configChanges="orientation|screenSize">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -42,7 +44,8 @@
         <activity
             android:name=".controllers.activities.RecipeActivity"
             android:label="Recipe"
-            android:parentActivityName=".controllers.activities.MainActivity">
+            android:parentActivityName=".controllers.activities.MainActivity"
+            android:configChanges="orientation|screenSize">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -52,7 +55,8 @@
         <!-- SHOPPING LIST ACTIVITY -->
         <activity android:name=".controllers.activities.ShoppingListActivity"
             android:label="Shopping"
-            android:parentActivityName=".controllers.activities.MainActivity">
+            android:parentActivityName=".controllers.activities.MainActivity"
+            android:configChanges="orientation|screenSize">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data

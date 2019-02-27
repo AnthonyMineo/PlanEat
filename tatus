@@ -1,0 +1,276 @@
+[33mcommit 7884b02c43d215d3e09ed52613c899e35871e693[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Mon Feb 25 15:27:23 2019 +0100
+
+    Correct height of shopping recycle item
+
+[33mcommit feea34d298c9f54c9ac124954ea6d868f80dbd62[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Tue Feb 19 12:10:19 2019 +0100
+
+    Add fade in animation on activity
+
+[33mcommit 9423373ce48f1c4f43ba2fce10a3d6b954167228[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Tue Feb 19 11:50:52 2019 +0100
+
+    Add unit test for Edamam API
+
+[33mcommit 05a069f0dfbbf12a4ca50b83e11dc92e99c8aa04[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Tue Feb 19 11:29:23 2019 +0100
+
+    Add FoodMenu Dao instrumented tests
+
+[33mcommit 1bd2a8037aaa0dee2d631c0592cb47b1e15b82ee[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Tue Feb 19 10:21:00 2019 +0100
+
+    Improve Internet check + add instrumented test for internet
+
+[33mcommit 5fde4ab5ccfcfdcfacbaa4d99c2b52f21b365b0a[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Mon Feb 18 18:08:58 2019 +0100
+
+    improve UI for toolbar and meal of the day Adapter
+
+[33mcommit aeaefebdcdcc43a295d756c600cade2660e77fed[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Mon Feb 18 16:59:38 2019 +0100
+
+    Add no internet error handling + optimize import
+
+[33mcommit d8bceedca003243c0dd053d799b1c3a45f14944e[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Mon Feb 18 14:59:52 2019 +0100
+
+    UI management improvement
+    git commit -m
+
+[33mcommit e52d4dc95bcd31111bac1b4b94b53827d08a2a1a[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Mon Feb 18 14:23:41 2019 +0100
+
+    Add ShoppingList activty + link with internal storage
+
+[33mcommit 1d026c6f9eaf2e2635c60b4b4a7922e248fc298d[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Sun Feb 17 19:36:21 2019 +0100
+
+    rework models + add I/O for shopping list on internal storage
+
+[33mcommit cc8c5b792ae695a653d50ecd250f1bb9cf6e3b60[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Sun Feb 17 17:42:41 2019 +0100
+
+    Add recipe display on meal click + add nav drawer click effect
+
+[33mcommit 62f19a67204c27d2b44c3b6edb70e168e0bc008d[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Sun Feb 17 17:16:30 2019 +0100
+
+    Update Meal of the day UI + add delete meal
+
+[33mcommit ef14fe0e3f9bf081bf073cf1028d456a543d67b2[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Sat Feb 16 20:54:11 2019 +0100
+
+    quick fix for image redondance in planningViewHolder
+
+[33mcommit a9e818f4c1cebb0da051a425ef297ea39c6bf314[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Sat Feb 16 20:00:07 2019 +0100
+
+    Link planning with meal of the day
+
+[33mcommit 38aa983e339070ddc0b0a16444f385224e035180[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Sat Feb 16 18:54:09 2019 +0100
+
+    Add menu update by choosing a meal
+
+[33mcommit 9e538da7fc573ff45b83a9fc39c51a1bbe4ef96d[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Sat Feb 16 14:34:58 2019 +0100
+
+    Add datePicker to modalFragment + currentMenu following
+
+[33mcommit a74b63ab01f4ac89821280d3e493f2d099968f1e[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Thu Feb 14 20:16:00 2019 +0100
+
+    WebView done + model corrections
+
+[33mcommit e099dfd4cb53bbe8acd2ff678eccafc31b07731f[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Thu Feb 14 19:54:28 2019 +0100
+
+    Rework DB and improve data share across the app
+
+[33mcommit 6c4cb29836ad1b9518ab8951c89a2c5a92295558[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Thu Feb 14 19:28:37 2019 +0100
+
+    add recipeFragment and modalFragment squeleton
+
+[33mcommit 574547898b1d10ac6469186bb0ac00c8736a6e39[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Thu Feb 14 17:15:10 2019 +0100
+
+    Proper display in responseFragment + little error management
+
+[33mcommit aca83c9a0a2c35804293f8c2b1bc5228802f245b[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Thu Feb 14 16:00:06 2019 +0100
+
+    Use search entry for the api call + errors awareness
+
+[33mcommit f33d31f6c2d3f615c35dbd645b0c3ad0bb18b9cd[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Wed Feb 13 17:32:34 2019 +0100
+
+    Add responseDao and arch + use on fragments
+
+[33mcommit 9ba7dc729139936a3d3be833880e3258f7d6b351[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Wed Feb 13 14:47:34 2019 +0100
+
+    Add search views + room db correction
+
+[33mcommit 4e2f1f7f01fa2afaa569153525e6ef228bde6675[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Mon Feb 11 17:32:47 2019 +0100
+
+    Add search fragments squeletons + link with search activity
+
+[33mcommit bfdbe6904d6df01ac52b47ae2e3b6498d6774a6f[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Mon Feb 11 16:23:16 2019 +0100
+
+    Add api call and models
+
+[33mcommit 2467c9ae447490b564d96f826ec770a617d10592[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Wed Feb 6 18:48:58 2019 +0100
+
+    Add SearchActivity + menu tools
+
+[33mcommit 442063b5c1df57ecb94716210149bea6d6aa2bce[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Wed Feb 6 17:34:10 2019 +0100
+
+    Rework Models/DB/Arch + display of 2 weeks on planning
+
+[33mcommit 332becca57fdd1d70237189762e21f23874e394e[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Wed Feb 6 16:21:18 2019 +0100
+
+    Add card view skeleton to meal of the day fragment
+
+[33mcommit 3811fab59fc41a8b73f13d2a8ea2214faf7733db[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Tue Feb 5 19:19:41 2019 +0100
+
+    Add a date function + 2 weeks of prepopulate for DB
+
+[33mcommit 8cbb63ae2401d88064c53729ed5f0ba438b6e1f9[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Tue Feb 5 18:45:09 2019 +0100
+
+    Adjust planning recycle item interface
+
+[33mcommit 3e03a9831bcbf8be6249fad8340e04f8b7f98a2e[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Tue Feb 5 18:23:22 2019 +0100
+
+    implementation of dagger2 and AAC done across the app
+
+[33mcommit 66ec36c944b152879bfa8ce946a0fbfecef4a7dc[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Tue Feb 5 17:36:31 2019 +0100
+
+    Add dependencies injection for Dagger2
+
+[33mcommit 6e05379563217d169f90ed3a33815d1aff91e3e9[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Tue Feb 5 17:14:35 2019 +0100
+
+    starting implementation of Android Arch Component
+
+[33mcommit e46e99132333adb75c3cb7236d4c644022e99b06[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Tue Feb 5 16:33:54 2019 +0100
+
+    add recycler view + model skeletons
+
+[33mcommit cd1e7c32880ee6425e337e70cfd59ed88da1c7bd[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Mon Feb 4 15:49:38 2019 +0100
+
+    adjust theme in manifest for app and main activity
+
+[33mcommit dcb322d672f1d0cb4cd4501d8dac64ac10d81a63[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Mon Feb 4 15:47:26 2019 +0100
+
+    Add bottom navigation and link it with view pager
+
+[33mcommit 892ff255091ecb423cfa04bf3c68fcc6bb2eaf69[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Mon Feb 4 14:53:49 2019 +0100
+
+    add 3 blank fragment to main activity's view pager
+
+[33mcommit 194bd796a4cac6d4e6c3d8db2252ac0dff75f601[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Fri Feb 1 16:52:13 2019 +0100
+
+    rework icon + nav header
+
+[33mcommit ac4a6deb4dc90024dbb8b426060e8764cc2c413c[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Fri Feb 1 15:26:28 2019 +0100
+
+    Add navigation view + toolbar
+
+[33mcommit dc3979f2286d008bad507db9349df9f53c56c52b[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Thu Jan 31 17:20:53 2019 +0100
+
+    Add splash screen with logo + launcher icon done
+
+[33mcommit 7592c3fa167448832da422b4b39e88228e54f540[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Tue Jan 29 15:23:29 2019 +0100
+
+    Adding project structure for xml + add dimen
+
+[33mcommit 33199e79fe0c725ca72fe2f4d13dfcc7d123276a[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Tue Jan 29 15:16:54 2019 +0100
+
+    Adding projet structure for java + add ItemClickSupport
+
+[33mcommit 56e8d5e768d4ed648b18dcf54de566917f0a7cfe[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Tue Jan 29 15:03:07 2019 +0100
+
+    Base Activity/Fragment creation + dependencies correction
+
+[33mcommit 40b028c77cbe96bcb13735d30bd2845ba0018ed3[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Tue Jan 29 14:53:49 2019 +0100
+
+    adding dependencies
+
+[33mcommit 2e990040f85aaca5d046768f25030fd52721a4c7[m
+Author: Denmaaa <anthony.mineo.pro@Gmail.com>
+Date:   Wed Jan 23 15:29:30 2019 +0100
+
+    App creation
+
+[33mcommit 4636d27da3f099086fad5da7329adba5cba3d3cd[m
+Author: Anthony MINEO <32934529+Denmaaa@users.noreply.github.com>
+Date:   Wed Jan 23 15:26:56 2019 +0100
+
+    Initial commit
