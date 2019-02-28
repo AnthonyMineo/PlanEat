@@ -16,7 +16,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class MealOfTheDayViewHolder extends RecyclerView.ViewHolder  {
+public class MealOfTheDayViewHolder extends GenericViewHolder<Meal> {
+
+    private MealOfTheDayAdapter.deleteButtonListener onDeleteButtonListener;
 
     @BindView(R.id.meal_of_the_day_image)
     ImageView mainImage;
@@ -25,17 +27,17 @@ public class MealOfTheDayViewHolder extends RecyclerView.ViewHolder  {
     @BindView(R.id.delete_meal_button)
     FloatingActionButton deleteMeal;
 
-    public MealOfTheDayViewHolder(View itemView) {
+    public MealOfTheDayViewHolder(View itemView, MealOfTheDayAdapter.deleteButtonListener onDeleteButtonListener) {
         super(itemView);
-        ButterKnife.bind(this, itemView);
-
+        this.onDeleteButtonListener = onDeleteButtonListener;
     }
 
-    public void updateWithMeal(Meal meal, Context context, MealOfTheDayAdapter.deleteButtonListener onDeleteButtonListener) {
+    @Override
+    public void updateWithItem(Meal item) {
         try{
-            Glide.with(context).load(meal.getRecipe().getImage()).into(this.mainImage);
-            this.mealLabel.setText(meal.getRecipe().getLabel());
-            deleteMeal.setOnClickListener(view -> onDeleteButtonListener.deleteButtonOnClick(meal));
+            Glide.with(getContext()).load(item.getRecipe().getImage()).into(this.mainImage);
+            this.mealLabel.setText(item.getRecipe().getLabel());
+            deleteMeal.setOnClickListener(view -> onDeleteButtonListener.deleteButtonOnClick(item));
         } catch (Exception e){
             e.printStackTrace();
         }

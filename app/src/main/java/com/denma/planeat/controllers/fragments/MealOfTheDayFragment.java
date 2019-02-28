@@ -95,9 +95,7 @@ public class MealOfTheDayFragment extends BaseFragment {
     // - Configure RecyclerView, Adapter, LayoutManager & glue it together
     private void configureRecyclerView() {
         // - Create adapter
-        this.mealOfTheDayAdapter = new MealOfTheDayAdapter(meal -> {
-            showDialog(meal);
-        });
+        this.mealOfTheDayAdapter = new MealOfTheDayAdapter(this.getContext(), this::showDialog);
         // - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.mealOfTheDayAdapter);
         // - Set layout manager to position the items
@@ -105,7 +103,7 @@ public class MealOfTheDayFragment extends BaseFragment {
 
         ItemClickSupport.addTo(recyclerView, R.layout.plannig_recycle_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
-                    responseViewModel.setCurrentRecipe(mealOfTheDayAdapter.getMeal(position).getRecipe());
+                    responseViewModel.setCurrentRecipe(mealOfTheDayAdapter.getItem(position).getRecipe());
                     // - Launch RecipeActivity
                     Intent intentAdd = new Intent(getContext() , RecipeActivity.class);
                     startActivity(intentAdd);

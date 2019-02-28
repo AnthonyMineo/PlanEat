@@ -99,7 +99,7 @@ public class PlanningFragment extends BaseFragment {
     // - Configure RecyclerView, Adapter, LayoutManager & glue it together
     private void configureRecyclerView() {
         // - Create adapter
-        this.planningAdapter = new PlanningAdapter();
+        this.planningAdapter = new PlanningAdapter(this.getContext());
         // - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.planningAdapter);
         // - Set layout manager to position the items
@@ -107,7 +107,7 @@ public class PlanningFragment extends BaseFragment {
 
         ItemClickSupport.addTo(recyclerView, R.layout.plannig_recycle_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
-                    menuViewModel.setCurrentMenu(planningAdapter.getMenu(position));
+                    menuViewModel.setCurrentMenu(planningAdapter.getItem(position));
                     callback.onMenuClick();
                 });
     }

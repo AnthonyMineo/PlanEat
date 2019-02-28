@@ -9,23 +9,21 @@ import android.view.ViewGroup;
 
 import com.denma.planeat.R;
 import com.denma.planeat.models.local.Meal;
+import com.denma.planeat.views.holder.GenericViewHolder;
 import com.denma.planeat.views.holder.MealOfTheDayViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MealOfTheDayAdapter extends RecyclerView.Adapter<MealOfTheDayViewHolder> {
-
-    private Context context;
-    private List<Meal> mealList;
+public class MealOfTheDayAdapter extends GenericAdapter<Meal, MealOfTheDayViewHolder> {
 
     public deleteButtonListener onDeleteButtonListener;
     public interface deleteButtonListener {
         void deleteButtonOnClick(Meal meal);
     }
 
-    public MealOfTheDayAdapter(deleteButtonListener onDeleteButtonListener) {
-        this.mealList = new ArrayList<>();
+    public MealOfTheDayAdapter(Context context, deleteButtonListener onDeleteButtonListener) {
+        super(context);
         this.onDeleteButtonListener = onDeleteButtonListener;
     }
 
@@ -33,25 +31,13 @@ public class MealOfTheDayAdapter extends RecyclerView.Adapter<MealOfTheDayViewHo
     @Override
     public MealOfTheDayViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // CREATE VIEW HOLDER AND INFLATING ITS XML LAYOUT
-        this.context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(this.context);
-        View view = inflater.inflate(R.layout.meal_of_the_day_recycle_item, parent, false);
-        return new MealOfTheDayViewHolder(view);
+        return new MealOfTheDayViewHolder(inflateView(R.layout.meal_of_the_day_recycle_item, parent), this.onDeleteButtonListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MealOfTheDayViewHolder holder, int position) {
-        holder.updateWithMeal(this.mealList.get(position), this.context, this.onDeleteButtonListener);
-    }
-
-    @Override
-    public int getItemCount() { return this.mealList.size(); }
-
-    public Meal getMeal(int position){ return this.mealList.get(position); }
-
-    public void updateData(List<Meal> mealList){
-        this.mealList = orderList(mealList);
-        this.notifyDataSetChanged();
+    public void updateData(List<Meal> items) {
+        orderList(items);
+        super.updateData(items);
     }
 
     private List<Meal> orderList(List<Meal> mealList){

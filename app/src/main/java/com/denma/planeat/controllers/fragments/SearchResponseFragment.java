@@ -98,7 +98,7 @@ public class SearchResponseFragment extends BaseFragment {
     // - Configure RecyclerView, Adapter, LayoutManager & glue it together
     private void configureRecyclerView() {
         // - Create adapter
-        this.searchResponseAdapter = new SearchResponseAdapter();
+        this.searchResponseAdapter = new SearchResponseAdapter(this.getContext());
         // - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.searchResponseAdapter);
         // - Set layout manager to position the items
@@ -107,7 +107,7 @@ public class SearchResponseFragment extends BaseFragment {
         ItemClickSupport.addTo(recyclerView, R.layout.search_recycle_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
                     // update selected recipe on view model
-                    responseViewModel.setCurrentRecipe(searchResponseAdapter.getRecipe(position));
+                    responseViewModel.setCurrentRecipe(searchResponseAdapter.getItem(position));
                     callback.onRecipeClick();
                 });
     }

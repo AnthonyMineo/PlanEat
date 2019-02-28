@@ -14,37 +14,17 @@ import com.denma.planeat.views.holder.SearchResponseViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchResponseAdapter extends RecyclerView.Adapter<SearchResponseViewHolder> {
+public class SearchResponseAdapter extends GenericAdapter<Recipe, SearchResponseViewHolder> {
 
-    private Context context;
-    private List<Recipe> recipeList;
-
-    public SearchResponseAdapter(){ this.recipeList = new ArrayList<>(); }
+    public SearchResponseAdapter(Context context){
+        super(context);
+    }
 
     @NonNull
     @Override
     public SearchResponseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // CREATE VIEW HOLDER AND INFLATING ITS XML LAYOUT
-        this.context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(this.context);
-        View view = inflater.inflate(R.layout.search_recycle_item, parent, false);
-        return new SearchResponseViewHolder(view);
+        return new SearchResponseViewHolder(inflateView(R.layout.search_recycle_item, parent));
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull SearchResponseViewHolder holder, int position) {
-        holder.updateWithRecipe(this.recipeList.get(position), this.context);
-    }
-
-    @Override
-    public int getItemCount() {
-        return this.recipeList.size();
-    }
-
-    public Recipe getRecipe(int position){ return this.recipeList.get(position); }
-
-    public void updateData(List<Recipe> recipeList){
-        this.recipeList = recipeList;
-        this.notifyDataSetChanged();
-    }
 }

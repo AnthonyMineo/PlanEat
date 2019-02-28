@@ -77,7 +77,7 @@ public class ShoppingListFragment extends BaseFragment {
     // - Configure RecyclerView, Adapter, LayoutManager & glue it together
     private void configureRecyclerView() {
         // - Create adapter
-        this.shoppingListAdapter = new ShoppingListAdapter();
+        this.shoppingListAdapter = new ShoppingListAdapter(this.getContext());
         // - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.shoppingListAdapter);
         // - Set layout manager to position the items
@@ -88,7 +88,7 @@ public class ShoppingListFragment extends BaseFragment {
                     // launch an activity to show shopping list detail
                     // - Launch SearchActivity
                     Intent intent = new Intent(getActivity(), ShoppingListActivity.class);
-                    intent.putExtra("fileName", shoppingListAdapter.getFileName(position));
+                    intent.putExtra("fileName", shoppingListAdapter.getItem(position));
                     startActivity(intent);
                 });
     }

@@ -1,7 +1,5 @@
 package com.denma.planeat.views.holder;
 
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,9 +10,8 @@ import com.denma.planeat.models.local.FoodMenu;
 import com.denma.planeat.models.local.Meal;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class PlanningViewHolder extends RecyclerView.ViewHolder{
+public class PlanningViewHolder extends GenericViewHolder<FoodMenu>{
 
     @BindView(R.id.planning_icon_day_name)
     TextView day_name;
@@ -33,12 +30,12 @@ public class PlanningViewHolder extends RecyclerView.ViewHolder{
 
     public PlanningViewHolder(View itemView) {
         super(itemView);
-        ButterKnife.bind(this, itemView);
     }
 
-    public void updateWithMenu(FoodMenu foodMenu, Context context){
-        this.day_name.setText(foodMenu.getEatingDateString().substring(0,3).toUpperCase());
-        this.day_number.setText(foodMenu.getEatingDateString().substring(4));
+    @Override
+    public void updateWithItem(FoodMenu item) {
+        this.day_name.setText(item.getEatingDateString().substring(0,3).toUpperCase());
+        this.day_number.setText(item.getEatingDateString().substring(4));
 
         this.breakfast.setImageDrawable(null);
         this.after_morning.setImageDrawable(null);
@@ -46,30 +43,29 @@ public class PlanningViewHolder extends RecyclerView.ViewHolder{
         this.afternoon.setImageDrawable(null);
         this.dinner.setImageDrawable(null);
 
-        if(foodMenu.getMealList().size() == 0){
+        if(item.getMealList().size() == 0){
             // show a message to the user
         } else {
-            for(Meal meal : foodMenu.getMealList()){
+            for(Meal meal : item.getMealList()){
                 String url = meal.getRecipe().getImage();
                 switch (meal.getDayTiming()){
                     case 1:
-                        Glide.with(context).load(url).into(this.breakfast);
+                        Glide.with(getContext()).load(url).into(this.breakfast);
                         break;
                     case 2:
-                        Glide.with(context).load(url).into(this.after_morning);
+                        Glide.with(getContext()).load(url).into(this.after_morning);
                         break;
                     case 3:
-                        Glide.with(context).load(url).into(this.lunch);
+                        Glide.with(getContext()).load(url).into(this.lunch);
                         break;
                     case 4:
-                        Glide.with(context).load(url).into(this.afternoon);
+                        Glide.with(getContext()).load(url).into(this.afternoon);
                         break;
                     case 5:
-                        Glide.with(context).load(url).into(this.dinner);
+                        Glide.with(getContext()).load(url).into(this.dinner);
                         break;
                 }
             }
         }
-
     }
 }

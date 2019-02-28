@@ -1,7 +1,6 @@
 package com.denma.planeat.views.holder;
 
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,9 +10,8 @@ import com.denma.planeat.R;
 import com.denma.planeat.models.remote.Recipe;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class SearchResponseViewHolder extends RecyclerView.ViewHolder {
+public class SearchResponseViewHolder extends GenericViewHolder<Recipe> {
 
     @BindView(R.id.search_response_image)
     ImageView recipeImage;
@@ -22,16 +20,16 @@ public class SearchResponseViewHolder extends RecyclerView.ViewHolder {
 
     public SearchResponseViewHolder(View itemView) {
         super(itemView);
-        ButterKnife.bind(this, itemView);
     }
 
-    public void updateWithRecipe(Recipe recipe, Context context){
-
+    @Override
+    public void updateWithItem(Recipe item) {
         try{
-            Glide.with(context).load(recipe.getImage()).into(recipeImage);
+            Glide.with(getContext()).load(item.getImage()).into(recipeImage);
         } catch (Exception e){
             e.printStackTrace();
         }
-        recipeName.setText(recipe.getLabel());
+        recipeName.setText(item.getLabel());
     }
+
 }
