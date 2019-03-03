@@ -4,6 +4,7 @@ package com.denma.planeat.controllers.fragments;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +28,6 @@ public class RecipeFragment extends BaseFragment {
     WebView webView;
 
     // FOR DATA
-    @Inject
-    ViewModelProvider.Factory viewModelFactory;
     private ResponseViewModel responseViewModel;
 
     // --------------------
@@ -50,8 +49,6 @@ public class RecipeFragment extends BaseFragment {
 
         // Configuration
         this.configureWebView();
-        this.configureDagger();
-        this.configureViewModel();
 
         return view;
     }
@@ -69,13 +66,9 @@ public class RecipeFragment extends BaseFragment {
     // CONFIGURATIONS
     // --------------------
 
-    // - Configure Dagger2
-    private void configureDagger() {
-        AndroidSupportInjection.inject(this);
-    }
-
-    private void configureViewModel(){
-        responseViewModel = ViewModelProviders.of(this, viewModelFactory).get(ResponseViewModel.class);
+    @Override
+    public void configureViewModel(){
+        responseViewModel = ViewModelProviders.of(getActivity()).get(ResponseViewModel.class);
         responseViewModel.getCurrentRecipe().observe(this, this::updateUI);
     }
 

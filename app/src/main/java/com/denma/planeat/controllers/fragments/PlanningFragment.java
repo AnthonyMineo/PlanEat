@@ -4,6 +4,7 @@ package com.denma.planeat.controllers.fragments;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,8 +34,6 @@ public class PlanningFragment extends BaseFragment {
     RecyclerView recyclerView;
 
     // FOR DATA
-    @Inject
-    ViewModelProvider.Factory viewModelFactory;
     private MenuViewModel menuViewModel;
     private PlanningAdapter planningAdapter;
 
@@ -71,9 +70,7 @@ public class PlanningFragment extends BaseFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         // Configuration
-        this.configureDagger();
         this.configureRecyclerView();
-        this.configureViewModel();
 
         return view;
     }
@@ -91,11 +88,6 @@ public class PlanningFragment extends BaseFragment {
     // CONFIGURATIONS
     // --------------------
 
-    // - Configure Dagger2
-    private void configureDagger() {
-        AndroidSupportInjection.inject(this);
-    }
-
     // - Configure RecyclerView, Adapter, LayoutManager & glue it together
     private void configureRecyclerView() {
         // - Create adapter
@@ -112,9 +104,10 @@ public class PlanningFragment extends BaseFragment {
                 });
     }
 
-    private void configureViewModel(){
+    @Override
+    public void configureViewModel(){
         int todayDate = TimeAndDateUtils.formatDateToInt_yyyyMMdd(TimeAndDateUtils.getDateWithGapFromToday(0));
-        menuViewModel = ViewModelProviders.of(this, viewModelFactory).get(MenuViewModel.class);
+        menuViewModel = ViewModelProviders.of(getActivity()).get(MenuViewModel.class);
         menuViewModel.getMenuFrom2WeeksRange(todayDate).observe(this, this::updateMenu);
     }
 

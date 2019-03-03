@@ -70,6 +70,9 @@ public class ShoppingListFragment extends BaseFragment {
         return R.layout.fragment_shopping_list;
     }
 
+    @Override
+    public void configureViewModel() { }
+
     // --------------------
     // CONFIGURATIONS
     // --------------------

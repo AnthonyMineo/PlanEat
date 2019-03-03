@@ -4,6 +4,7 @@ package com.denma.planeat.controllers.fragments;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,8 +40,6 @@ public class SearchResponseFragment extends BaseFragment {
     RecyclerView recyclerView;
 
     // FOR DATA
-    @Inject
-    ViewModelProvider.Factory viewModelFactory;
     private ResponseViewModel responseViewModel;
     private SearchResponseAdapter searchResponseAdapter;
 
@@ -70,7 +69,6 @@ public class SearchResponseFragment extends BaseFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         // Configuration
-        this.configureDagger();
         this.configureRecyclerView();
         this.configureViewModel();
 
@@ -90,11 +88,6 @@ public class SearchResponseFragment extends BaseFragment {
     // CONFIGURATIONS
     // --------------------
 
-    // - Configure Dagger2
-    private void configureDagger() {
-        AndroidSupportInjection.inject(this);
-    }
-
     // - Configure RecyclerView, Adapter, LayoutManager & glue it together
     private void configureRecyclerView() {
         // - Create adapter
@@ -112,8 +105,9 @@ public class SearchResponseFragment extends BaseFragment {
                 });
     }
 
-    private void configureViewModel(){
-        responseViewModel = ViewModelProviders.of(this, viewModelFactory).get(ResponseViewModel.class);
+    @Override
+    public void configureViewModel(){
+        responseViewModel = ViewModelProviders.of(getActivity()).get(ResponseViewModel.class);
         responseViewModel.getResponse().observe(this, this::updateUI);
     }
 

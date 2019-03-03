@@ -19,9 +19,21 @@ public abstract class BaseFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        this.configureViewModel();
+    }
+
     // --------------------
     // GETTERS
     // --------------------
 
     public abstract int getFragmentLayout();
+
+    // --------------------
+    // CONFIGURATIONS
+    // --------------------
+
+    public abstract void configureViewModel();
 }

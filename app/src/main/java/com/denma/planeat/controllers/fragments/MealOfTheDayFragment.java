@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -34,8 +35,6 @@ public class MealOfTheDayFragment extends BaseFragment {
     RecyclerView recyclerView;
 
     // FOR DATA
-    @Inject
-    ViewModelProvider.Factory viewModelFactory;
     private MenuViewModel menuViewModel;
     private ResponseViewModel responseViewModel;
     private MealOfTheDayAdapter mealOfTheDayAdapter;
@@ -67,9 +66,7 @@ public class MealOfTheDayFragment extends BaseFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         // Configuration
-        this.configureDagger();
         this.configureRecyclerView();
-        this.configureViewModel();
 
         return view;
     }
@@ -86,11 +83,6 @@ public class MealOfTheDayFragment extends BaseFragment {
     // --------------------
     // CONFIGURATIONS
     // --------------------
-
-    // - Configure Dagger2
-    private void configureDagger() {
-        AndroidSupportInjection.inject(this);
-    }
 
     // - Configure RecyclerView, Adapter, LayoutManager & glue it together
     private void configureRecyclerView() {
@@ -110,9 +102,10 @@ public class MealOfTheDayFragment extends BaseFragment {
                 });
     }
 
-    private void configureViewModel(){
-        responseViewModel = ViewModelProviders.of(this, viewModelFactory).get(ResponseViewModel.class);
-        menuViewModel = ViewModelProviders.of(this, viewModelFactory).get(MenuViewModel.class);
+    @Override
+    public void configureViewModel(){
+        responseViewModel = ViewModelProviders.of(getActivity()).get(ResponseViewModel.class);
+        menuViewModel = ViewModelProviders.of(getActivity()).get(MenuViewModel.class);
         menuViewModel.getCurrentMenu().observe(this, this::updateMealFromDB);
     }
 

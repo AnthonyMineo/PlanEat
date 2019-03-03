@@ -8,7 +8,7 @@ public class TimeAndDateUtils {
 
     public static Date getDateWithGapFromToday(int gap){
         // get today date
-        Date date = new Date();
+        Date date;
         Calendar calendar = Calendar.getInstance();
         // add the gap to today (0 = today 1 = tomorrow)
         calendar.add(Calendar.DATE, gap);
@@ -20,8 +20,7 @@ public class TimeAndDateUtils {
     public static int formatDateToInt_yyyyMMdd(Date date){
         // format to int
         SimpleDateFormat dateFormat= new SimpleDateFormat("yyyyMMdd");
-        int dateToReturn = Integer.parseInt(dateFormat.format(date));
-        return dateToReturn;
+        return Integer.parseInt(dateFormat.format(date));
     }
 
     public static String formatDateToString_EEEdd(Date date){

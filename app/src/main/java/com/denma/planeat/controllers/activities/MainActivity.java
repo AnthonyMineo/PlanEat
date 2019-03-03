@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.denma.planeat.R;
 import com.denma.planeat.arch.viewmodels.MenuViewModel;
+import com.denma.planeat.arch.viewmodels.ResponseViewModel;
 import com.denma.planeat.controllers.BaseActivity;
 import com.denma.planeat.controllers.fragments.PlanningFragment;
 import com.denma.planeat.models.local.FoodMenu;
@@ -39,7 +40,7 @@ import dagger.android.AndroidInjection;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, PlanningFragment.OnMenuClickListener, HasSupportFragmentInjector {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, PlanningFragment.OnMenuClickListener {
 
     // FOR DESIGN
     @BindView(R.id.toolbar)
@@ -60,15 +61,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Inject
     ViewModelProvider.Factory viewModelFactory;
     private MenuViewModel menuViewModel;
+    private ResponseViewModel responseViewModel;
     private PageAdapter pagerAdapter;
-
-    // FOR INJECTION
-    @Inject
-    DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
-    @Override
-    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
-        return dispatchingAndroidInjector;
-    }
 
     // --------------------
     // ON CREATE
@@ -167,6 +161,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void configureViewModel(){
         menuViewModel = ViewModelProviders.of(this, viewModelFactory).get(MenuViewModel.class);
+        responseViewModel = ViewModelProviders.of(this, viewModelFactory).get(ResponseViewModel.class);
     }
 
     @Override

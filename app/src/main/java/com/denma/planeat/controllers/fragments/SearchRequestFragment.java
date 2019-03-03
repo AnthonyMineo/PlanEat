@@ -4,6 +4,7 @@ package com.denma.planeat.controllers.fragments;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +45,6 @@ public class SearchRequestFragment extends BaseFragment {
     CheckBox treeNutFree;
 
     // FOR DATA
-    @Inject
-    ViewModelProvider.Factory viewModelFactory;
     private ResponseViewModel responseViewModel;
 
     public OnSearchClickListener callback;
@@ -72,11 +71,6 @@ public class SearchRequestFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
-
-        // Configuration
-        this.configureDagger();
-        this.configureViewModel();
-
         return view;
     }
 
@@ -93,15 +87,10 @@ public class SearchRequestFragment extends BaseFragment {
     // CONFIGURATIONS
     // --------------------
 
-    // - Configure Dagger2
-    private void configureDagger() {
-        AndroidSupportInjection.inject(this);
+    @Override
+    public void configureViewModel(){
+        responseViewModel = ViewModelProviders.of(getActivity()).get(ResponseViewModel.class);
     }
-
-    private void configureViewModel(){
-        responseViewModel = ViewModelProviders.of(this, viewModelFactory).get(ResponseViewModel.class);
-    }
-
 
     // --------------------
     // ACTIONS

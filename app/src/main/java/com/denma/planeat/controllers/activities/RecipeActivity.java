@@ -1,5 +1,7 @@
 package com.denma.planeat.controllers.activities;
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -11,6 +13,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.denma.planeat.R;
+import com.denma.planeat.arch.viewmodels.MenuViewModel;
+import com.denma.planeat.arch.viewmodels.ResponseViewModel;
 import com.denma.planeat.controllers.BaseActivity;
 import com.denma.planeat.controllers.fragments.RecipeFragment;
 
@@ -21,7 +25,7 @@ import dagger.android.AndroidInjection;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-public class RecipeActivity extends BaseActivity implements HasSupportFragmentInjector {
+public class RecipeActivity extends BaseActivity{
 
     // FOR DESIGN
     @BindView(R.id.activity_recipe_layout)
@@ -32,15 +36,11 @@ public class RecipeActivity extends BaseActivity implements HasSupportFragmentIn
     FrameLayout fragmentLayout;
 
     // FOR DATA
-    RecipeFragment recipeFragment;
-
-    // FOR INJECTION
     @Inject
-    DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
-    @Override
-    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
-        return dispatchingAndroidInjector;
-    }
+    ViewModelProvider.Factory viewModelFactory;
+    private MenuViewModel menuViewModel;
+    private ResponseViewModel responseViewModel;
+    RecipeFragment recipeFragment;
 
     // --------------------
     // ON CREATE
@@ -53,6 +53,7 @@ public class RecipeActivity extends BaseActivity implements HasSupportFragmentIn
         // Configuration
         this.configureDagger();
         this.configureToolBar();
+        this.configureViewModel();
 
         // Actions
         this.alphaViewAnimation(mainLayout, 100);
@@ -86,6 +87,11 @@ public class RecipeActivity extends BaseActivity implements HasSupportFragmentIn
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    private void configureViewModel(){
+        menuViewModel = ViewModelProviders.of(this, viewModelFactory).get(MenuViewModel.class);
+        responseViewModel = ViewModelProviders.of(this, viewModelFactory).get(ResponseViewModel.class);
     }
 
     // --------------------

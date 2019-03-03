@@ -44,8 +44,6 @@ public class ModalFragment extends BottomSheetDialogFragment {
     ImageView eatingButton;
 
     // FOR DATA
-    @Inject
-    ViewModelProvider.Factory viewModelFactory;
     private MenuViewModel menuViewModel;
     private ResponseViewModel responseViewModel;
     private int day;
@@ -80,25 +78,23 @@ public class ModalFragment extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         // Configuration
-        this.configureDagger();
-        this.configureViewModel();
         this.configureDatePicker();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        this.configureViewModel();
     }
 
     // --------------------
     // CONFIGURATIONS
     // --------------------
 
-    // - Configure Dagger2
-    private void configureDagger() {
-        AndroidSupportInjection.inject(this);
-    }
-
     private void configureViewModel(){
-        menuViewModel = ViewModelProviders.of(this, viewModelFactory).get(MenuViewModel.class);
-        responseViewModel = ViewModelProviders.of(this, viewModelFactory).get(ResponseViewModel.class);
-        menuViewModel.getCurrentMenu().observe(this, this::updateUI);
-
+        menuViewModel = ViewModelProviders.of(getActivity()).get(MenuViewModel.class);
+        responseViewModel = ViewModelProviders.of(getActivity()).get(ResponseViewModel.class);
+        menuViewModel.getCurrentMenu().observe(getActivity(), this::updateUI);
     }
 
     private void configureDatePicker(){
@@ -163,10 +159,10 @@ public class ModalFragment extends BottomSheetDialogFragment {
 
         // Add it to the menu choosed by user
         int eatingDateInt = TimeAndDateUtils.formatStringDateToShowToIntToSave(eatingDate.getText().toString());
-        menuViewModel.getMenuByDate(eatingDateInt).observe(this, menuToUpdate -> updateMenu(menuToUpdate, mealToSave, eatingDateInt));
+        menuViewModel.getMenuByDate(eatingDateInt).observe(this, menuToUpdate -> updateMenu(menuToUpdate, mealToSave));
     }
 
-    private void updateMenu(FoodMenu foodMenuToUpdate, Meal mealToSave, int eatingDateInt){
+    private void updateMenu(FoodMenu foodMenuToUpdate, Meal mealToSave){
         // Necessary to avoid the update to trigger the observer
         if(!this.updated){
             int existed = 0;

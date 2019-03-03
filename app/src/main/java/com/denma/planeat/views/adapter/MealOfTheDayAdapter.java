@@ -36,8 +36,7 @@ public class MealOfTheDayAdapter extends GenericAdapter<Meal, MealOfTheDayViewHo
 
     @Override
     public void updateData(List<Meal> items) {
-        orderList(items);
-        super.updateData(items);
+        super.updateData(orderList(items));
     }
 
     private List<Meal> orderList(List<Meal> mealList){
