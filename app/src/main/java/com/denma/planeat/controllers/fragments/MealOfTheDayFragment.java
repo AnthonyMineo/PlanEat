@@ -2,11 +2,9 @@ package com.denma.planeat.controllers.fragments;
 
 
 import android.app.AlertDialog;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,8 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.denma.planeat.R;
-import com.denma.planeat.arch.viewmodels.MenuViewModel;
-import com.denma.planeat.arch.viewmodels.ResponseViewModel;
+import com.denma.planeat.arch.viewmodels.MainScreenViewModel;
 import com.denma.planeat.controllers.BaseFragment;
 import com.denma.planeat.controllers.activities.RecipeActivity;
 import com.denma.planeat.models.local.FoodMenu;
@@ -23,10 +20,7 @@ import com.denma.planeat.models.local.Meal;
 import com.denma.planeat.utils.ItemClickSupport;
 import com.denma.planeat.views.adapter.MealOfTheDayAdapter;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
-import dagger.android.support.AndroidSupportInjection;
 
 public class MealOfTheDayFragment extends BaseFragment {
 
@@ -35,8 +29,7 @@ public class MealOfTheDayFragment extends BaseFragment {
     RecyclerView recyclerView;
 
     // FOR DATA
-    private MenuViewModel menuViewModel;
-    private ResponseViewModel responseViewModel;
+    private MainScreenViewModel mainScreenViewModel;
     private MealOfTheDayAdapter mealOfTheDayAdapter;
     // necessary to stay with the same menu when upload in order to trigger the observer
     private FoodMenu mCurrentFoodMenu;
@@ -95,18 +88,18 @@ public class MealOfTheDayFragment extends BaseFragment {
 
         ItemClickSupport.addTo(recyclerView, R.layout.plannig_recycle_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
-                    responseViewModel.setCurrentRecipe(mealOfTheDayAdapter.getItem(position).getRecipe());
+                    mainScreenViewModel.setCurrentRecipe(mealOfTheDayAdapter.getItem(position).getRecipe());
                     // - Launch RecipeActivity
-                    Intent intentAdd = new Intent(getContext() , RecipeActivity.class);
-                    startActivity(intentAdd);
+                    Intent intent = new Intent(getActivity(), RecipeActivity.class);
+                    intent.putExtra("parent", "MainActivity");
+                    startActivity(intent);
                 });
     }
 
     @Override
     public void configureViewModel(){
-        responseViewModel = ViewModelProviders.of(getActivity()).get(ResponseViewModel.class);
-        menuViewModel = ViewModelProviders.of(getActivity()).get(MenuViewModel.class);
-        menuViewModel.getCurrentMenu().observe(this, this::updateMealFromDB);
+        mainScreenViewModel = ViewModelProviders.of(getActivity()).get(MainScreenViewModel.class);
+        mainScreenViewModel.getCurrentMenu().observe(this, this::updateMealFromDB);
     }
 
     // --------------------
@@ -114,7 +107,7 @@ public class MealOfTheDayFragment extends BaseFragment {
     // --------------------
 
     private void updateMealFromDB(FoodMenu currentFoodMenu){
-        menuViewModel.getMenuByDate(currentFoodMenu.getEatingDate()).observe(this, this::updateMeal);
+        mainScreenViewModel.getMenuByDate(currentFoodMenu.getEatingDate()).observe(this, this::updateMeal);
     }
 
     private void updateMeal(FoodMenu currentFoodMenu){
@@ -139,7 +132,7 @@ public class MealOfTheDayFragment extends BaseFragment {
 
     private void deleteMealFromCurrentMenu(Meal meal){
         this.mCurrentFoodMenu.getMealList().remove(meal);
-        menuViewModel.updateMenu(mCurrentFoodMenu);
+        mainScreenViewModel.updateMenu(mCurrentFoodMenu);
     }
 
 }

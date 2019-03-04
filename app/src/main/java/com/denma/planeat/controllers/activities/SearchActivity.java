@@ -2,12 +2,11 @@ package com.denma.planeat.controllers.activities;
 
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -16,10 +15,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.denma.planeat.R;
-import com.denma.planeat.arch.viewmodels.MenuViewModel;
-import com.denma.planeat.arch.viewmodels.ResponseViewModel;
+import com.denma.planeat.arch.viewmodels.SearchScreenViewModel;
 import com.denma.planeat.controllers.BaseActivity;
-import com.denma.planeat.controllers.fragments.ModalFragment;
 import com.denma.planeat.controllers.fragments.RecipeFragment;
 import com.denma.planeat.controllers.fragments.SearchRequestFragment;
 import com.denma.planeat.controllers.fragments.SearchResponseFragment;
@@ -28,8 +25,9 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import dagger.android.AndroidInjection;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.support.HasSupportFragmentInjector;
+
+import static com.denma.planeat.utils.ConstantsKt.RECIPE_ACTIVITY_REQUEST_CODE;
+import static com.denma.planeat.utils.ConstantsKt.USER_CHOOSE_A_MEAL;
 
 public class SearchActivity extends BaseActivity implements SearchRequestFragment.OnSearchClickListener, SearchResponseFragment.OnRecipeClickListener {
 
@@ -40,18 +38,17 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
     Toolbar toolbar;
     @BindView(R.id.activity_search_fragment_layout)
     FrameLayout fragmentLayout;
-    private MenuItem chooseMenu;
+
 
     // FOR DATA
-    SearchRequestFragment requestFragment;
-    SearchResponseFragment responseFragment;
-    RecipeFragment recipeFragment;
+    private SearchRequestFragment requestFragment;
+    private SearchResponseFragment responseFragment;
+    private RecipeFragment recipeFragment;
 
     // FOR INJECTION
     @Inject
     ViewModelProvider.Factory viewModelFactory;
-    private MenuViewModel menuViewModel;
-    private ResponseViewModel responseViewModel;
+    private SearchScreenViewModel searchScreenViewModel;
 
     // --------------------
     // ON CREATE
@@ -70,6 +67,15 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
         // Actions
         this.alphaViewAnimation(mainLayout, 100);
         this.showRequestFragment();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == RECIPE_ACTIVITY_REQUEST_CODE){
+            if(resultCode == USER_CHOOSE_A_MEAL){
+                finish();
+            }
+        }
     }
 
     // --------------------
@@ -115,8 +121,7 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
     }
 
     private void configureViewModel(){
-        menuViewModel = ViewModelProviders.of(this, viewModelFactory).get(MenuViewModel.class);
-        responseViewModel = ViewModelProviders.of(this, viewModelFactory).get(ResponseViewModel.class);
+        searchScreenViewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchScreenViewModel.class);
     }
 
     @Override
@@ -162,15 +167,10 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
         }
     }
 
-    private void showRecipeFragment(){
-        if(fragmentLayout != null){
-            // replace the fragment to the FrameLayout container
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.activity_search_fragment_layout, recipeFragment)
-                    .addToBackStack("Recipe")
-                    .commit();
-            this.toolbar.setTitle(getResources().getString(R.string.toolbar_recipe_title));
-        }
+    private void showRecipeActivity(){
+        Intent intent = new Intent(this, RecipeActivity.class);
+        intent.putExtra("parent", "RecipeActivity");
+        startActivityForResult(intent, RECIPE_ACTIVITY_REQUEST_CODE);
     }
 
     @Override
@@ -180,8 +180,7 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
 
     @Override
     public void onRecipeClick() {
-        showRecipeFragment();
-        this.chooseMenu.setVisible(true);
+        showRecipeActivity();
     }
 
     // --------------------
@@ -189,25 +188,10 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
     // --------------------
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // - Inflate the menu and add it to the Toolbar
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_search_tools, menu);
-
-        this.chooseMenu = menu.findItem(R.id.toolbar_menu_choose);
-        this.chooseMenu.setVisible(false);
-
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-                break;
-            case R.id.toolbar_menu_choose:
-                ModalFragment.newInstance().show(this.getSupportFragmentManager(), "MODAL");
                 break;
         }
         return true;
@@ -216,7 +200,6 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        this.chooseMenu.setVisible(false);
         if(responseFragment.isVisible())
             this.toolbar.setTitle(getResources().getString(R.string.toolbar_response_title));
         if(requestFragment.isVisible())

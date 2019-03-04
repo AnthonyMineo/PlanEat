@@ -2,7 +2,6 @@ package com.denma.planeat.controllers.fragments;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,8 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.denma.planeat.R;
-import com.denma.planeat.arch.viewmodels.MenuViewModel;
-import com.denma.planeat.arch.viewmodels.ResponseViewModel;
+import com.denma.planeat.arch.viewmodels.RecipeScreenViewModel;
 import com.denma.planeat.models.local.FoodMenu;
 import com.denma.planeat.models.local.Meal;
 import com.denma.planeat.models.remote.Recipe;
@@ -26,12 +24,11 @@ import com.denma.planeat.utils.TimeAndDateUtils;
 
 import java.util.Calendar;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import dagger.android.support.AndroidSupportInjection;
+
+import static com.denma.planeat.utils.ConstantsKt.USER_CHOOSE_A_MEAL;
 
 public class ModalFragment extends BottomSheetDialogFragment {
 
@@ -44,8 +41,7 @@ public class ModalFragment extends BottomSheetDialogFragment {
     ImageView eatingButton;
 
     // FOR DATA
-    private MenuViewModel menuViewModel;
-    private ResponseViewModel responseViewModel;
+    private RecipeScreenViewModel recipeScreenViewModel;
     private int day;
     private int month;
     private int year;
@@ -92,9 +88,8 @@ public class ModalFragment extends BottomSheetDialogFragment {
     // --------------------
 
     private void configureViewModel(){
-        menuViewModel = ViewModelProviders.of(getActivity()).get(MenuViewModel.class);
-        responseViewModel = ViewModelProviders.of(getActivity()).get(ResponseViewModel.class);
-        menuViewModel.getCurrentMenu().observe(getActivity(), this::updateUI);
+        recipeScreenViewModel = ViewModelProviders.of(getActivity()).get(RecipeScreenViewModel.class);
+        recipeScreenViewModel.getCurrentMenu().observe(getActivity(), this::updateUI);
     }
 
     private void configureDatePicker(){
@@ -152,14 +147,14 @@ public class ModalFragment extends BottomSheetDialogFragment {
         }
 
         // Create the meal from user choices
-        Recipe recipe = responseViewModel.getCurrentRecipe().getValue();
+        Recipe recipe = recipeScreenViewModel.getCurrentRecipe().getValue();
         Meal mealToSave = new Meal();
         mealToSave.setDayTiming(dayTimingInt);
         mealToSave.setRecipe(recipe);
 
         // Add it to the menu choosed by user
         int eatingDateInt = TimeAndDateUtils.formatStringDateToShowToIntToSave(eatingDate.getText().toString());
-        menuViewModel.getMenuByDate(eatingDateInt).observe(this, menuToUpdate -> updateMenu(menuToUpdate, mealToSave));
+        recipeScreenViewModel.getMenuByDate(eatingDateInt).observe(this, menuToUpdate -> updateMenu(menuToUpdate, mealToSave));
     }
 
     private void updateMenu(FoodMenu foodMenuToUpdate, Meal mealToSave){
@@ -229,8 +224,9 @@ public class ModalFragment extends BottomSheetDialogFragment {
 
     private void updateAndClose(FoodMenu foodMenuToUpdate, Meal mealToSave){
         foodMenuToUpdate.getMealList().add(mealToSave);
-        menuViewModel.updateMenu(foodMenuToUpdate);
+        recipeScreenViewModel.updateMenu(foodMenuToUpdate);
         this.updated = true;
+        getActivity().setResult(USER_CHOOSE_A_MEAL);
         getActivity().finish();
     }
 

@@ -3,8 +3,9 @@ package com.denma.planeat.injections;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.denma.planeat.arch.viewmodels.MenuViewModel;
-import com.denma.planeat.arch.viewmodels.ResponseViewModel;
+import com.denma.planeat.arch.viewmodels.MainScreenViewModel;
+import com.denma.planeat.arch.viewmodels.RecipeScreenViewModel;
+import com.denma.planeat.arch.viewmodels.SearchScreenViewModel;
 
 import dagger.Binds;
 import dagger.Module;
@@ -13,17 +14,23 @@ import dagger.multibindings.IntoMap;
 @Module
 public abstract class ViewModelModule {
 
-    // Provide a MenuViewModel for binding it
+    // Provide a MainScreenViewModel for binding it
     @Binds
     @IntoMap
-    @ViewModelKey(MenuViewModel.class)
-    abstract ViewModel bindMenuViewModel(MenuViewModel menuViewModel);
+    @ViewModelKey(MainScreenViewModel.class)
+    abstract ViewModel bindMainScreenViewModel(MainScreenViewModel mainScreenViewModel);
 
-    // Provide a MenuViewModel for binding it
+    // Provide a SearchScreenViewModel for binding it
     @Binds
     @IntoMap
-    @ViewModelKey(ResponseViewModel.class)
-    abstract ViewModel bindResponseViewModel(ResponseViewModel responseViewModel);
+    @ViewModelKey(SearchScreenViewModel.class)
+    abstract ViewModel bindSearchScreenViewModel(SearchScreenViewModel searchScreenViewModel);
+
+    // Provide a RecipeScreenViewModel for binding it
+    @Binds
+    @IntoMap
+    @ViewModelKey(RecipeScreenViewModel.class)
+    abstract ViewModel bindRecipeScreenViewModel(RecipeScreenViewModel recipeScreenViewModel);
 
     // Dagger 2 will provide our ViewModel Factory
     @Binds

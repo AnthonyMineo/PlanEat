@@ -1,10 +1,8 @@
 package com.denma.planeat.controllers.fragments;
 
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +10,11 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.denma.planeat.R;
-import com.denma.planeat.arch.viewmodels.ResponseViewModel;
+import com.denma.planeat.arch.viewmodels.RecipeScreenViewModel;
 import com.denma.planeat.controllers.BaseFragment;
 import com.denma.planeat.models.remote.Recipe;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
-import dagger.android.support.AndroidSupportInjection;
 
 public class RecipeFragment extends BaseFragment {
 
@@ -28,7 +23,7 @@ public class RecipeFragment extends BaseFragment {
     WebView webView;
 
     // FOR DATA
-    private ResponseViewModel responseViewModel;
+    private RecipeScreenViewModel recipeScreenViewModel;
 
     // --------------------
     // CONSTRUCTORS
@@ -68,8 +63,8 @@ public class RecipeFragment extends BaseFragment {
 
     @Override
     public void configureViewModel(){
-        responseViewModel = ViewModelProviders.of(getActivity()).get(ResponseViewModel.class);
-        responseViewModel.getCurrentRecipe().observe(this, this::updateUI);
+        recipeScreenViewModel = ViewModelProviders.of(getActivity()).get(RecipeScreenViewModel.class);
+        recipeScreenViewModel.getCurrentRecipe().observe(this, this::updateUI);
     }
 
     private void configureWebView(){

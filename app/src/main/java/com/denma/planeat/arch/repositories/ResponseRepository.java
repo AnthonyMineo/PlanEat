@@ -2,8 +2,6 @@ package com.denma.planeat.arch.repositories;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.content.Context;
-import android.widget.Toast;
 
 import com.denma.planeat.models.remote.Recipe;
 import com.denma.planeat.models.remote.Response;
@@ -31,7 +29,6 @@ public class ResponseRepository {
     }
 
     // FOR RESPONSE
-
     // --- GET ---
     public LiveData<Response> getResponse(){ return this.currentResponse; }
 
@@ -61,7 +58,6 @@ public class ResponseRepository {
     }
 
     // FOR RECIPE
-
     // --- GET ---
     public LiveData<Recipe> getCurrentRecipe(){ return this.currentRecipe; }
 

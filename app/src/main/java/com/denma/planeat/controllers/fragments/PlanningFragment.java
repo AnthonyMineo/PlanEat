@@ -1,10 +1,8 @@
 package com.denma.planeat.controllers.fragments;
 
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.denma.planeat.R;
-import com.denma.planeat.arch.viewmodels.MenuViewModel;
+import com.denma.planeat.arch.viewmodels.MainScreenViewModel;
 import com.denma.planeat.controllers.BaseFragment;
 import com.denma.planeat.controllers.activities.MainActivity;
 import com.denma.planeat.models.local.FoodMenu;
@@ -22,10 +20,7 @@ import com.denma.planeat.views.adapter.PlanningAdapter;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
-import dagger.android.support.AndroidSupportInjection;
 
 public class PlanningFragment extends BaseFragment {
 
@@ -34,7 +29,7 @@ public class PlanningFragment extends BaseFragment {
     RecyclerView recyclerView;
 
     // FOR DATA
-    private MenuViewModel menuViewModel;
+    private MainScreenViewModel mainScreenViewModel;
     private PlanningAdapter planningAdapter;
 
     public OnMenuClickListener callback;
@@ -99,7 +94,7 @@ public class PlanningFragment extends BaseFragment {
 
         ItemClickSupport.addTo(recyclerView, R.layout.plannig_recycle_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
-                    menuViewModel.setCurrentMenu(planningAdapter.getItem(position));
+                    mainScreenViewModel.setCurrentMenu(planningAdapter.getItem(position));
                     callback.onMenuClick();
                 });
     }
@@ -107,8 +102,8 @@ public class PlanningFragment extends BaseFragment {
     @Override
     public void configureViewModel(){
         int todayDate = TimeAndDateUtils.formatDateToInt_yyyyMMdd(TimeAndDateUtils.getDateWithGapFromToday(0));
-        menuViewModel = ViewModelProviders.of(getActivity()).get(MenuViewModel.class);
-        menuViewModel.getMenuFrom2WeeksRange(todayDate).observe(this, this::updateMenu);
+        mainScreenViewModel = ViewModelProviders.of(getActivity()).get(MainScreenViewModel.class);
+        mainScreenViewModel.getMenuFrom2WeeksRange(todayDate).observe(this, this::updateMenu);
     }
 
     // --------------------

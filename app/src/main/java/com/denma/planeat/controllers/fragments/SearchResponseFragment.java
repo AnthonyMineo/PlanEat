@@ -1,10 +1,8 @@
 package com.denma.planeat.controllers.fragments;
 
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.denma.planeat.R;
-import com.denma.planeat.arch.viewmodels.ResponseViewModel;
+import com.denma.planeat.arch.viewmodels.SearchScreenViewModel;
 import com.denma.planeat.controllers.BaseFragment;
 import com.denma.planeat.controllers.activities.SearchActivity;
 import com.denma.planeat.models.remote.Hit;
@@ -25,10 +23,7 @@ import com.denma.planeat.views.adapter.SearchResponseAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
-import dagger.android.support.AndroidSupportInjection;
 
 
 public class SearchResponseFragment extends BaseFragment {
@@ -40,7 +35,7 @@ public class SearchResponseFragment extends BaseFragment {
     RecyclerView recyclerView;
 
     // FOR DATA
-    private ResponseViewModel responseViewModel;
+    private SearchScreenViewModel searchScreenViewModel;
     private SearchResponseAdapter searchResponseAdapter;
 
     public OnRecipeClickListener callback;
@@ -100,15 +95,15 @@ public class SearchResponseFragment extends BaseFragment {
         ItemClickSupport.addTo(recyclerView, R.layout.search_recycle_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
                     // update selected recipe on view model
-                    responseViewModel.setCurrentRecipe(searchResponseAdapter.getItem(position));
+                    searchScreenViewModel.setCurrentRecipe(searchResponseAdapter.getItem(position));
                     callback.onRecipeClick();
                 });
     }
 
     @Override
     public void configureViewModel(){
-        responseViewModel = ViewModelProviders.of(getActivity()).get(ResponseViewModel.class);
-        responseViewModel.getResponse().observe(this, this::updateUI);
+        searchScreenViewModel = ViewModelProviders.of(getActivity()).get(SearchScreenViewModel.class);
+        searchScreenViewModel.getResponse().observe(this, this::updateUI);
     }
 
     // --------------------

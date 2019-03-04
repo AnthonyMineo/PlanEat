@@ -1,8 +1,6 @@
 package com.denma.planeat.views.holder;
 
-import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,7 +11,6 @@ import com.denma.planeat.models.local.Meal;
 import com.denma.planeat.views.adapter.MealOfTheDayAdapter;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 public class MealOfTheDayViewHolder extends GenericViewHolder<Meal> {

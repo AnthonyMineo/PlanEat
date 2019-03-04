@@ -20,8 +20,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.denma.planeat.R;
-import com.denma.planeat.arch.viewmodels.MenuViewModel;
-import com.denma.planeat.arch.viewmodels.ResponseViewModel;
+import com.denma.planeat.arch.viewmodels.MainScreenViewModel;
 import com.denma.planeat.controllers.BaseActivity;
 import com.denma.planeat.controllers.fragments.PlanningFragment;
 import com.denma.planeat.models.local.FoodMenu;
@@ -37,8 +36,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import dagger.android.AndroidInjection;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.support.HasSupportFragmentInjector;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, PlanningFragment.OnMenuClickListener {
 
@@ -60,8 +57,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     // FOR DATA
     @Inject
     ViewModelProvider.Factory viewModelFactory;
-    private MenuViewModel menuViewModel;
-    private ResponseViewModel responseViewModel;
+    private MainScreenViewModel mainScreenViewModel;
     private PageAdapter pagerAdapter;
 
     // --------------------
@@ -160,8 +156,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void configureViewModel(){
-        menuViewModel = ViewModelProviders.of(this, viewModelFactory).get(MenuViewModel.class);
-        responseViewModel = ViewModelProviders.of(this, viewModelFactory).get(ResponseViewModel.class);
+        mainScreenViewModel = ViewModelProviders.of(this, viewModelFactory).get( MainScreenViewModel.class);
     }
 
     @Override
@@ -255,7 +250,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.toolbar_menu_list:
                 // do someting about the list
                 int todayDate = TimeAndDateUtils.formatDateToInt_yyyyMMdd(TimeAndDateUtils.getDateWithGapFromToday(0));
-                menuViewModel.getMenuFrom2WeeksRange(todayDate).observe(this, this::updateShoppingList);
+                mainScreenViewModel.getMenuFrom2WeeksRange(todayDate).observe(this, this::updateShoppingList);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
