@@ -23,19 +23,11 @@ public class MenuRepository {
 
     // DAO
     // --- GET ---
-    public LiveData<List<FoodMenu>> getAllMenu(){ return this.menuDao.getAllMenu(); }
     public LiveData<List<FoodMenu>> getMenuFrom2WeeksRange(int todayDate){ return this.menuDao.getMenuFrom2WeeksRange(todayDate); }
     public LiveData<FoodMenu> getMenuByDate(int eatingDate){ return this.menuDao.getMenuByDate(eatingDate); }
 
-    // --- CREATE ---
-    public void createMenu(FoodMenu foodMenu){ this.menuDao.insertMenu(foodMenu); }
-
-    // --- DELETE ---
-    public void deleteMenu(int eatingDate){ this.menuDao.deleteMenu(eatingDate); }
-
     // --- UPDATE ---
     public void updateMenu(FoodMenu foodMenu){ this.menuDao.updateMenu(foodMenu); }
-
 
     // FOR CURRENT MENU
     // --- GET ---
