@@ -20,6 +20,7 @@ import com.denma.planeat.models.remote.Response;
 import com.denma.planeat.utils.ItemClickSupport;
 import com.denma.planeat.views.adapter.SearchResponseAdapter;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,9 +39,9 @@ public class SearchResponseFragment extends BaseFragment {
     private SearchScreenViewModel searchScreenViewModel;
     private SearchResponseAdapter searchResponseAdapter;
 
-    public OnRecipeClickListener callback;
+    public WeakReference<OnRecipeClickListener> callback;
     public void setOnRecipeClickListener(SearchActivity activity) {
-        callback = activity;
+        callback = new WeakReference<>(activity);
     }
     public interface OnRecipeClickListener {
         void onRecipeClick();
@@ -96,7 +97,7 @@ public class SearchResponseFragment extends BaseFragment {
                 .setOnItemClickListener((recyclerView, position, v) -> {
                     // update selected recipe on view model
                     searchScreenViewModel.setCurrentRecipe(searchResponseAdapter.getItem(position));
-                    callback.onRecipeClick();
+                    callback.get().onRecipeClick();
                 });
     }
 
@@ -124,10 +125,4 @@ public class SearchResponseFragment extends BaseFragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        this.recyclerView.setVisibility(View.GONE);
-        this.errorText.setVisibility(View.GONE);
-    }
 }

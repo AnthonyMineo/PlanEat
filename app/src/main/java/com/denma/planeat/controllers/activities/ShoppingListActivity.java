@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -96,6 +97,20 @@ public class ShoppingListActivity extends BaseActivity {
         }
         this.shoppingText.setMovementMethod(new ScrollingMovementMethod());
         this.shoppingText.setText(listToDiplay);
+    }
+
+    // --------------------
+    // MENUS
+    // --------------------
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return true;
     }
 
 }

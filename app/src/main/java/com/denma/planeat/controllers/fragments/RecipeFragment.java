@@ -69,7 +69,6 @@ public class RecipeFragment extends BaseFragment {
 
     private void configureWebView(){
         // - Configure WebView
-        webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);
         webView.setWebViewClient(new WebViewClient());

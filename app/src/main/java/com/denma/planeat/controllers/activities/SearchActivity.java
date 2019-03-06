@@ -36,14 +36,11 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
     LinearLayout mainLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.activity_search_fragment_layout)
-    FrameLayout fragmentLayout;
 
 
     // FOR DATA
     private SearchRequestFragment requestFragment;
     private SearchResponseFragment responseFragment;
-    private RecipeFragment recipeFragment;
 
     // FOR INJECTION
     @Inject
@@ -61,8 +58,8 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
         // Configuration
         this.configureDagger();
         this.configureToolBar();
-        this.configureFragment();
         this.configureViewModel();
+        this.configureFragments();
 
         // Actions
         this.alphaViewAnimation(mainLayout, 100);
@@ -108,18 +105,6 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
         }
     }
 
-    private void configureFragment(){
-        if(requestFragment == null){
-            requestFragment = new SearchRequestFragment();
-        }
-        if(responseFragment == null){
-            responseFragment = new SearchResponseFragment();
-        }
-        if(recipeFragment == null){
-            recipeFragment = new RecipeFragment();
-        }
-    }
-
     private void configureViewModel(){
         searchScreenViewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchScreenViewModel.class);
     }
@@ -147,24 +132,37 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
         view.startAnimation(animation);
     }
 
-    private void showRequestFragment(){
-        if(fragmentLayout != null){
+    private void configureFragments(){
+        if(requestFragment == null) {
+            requestFragment = new SearchRequestFragment();
             // Add the fragment to the FrameLayout container
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.activity_search_fragment_layout, requestFragment).commit();
-            this.toolbar.setTitle(getResources().getString(R.string.toolbar_search_title));
+                    .add(R.id.activity_search_fragment_layout, requestFragment)
+                    .commit();
+        }
+
+        if(responseFragment == null) {
+            responseFragment = new SearchResponseFragment();
+            // replace the fragment to the FrameLayout container
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.activity_search_fragment_layout, responseFragment)
+                    .addToBackStack("response")
+                    .commit();
         }
     }
 
+    private void showRequestFragment(){
+        // Add the fragment to the FrameLayout container
+        getSupportFragmentManager().beginTransaction().hide(responseFragment).commit();
+        getSupportFragmentManager().beginTransaction().show(requestFragment).commit();
+        this.toolbar.setTitle(getResources().getString(R.string.toolbar_search_title));
+    }
+
     private void showResponseFragment(){
-        if(fragmentLayout != null){
-            // replace the fragment to the FrameLayout container
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.activity_search_fragment_layout, responseFragment)
-                    .addToBackStack("Response")
-                    .commit();
-            this.toolbar.setTitle(getResources().getString(R.string.toolbar_response_title));
-        }
+        // replace the fragment to the FrameLayout container
+        getSupportFragmentManager().beginTransaction().hide(requestFragment).commit();
+        getSupportFragmentManager().beginTransaction().show(responseFragment).commit();
+        this.toolbar.setTitle(getResources().getString(R.string.toolbar_response_title));
     }
 
     private void showRecipeActivity(){
@@ -199,10 +197,9 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         if(responseFragment.isVisible())
-            this.toolbar.setTitle(getResources().getString(R.string.toolbar_response_title));
+            showRequestFragment();
         if(requestFragment.isVisible())
-            toolbar.setTitle(getResources().getString(R.string.toolbar_search_title));
+            finish();
     }
 }

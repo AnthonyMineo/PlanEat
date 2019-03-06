@@ -17,6 +17,8 @@ import com.denma.planeat.controllers.BaseFragment;
 import com.denma.planeat.controllers.activities.SearchActivity;
 import com.denma.planeat.utils.InternetUtils;
 
+import java.lang.ref.WeakReference;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -42,9 +44,9 @@ public class SearchRequestFragment extends BaseFragment {
     // FOR DATA
     private SearchScreenViewModel searchScreenViewModel;
 
-    public OnSearchClickListener callback;
+    public WeakReference<OnSearchClickListener> callback;
     public void setOnSearchClickListener(SearchActivity activity) {
-        callback = activity;
+        callback = new WeakReference<>(activity);
     }
     public interface OnSearchClickListener {
         void onSearchClick();
@@ -106,7 +108,7 @@ public class SearchRequestFragment extends BaseFragment {
         String health = healthAttribution();
         if(InternetUtils.isInternetAvailable(getActivity())){
             searchScreenViewModel.updateResponseFromAPI(query, diet, health);
-            callback.onSearchClick();
+            callback.get().onSearchClick();
         } else {
             Toast.makeText(getActivity(), getString(R.string.error_no_internet), Toast.LENGTH_LONG).show();
         }
