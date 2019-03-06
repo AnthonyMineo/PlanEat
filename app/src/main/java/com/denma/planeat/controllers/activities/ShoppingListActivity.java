@@ -33,7 +33,7 @@ public class ShoppingListActivity extends BaseActivity {
     private String fileName;
 
     // --------------------
-    // ON CREATE
+    // LIFE CYCLE
     // --------------------
 
     @Override

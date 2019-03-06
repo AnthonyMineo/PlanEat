@@ -29,12 +29,15 @@ public class RecipeFragment extends BaseFragment {
     // CONSTRUCTORS
     // --------------------
 
-    public RecipeFragment() {
-        // Required empty public constructor
+    public static RecipeFragment newInstance() {
+        Bundle args = new Bundle();
+        RecipeFragment fragment = new RecipeFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     // --------------------
-    // ON CREATE VIEW
+    // LIFE CYCLE
     // --------------------
 
     @Override

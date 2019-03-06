@@ -9,6 +9,10 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    // --------------------
+    // LIFE CYCLE
+    // --------------------
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,4 +25,5 @@ public abstract class BaseActivity extends AppCompatActivity {
     // --------------------
 
     protected abstract int getActivityLayout();
+
 }

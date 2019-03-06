@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.denma.planeat.R;
@@ -32,18 +31,15 @@ public class RecipeActivity extends BaseActivity{
     LinearLayout mainLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.activity_recipe_fragment_layout)
-    FrameLayout fragmentLayout;
     private MenuItem chooseMenu;
 
     // FOR DATA
     @Inject
     ViewModelProvider.Factory viewModelFactory;
-    private RecipeScreenViewModel recipeScreenViewModel;
     private RecipeFragment recipeFragment;
 
     // --------------------
-    // ON CREATE
+    // LIFE CYCLE
     // --------------------
 
     @Override
@@ -91,7 +87,7 @@ public class RecipeActivity extends BaseActivity{
     }
 
     private void configureViewModel(){
-        recipeScreenViewModel = ViewModelProviders.of(this, viewModelFactory).get(RecipeScreenViewModel.class);
+        RecipeScreenViewModel recipeScreenViewModel = ViewModelProviders.of(this, viewModelFactory).get(RecipeScreenViewModel.class);
     }
 
     // --------------------
@@ -105,21 +101,19 @@ public class RecipeActivity extends BaseActivity{
         view.startAnimation(animation);
     }
 
-    // --------------------
-    // MENUS
-    // --------------------
-
     private void showRecipeFragment(){
-        if(fragmentLayout != null){
-            if(recipeFragment == null){
-                recipeFragment = new RecipeFragment();
-            }
-            // replace the fragment to the FrameLayout container
+        if(recipeFragment == null){
+            recipeFragment = RecipeFragment.newInstance();
+            // add the fragment to the FrameLayout container
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.activity_recipe_fragment_layout, recipeFragment)
                     .commit();
         }
     }
+
+    // --------------------
+    // MENUS
+    // --------------------
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

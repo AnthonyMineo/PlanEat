@@ -5,19 +5,19 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.denma.planeat.R;
 import com.denma.planeat.arch.viewmodels.SearchScreenViewModel;
 import com.denma.planeat.controllers.BaseActivity;
-import com.denma.planeat.controllers.fragments.RecipeFragment;
 import com.denma.planeat.controllers.fragments.SearchRequestFragment;
 import com.denma.planeat.controllers.fragments.SearchResponseFragment;
 
@@ -39,16 +39,14 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
 
 
     // FOR DATA
-    private SearchRequestFragment requestFragment;
-    private SearchResponseFragment responseFragment;
-
-    // FOR INJECTION
     @Inject
     ViewModelProvider.Factory viewModelFactory;
-    private SearchScreenViewModel searchScreenViewModel;
+    private SearchRequestFragment requestFragment;
+    private SearchResponseFragment responseFragment;
+    private FragmentManager fm;
 
     // --------------------
-    // ON CREATE
+    // LIFE CYCLE
     // --------------------
 
     @Override
@@ -106,7 +104,23 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
     }
 
     private void configureViewModel(){
-        searchScreenViewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchScreenViewModel.class);
+        SearchScreenViewModel searchScreenViewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchScreenViewModel.class);
+    }
+
+    private void configureFragments(){
+        fm = getSupportFragmentManager();
+
+        if(requestFragment == null) {
+            requestFragment = SearchRequestFragment.newInstance();
+            // Add the fragment to the FrameLayout container
+            fm.beginTransaction().add(R.id.activity_search_fragment_layout, requestFragment).commit();
+        }
+
+        if(responseFragment == null) {
+            responseFragment = SearchResponseFragment.newInstance();
+            // add the fragment to the FrameLayout container
+            fm.beginTransaction().add(R.id.activity_search_fragment_layout, responseFragment).addToBackStack("response").commit();
+        }
     }
 
     @Override
@@ -132,43 +146,18 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
         view.startAnimation(animation);
     }
 
-    private void configureFragments(){
-        if(requestFragment == null) {
-            requestFragment = new SearchRequestFragment();
-            // Add the fragment to the FrameLayout container
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.activity_search_fragment_layout, requestFragment)
-                    .commit();
-        }
-
-        if(responseFragment == null) {
-            responseFragment = new SearchResponseFragment();
-            // replace the fragment to the FrameLayout container
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.activity_search_fragment_layout, responseFragment)
-                    .addToBackStack("response")
-                    .commit();
-        }
-    }
-
     private void showRequestFragment(){
-        // Add the fragment to the FrameLayout container
-        getSupportFragmentManager().beginTransaction().hide(responseFragment).commit();
-        getSupportFragmentManager().beginTransaction().show(requestFragment).commit();
+        // Using show/hide to avoid memory leaks from add/remove
+        fm.beginTransaction().hide(responseFragment).commit();
+        fm.beginTransaction().show(requestFragment).commit();
         this.toolbar.setTitle(getResources().getString(R.string.toolbar_search_title));
     }
 
     private void showResponseFragment(){
-        // replace the fragment to the FrameLayout container
-        getSupportFragmentManager().beginTransaction().hide(requestFragment).commit();
-        getSupportFragmentManager().beginTransaction().show(responseFragment).commit();
+        // Using show/hide to avoid memory leaks from add/remove
+        fm.beginTransaction().hide(requestFragment).commit();
+        fm.beginTransaction().show(responseFragment).commit();
         this.toolbar.setTitle(getResources().getString(R.string.toolbar_response_title));
-    }
-
-    private void showRecipeActivity(){
-        Intent intent = new Intent(this, RecipeActivity.class);
-        intent.putExtra("parent", "RecipeActivity");
-        startActivityForResult(intent, RECIPE_ACTIVITY_REQUEST_CODE);
     }
 
     @Override
@@ -178,7 +167,17 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
 
     @Override
     public void onRecipeClick() {
-        showRecipeActivity();
+        startRecipeActivity();
+    }
+
+    // --------------------
+    // NAVIGATION
+    // --------------------
+
+    private void startRecipeActivity(){
+        Intent intent = new Intent(this, RecipeActivity.class);
+        intent.putExtra("parent", "RecipeActivity");
+        startActivityForResult(intent, RECIPE_ACTIVITY_REQUEST_CODE);
     }
 
     // --------------------
@@ -202,4 +201,5 @@ public class SearchActivity extends BaseActivity implements SearchRequestFragmen
         if(requestFragment.isVisible())
             finish();
     }
+
 }

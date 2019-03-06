@@ -61,7 +61,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private PageAdapter pagerAdapter;
 
     // --------------------
-    // ON CREATE
+    // LIFE CYCLE
     // --------------------
 
     @Override
@@ -193,17 +193,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         bottomNavigationView.setSelectedItemId(R.id.action_planning);
     }
 
-    @Override
-    public void onMenuClick() {
-        viewPager.setCurrentItem(2);
-    }
-
-    private void launchSearchActivity(){
-        // - Launch SearchActivity
-        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-        startActivity(intent);
-    }
-
     private void updateShoppingList(List<FoodMenu> foodMenuList){
         List<String> shoppingList = new ArrayList<>();
         for(FoodMenu menu : foodMenuList){
@@ -213,6 +202,21 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
         String fileName = "From : " + TimeAndDateUtils.formatDateToString_EEEdd(TimeAndDateUtils.getDateWithGapFromToday(0));
         StorageHelper.setShoppingListInStorage(getFilesDir(), this, fileName, shoppingList);
+    }
+
+    @Override
+    public void onMenuClick() {
+        viewPager.setCurrentItem(2);
+    }
+
+    // --------------------
+    // NAVIGATION
+    // --------------------
+
+    private void startSearchActivity(){
+        // - Launch SearchActivity
+        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+        startActivity(intent);
     }
 
     // --------------------
@@ -242,10 +246,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     // - Handle actions on menu items
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.toolbar_menu_add:
-                launchSearchActivity();
+                startSearchActivity();
                 return true;
             case R.id.toolbar_menu_list:
                 // do someting about the list
@@ -263,7 +268,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         switch (id){
             case R.id.menu_drawer_recipes :
-                launchSearchActivity();
+                startSearchActivity();
                 break;
             case R.id.menu_drawer_profil:
                 Toast.makeText(this, getResources().getString(R.string.error_not_available_yet), Toast.LENGTH_SHORT).show();
@@ -293,4 +298,5 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             super.onBackPressed();
         }
     }
+
 }

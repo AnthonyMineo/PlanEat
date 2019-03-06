@@ -60,7 +60,7 @@ public class ModalFragment extends BottomSheetDialogFragment {
     }
 
     // --------------------
-    // ON CREATE VIEW
+    // LIFE CYCLE
     // --------------------
 
     @Nullable

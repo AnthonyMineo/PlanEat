@@ -51,12 +51,15 @@ public class SearchResponseFragment extends BaseFragment {
     // CONSTRUCTORS
     // --------------------
 
-    public SearchResponseFragment() {
-        // Required empty public constructor
+    public static SearchResponseFragment newInstance() {
+        Bundle args = new Bundle();
+        SearchResponseFragment fragment = new SearchResponseFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     // --------------------
-    // ON CREATE VIEW
+    // LIFE CYCLE
     // --------------------
 
     @Override

@@ -3,9 +3,6 @@ package com.denma.planeat.controllers.fragments;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -56,20 +53,16 @@ public class SearchRequestFragment extends BaseFragment {
     // CONSTRUCTORS
     // --------------------
 
-    public SearchRequestFragment() {
-        // Required empty public constructor
+    public static SearchRequestFragment newInstance() {
+        Bundle args = new Bundle();
+        SearchRequestFragment fragment = new SearchRequestFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     // --------------------
-    // ON CREATE VIEW
+    // LIFE CYCLE
     // --------------------
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
-        return view;
-    }
 
     // --------------------
     // GETTERS

@@ -38,10 +38,6 @@ public class MealOfTheDayFragment extends BaseFragment {
     // CONSTRUCTORS
     // --------------------
 
-    public MealOfTheDayFragment() {
-        // Required empty public constructor
-    }
-
     public static MealOfTheDayFragment newInstance() {
         Bundle args = new Bundle();
         MealOfTheDayFragment fragment = new MealOfTheDayFragment();
@@ -50,7 +46,7 @@ public class MealOfTheDayFragment extends BaseFragment {
     }
 
     // --------------------
-    // ON CREATE VIEW
+    // LIFE CYCLE
     // --------------------
 
     @Override

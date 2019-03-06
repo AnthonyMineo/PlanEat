@@ -34,10 +34,6 @@ public class ShoppingListFragment extends BaseFragment {
     // CONSTRUCTORS
     // --------------------
 
-    public ShoppingListFragment() {
-        // Required empty public constructor
-    }
-
     public static ShoppingListFragment newInstance() {
         Bundle args = new Bundle();
         ShoppingListFragment fragment = new ShoppingListFragment();
@@ -46,7 +42,7 @@ public class ShoppingListFragment extends BaseFragment {
     }
 
     // --------------------
-    // ON CREATE VIEW
+    // LIFE CYCLE
     // --------------------
 
     @Override
@@ -70,9 +66,6 @@ public class ShoppingListFragment extends BaseFragment {
         return R.layout.fragment_shopping_list;
     }
 
-    @Override
-    public void configureViewModel() { }
-
     // --------------------
     // CONFIGURATIONS
     // --------------------
@@ -89,10 +82,7 @@ public class ShoppingListFragment extends BaseFragment {
         ItemClickSupport.addTo(recyclerView, R.layout.shopping_recycle_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
                     // launch an activity to show shopping list detail
-                    // - Launch SearchActivity
-                    Intent intent = new Intent(getActivity(), ShoppingListActivity.class);
-                    intent.putExtra("fileName", shoppingListAdapter.getItem(position));
-                    startActivity(intent);
+                    startShoppingListActivity(position);
                 });
     }
 
@@ -108,6 +98,19 @@ public class ShoppingListFragment extends BaseFragment {
             }
             this.shoppingListAdapter.updateData(fileNameList);
         }
+    }
+
+    @Override
+    public void configureViewModel() { }
+
+    // --------------------
+    // NAVIGATION
+    // --------------------
+
+    private void startShoppingListActivity(int position){
+        Intent intent = new Intent(getActivity(), ShoppingListActivity.class);
+        intent.putExtra("fileName", shoppingListAdapter.getItem(position));
+        startActivity(intent);
     }
 
 }

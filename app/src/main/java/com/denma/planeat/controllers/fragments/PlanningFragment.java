@@ -18,6 +18,7 @@ import com.denma.planeat.utils.ItemClickSupport;
 import com.denma.planeat.utils.TimeAndDateUtils;
 import com.denma.planeat.views.adapter.PlanningAdapter;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import butterknife.BindView;
@@ -32,9 +33,9 @@ public class PlanningFragment extends BaseFragment {
     private MainScreenViewModel mainScreenViewModel;
     private PlanningAdapter planningAdapter;
 
-    public OnMenuClickListener callback;
+    public WeakReference<OnMenuClickListener> callback;
     public void setOnMenuClickListener(MainActivity activity) {
-        callback = activity;
+        callback = new WeakReference<>(activity);
     }
     public interface OnMenuClickListener {
         void onMenuClick();
@@ -44,10 +45,6 @@ public class PlanningFragment extends BaseFragment {
     // CONSTRUCTORS
     // --------------------
 
-    public PlanningFragment() {
-        // Required empty public constructor
-    }
-
     public static PlanningFragment newInstance() {
         Bundle args = new Bundle();
         PlanningFragment fragment = new PlanningFragment();
@@ -56,7 +53,7 @@ public class PlanningFragment extends BaseFragment {
     }
 
     // --------------------
-    // ON CREATE VIEW
+    // LIFE CYCLE
     // --------------------
 
     @Override
@@ -95,7 +92,7 @@ public class PlanningFragment extends BaseFragment {
         ItemClickSupport.addTo(recyclerView, R.layout.plannig_recycle_item)
                 .setOnItemClickListener((recyclerView, position, v) -> {
                     mainScreenViewModel.setCurrentMenu(planningAdapter.getItem(position));
-                    callback.onMenuClick();
+                    callback.get().onMenuClick();
                 });
     }
 
