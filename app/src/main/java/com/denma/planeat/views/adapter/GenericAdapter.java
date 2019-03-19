@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,8 +46,9 @@ public abstract class GenericAdapter<T, VH extends GenericViewHolder<T>> extends
     public T getItem(int position){ return this.itemList.get(position); }
 
     public void updateData(List<T> items){
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new GenericListDiffCallback(this.itemList, items));
+        diffResult.dispatchUpdatesTo(this);
         this.itemList = items;
-        this.notifyDataSetChanged();
     }
 
 }

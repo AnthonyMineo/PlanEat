@@ -18,7 +18,7 @@ public class InternetConnexionTest extends ActivityInstrumentationTestCase2<Main
     }
 
     @Override
-    protected void setUp() throws Exception{
+    protected void setUp() {
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
