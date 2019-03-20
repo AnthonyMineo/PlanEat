@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:paddingRight="@dimen/general_small_padding"
     android:paddingLeft="@dimen/general_small_padding"
+    android:background="?android:attr/selectableItemBackground"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <RelativeLayout

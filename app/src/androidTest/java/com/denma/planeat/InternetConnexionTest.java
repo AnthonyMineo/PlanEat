@@ -31,7 +31,7 @@ public class InternetConnexionTest extends ActivityInstrumentationTestCase2<Main
         // Test
         solo.setWiFiData(true);
         solo.waitForActivity(String.valueOf(solo.getCurrentActivity()), 5000);
-        Boolean internet = InternetUtils.isInternetAvailable(getTargetContext());
+        Boolean internet = InternetUtils.Companion.isWifiAvailable(getTargetContext());
         assertTrue(internet);
         solo.setWiFiData(false);
     }

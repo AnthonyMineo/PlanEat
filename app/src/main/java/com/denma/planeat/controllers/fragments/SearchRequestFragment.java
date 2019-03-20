@@ -99,7 +99,7 @@ public class SearchRequestFragment extends BaseFragment {
         }
         String diet = dietAttribution();
         String health = healthAttribution();
-        if(InternetUtils.isInternetAvailable(getActivity())){
+        if(InternetUtils.Companion.isInternetAvailable(getActivity())){
             searchScreenViewModel.updateResponseFromAPI(query, diet, health);
             callback.get().onSearchClick();
         } else {

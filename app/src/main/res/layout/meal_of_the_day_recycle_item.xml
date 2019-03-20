@@ -8,7 +8,9 @@
     android:layout_marginRight="@dimen/meal_of_the_day_medium_margin"
     card_view:cardUseCompatPadding="true"
     card_view:cardElevation="@dimen/meal_of_the_day_medium_margin"
-    card_view:cardCornerRadius="@dimen/meal_of_the_day_small_margin">
+    card_view:cardCornerRadius="@dimen/meal_of_the_day_small_margin"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <ImageView
         android:id="@+id/meal_of_the_day_image"
