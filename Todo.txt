@@ -1,0 +1,4 @@
+Next : 
+Changing the source of remote data, no more API, actually thinking of using WAMP 
+the time to be able to build a back-end myself + create my own data for meals.
+
