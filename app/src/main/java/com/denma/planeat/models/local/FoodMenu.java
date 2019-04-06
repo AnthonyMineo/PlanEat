@@ -36,6 +36,7 @@ public class FoodMenu {
     public List<Meal> getMealList() { return mealList; }
     public int getEatingDate() { return eatingDate; }
     public String getEatingDateString() { return eatingDateString; }
+
     // --------------------
     // SETTERS
     // --------------------

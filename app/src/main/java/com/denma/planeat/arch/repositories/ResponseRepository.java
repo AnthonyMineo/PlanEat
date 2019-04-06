@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.denma.planeat.models.remote.Recipe;
 import com.denma.planeat.models.remote.Response;
-import com.denma.planeat.utils.api.EdamamService;
+import com.denma.planeat.utils.api.ApiService;
 
 import java.util.concurrent.Executor;
 
@@ -17,15 +17,15 @@ import retrofit2.Callback;
 public class ResponseRepository {
 
     private final Executor executor;
-    private EdamamService edamamService;
+    private ApiService apiService;
     private final MutableLiveData<Response> currentResponse = new MutableLiveData<Response>();
     private final MutableLiveData<Recipe> currentRecipe = new MutableLiveData<Recipe>();
 
     // --- CONSTRUCTOR ---
     @Inject
-    public ResponseRepository(Executor executor, EdamamService edamamService){
+    public ResponseRepository(Executor executor, ApiService apiService){
         this.executor = executor;
-        this.edamamService = edamamService;
+        this.apiService = apiService;
     }
 
     // FOR RESPONSE
@@ -38,11 +38,11 @@ public class ResponseRepository {
     // --- REMOTE DATA UPDATE ---
     public void updateResponseFromAPI(final String query, final String diet, final String health) {
         executor.execute(() -> {
-            edamamService.getRecipes(query, diet, health).enqueue(new Callback<Response>() {
+            apiService.getRecipes().enqueue(new Callback<Response>() {
                 @Override
                 public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
-                    if(response.isSuccessful() && response.body() != null){
-                        if (response.body().getHits() != null){
+                    if(response.isSuccessful()){
+                        if (response.body().getSuccess() == 1){
                             // the request return true results
                             setResponse(response.body());
                         } else {
@@ -50,7 +50,6 @@ public class ResponseRepository {
                         }
                     }
                 }
-
                 @Override
                 public void onFailure(Call<Response> call, Throwable t) { }
             });

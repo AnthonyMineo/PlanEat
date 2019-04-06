@@ -14,7 +14,6 @@ import com.denma.planeat.R;
 import com.denma.planeat.arch.viewmodels.SearchScreenViewModel;
 import com.denma.planeat.controllers.BaseFragment;
 import com.denma.planeat.controllers.activities.SearchActivity;
-import com.denma.planeat.models.remote.Hit;
 import com.denma.planeat.models.remote.Recipe;
 import com.denma.planeat.models.remote.Response;
 import com.denma.planeat.utils.ItemClickSupport;
@@ -116,10 +115,10 @@ public class SearchResponseFragment extends BaseFragment {
 
     private void updateUI(Response response){
         List<Recipe> recipeList = new ArrayList<>();
-        if(response.getHits().size() != 0){
+        if(response.getData().size() != 0){
             this.errorText.setVisibility(View.GONE);
-            for(Hit hit : response.getHits()){
-                recipeList.add(hit.getRecipe());
+            for(Recipe recipe : response.getData()){
+                recipeList.add(recipe);
             }
             this.recyclerView.setVisibility(View.VISIBLE);
             searchResponseAdapter.updateData(recipeList);

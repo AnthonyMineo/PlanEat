@@ -47,7 +47,7 @@ public class PlanningViewHolder extends GenericViewHolder<FoodMenu>{
             // show a message to the user
         } else {
             for(Meal meal : item.getMealList()){
-                String url = meal.getRecipe().getImage();
+                String url = meal.getRecipe().getPicture();
                 switch (meal.getDayTiming()){
                     case 1:
                         Glide.with(getContext()).load(url).into(this.breakfast);

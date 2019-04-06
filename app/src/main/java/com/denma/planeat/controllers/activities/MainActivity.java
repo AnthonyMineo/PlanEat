@@ -197,7 +197,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         List<String> shoppingList = new ArrayList<>();
         for(FoodMenu menu : foodMenuList){
             for(Meal meal : menu.getMealList()){
-                shoppingList.addAll(meal.getRecipe().getIngredientLines());
+               // shoppingList.addAll(meal.getRecipe().getIngredientLines());
             }
         }
         String fileName = "From : " + TimeAndDateUtils.formatDateToString_EEEdd(TimeAndDateUtils.getDateWithGapFromToday(0));

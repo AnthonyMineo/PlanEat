@@ -14,7 +14,7 @@ import com.denma.planeat.models.database.MenuDao;
 import com.denma.planeat.models.database.PlaneatDB;
 import com.denma.planeat.models.local.Meal;
 import com.denma.planeat.utils.TimeAndDateUtils;
-import com.denma.planeat.utils.api.EdamamService;
+import com.denma.planeat.utils.api.ApiService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -32,7 +32,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.denma.planeat.utils.ConstantsKt.APP_DB_NAME;
-import static com.denma.planeat.utils.ConstantsKt.EDAMAM_URL;
+import static com.denma.planeat.utils.ConstantsKt.BACK_END_URL;
 
 @Module(includes = ViewModelModule.class)
 public class AppModule {
@@ -93,7 +93,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    ResponseRepository provideResponseRepository(Executor executor, EdamamService edamamService) { return new ResponseRepository(executor, edamamService); }
+    ResponseRepository provideResponseRepository(Executor executor, ApiService edamamService) { return new ResponseRepository(executor, edamamService); }
 
     // --- NETWORK INJECTION ---
 
@@ -104,14 +104,14 @@ public class AppModule {
     Retrofit provideRetrofit(Gson gson){
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .baseUrl(EDAMAM_URL)
+                .baseUrl(BACK_END_URL)
                 .build();
         return retrofit;
     }
 
     @Provides
     @Singleton
-    EdamamService provideEdamamService(Retrofit restAdapter){
-        return restAdapter.create(EdamamService.class);
+    ApiService provideApiService(Retrofit restAdapter){
+        return restAdapter.create(ApiService.class);
     }
 }

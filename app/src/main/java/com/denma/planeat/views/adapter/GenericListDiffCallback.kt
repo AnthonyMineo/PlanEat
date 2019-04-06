@@ -33,12 +33,12 @@ class GenericListDiffCallback(private val oldList: List<Any>, private val newLis
             oldList[oldItemPosition] is Recipe -> {
                 val old = oldList[oldItemPosition] as Recipe
                 val new = newList[newItemPosition] as Recipe
-                old.label == new.label
+                old.id == new.id
             }
             oldList[oldItemPosition] is Meal -> {
                 val old = oldList[oldItemPosition] as Meal
                 val new = newList[newItemPosition] as Meal
-                old.dayTiming == new.dayTiming && old.recipe.label == new.recipe.label
+                old.dayTiming == new.dayTiming && old.recipe.id == new.recipe.id
             }
             else -> oldList[oldItemPosition] == newList[newItemPosition]
         }

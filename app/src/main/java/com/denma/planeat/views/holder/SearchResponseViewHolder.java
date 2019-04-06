@@ -25,11 +25,11 @@ public class SearchResponseViewHolder extends GenericViewHolder<Recipe> {
     @Override
     public void updateWithItem(Recipe item) {
         try{
-            Glide.with(getContext()).load(item.getImage()).into(recipeImage);
+            Glide.with(getContext()).load(item.getPicture()).into(recipeImage);
         } catch (Exception e){
             e.printStackTrace();
         }
-        recipeName.setText(item.getLabel());
+        recipeName.setText(item.getTitle());
     }
 
 }

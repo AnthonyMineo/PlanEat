@@ -9,7 +9,6 @@ import com.denma.planeat.models.database.PlaneatDB;
 import com.denma.planeat.models.local.FoodMenu;
 import com.denma.planeat.models.local.Meal;
 import com.denma.planeat.models.remote.Digest;
-import com.denma.planeat.models.remote.Ingredient;
 import com.denma.planeat.models.remote.Recipe;
 
 import org.junit.After;

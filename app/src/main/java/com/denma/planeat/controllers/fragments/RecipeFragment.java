@@ -82,7 +82,7 @@ public class RecipeFragment extends BaseFragment {
     // --------------------
 
     private void updateUI(Recipe recipe){
-        this.webView.loadUrl(recipe.getUrlSource());
+        //this.webView.loadUrl(recipe.getUrlSource());
     }
 
 }

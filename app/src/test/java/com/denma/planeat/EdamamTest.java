@@ -1,6 +1,6 @@
 package com.denma.planeat;
 
-import com.denma.planeat.utils.api.EdamamService;
+import com.denma.planeat.utils.api.ApiService;
 
 import org.junit.After;
 import org.junit.Before;
@@ -52,7 +52,7 @@ public class EdamamTest {
         final String[] url = new String[1];
         final List<String>[] ingredientLines = new List[]{new ArrayList<>()};
 
-        EdamamService service = retrofit.create(EdamamService.class);
+        ApiService service = retrofit.create(ApiService.class);
 
         CountDownLatch latch = new CountDownLatch(1);
         service.getRecipes("riz", null, null).enqueue(new Callback<com.denma.planeat.models.remote.Response>() {

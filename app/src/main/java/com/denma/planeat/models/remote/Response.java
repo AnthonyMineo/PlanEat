@@ -8,23 +8,25 @@ import java.util.List;
 
 public class Response {
 
-    long id = 1;
-
-    @SerializedName("hits")
+    @SerializedName("success")
     @Expose
-    private List<Hit> hits = null;
+    private int success;
 
-    public long getId() { return id; }
+    @SerializedName("data")
+    @Expose
+    private List<Recipe> data;
 
-    public void setId(long id) { this.id = id; }
+    // --------------------
+    // GETTERS
+    // --------------------
 
-    public List<Hit> getHits() {
-        return hits;
-    }
+    public int getSuccess() { return success; }
+    public List<Recipe> getData() { return data; }
 
-    public void setHits(List<Hit> hits) {
-        this.hits = hits;
-    }
+    // --------------------
+    // SETTERS
+    // --------------------
 
-
+    public void setSuccess(int success) { this.success = success; }
+    public void setData(List<Recipe> data) { this.data = data; }
 }

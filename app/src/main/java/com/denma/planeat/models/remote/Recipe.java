@@ -1,133 +1,68 @@
 
 package com.denma.planeat.models.remote;
 
+import android.support.annotation.Nullable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class Recipe {
 
-    @SerializedName("label")
+    @SerializedName("id")
     @Expose
-    private String label;
-    @SerializedName("image")
+    private int id;
+    @SerializedName("people_number")
     @Expose
-    private String image;
-    @SerializedName("url")
+    private int peopleNumber;
+    @SerializedName("difficulty")
     @Expose
-    private String urlSource;
-    @SerializedName("dietLabels")
+    private int difficulty;
+    @SerializedName("picture")
     @Expose
-    private List<String> dietLabels = null;
-    @SerializedName("healthLabels")
+    private String picture;
+    @SerializedName("video")
     @Expose
-    private List<String> healthLabels = null;
-    @SerializedName("ingredientLines")
+    @Nullable
+    private String video;
+    @SerializedName("title")
     @Expose
-    private List<String> ingredientLines = null;
-    @SerializedName("ingredients")
+    private String title;
+    @SerializedName("cooking_time")
     @Expose
-    private List<Ingredient> ingredients = null;
-    @SerializedName("calories")
+    private int cookingTime;
+    @SerializedName("preparing_time")
     @Expose
-    private Double calories;
-    @SerializedName("totalWeight")
-    @Expose
-    private Double totalWeight;
-    @SerializedName("totalTime")
+    private int preparingTime;
+    @SerializedName("total_time")
     @Expose
     private Double totalTime;
-    @SerializedName("digest")
-    @Expose
-    private List<Digest> digest = null;
 
-    public String getLabel() {
-        return label;
-    }
+    // --------------------
+    // GETTERS
+    // --------------------
 
-    public void setLabel(String label) {
-        this.label = label;
-    }
+    public int getId() { return id; }
+    public int getPeopleNumber() { return peopleNumber; }
+    public int getDifficulty() { return difficulty; }
+    public String getPicture() { return picture; }
+    @Nullable
+    public String getVideo() { return video; }
+    public String getTitle() { return title; }
+    public int getCookingTime() { return cookingTime; }
+    public int getPreparingTime() { return preparingTime; }
+    public Double getTotalTime() { return totalTime; }
 
-    public String getImage() {
-        return image;
-    }
+    // --------------------
+    // SETTERS
+    // --------------------
 
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getUrlSource() {
-        return urlSource;
-    }
-
-    public void setUrlSource(String urlSource) {
-        this.urlSource = urlSource;
-    }
-
-    public List<String> getDietLabels() {
-        return dietLabels;
-    }
-
-    public void setDietLabels(List<String> dietLabels) {
-        this.dietLabels = dietLabels;
-    }
-
-    public List<String> getHealthLabels() {
-        return healthLabels;
-    }
-
-    public void setHealthLabels(List<String> healthLabels) {
-        this.healthLabels = healthLabels;
-    }
-
-    public List<String> getIngredientLines() {
-        return ingredientLines;
-    }
-
-    public void setIngredientLines(List<String> ingredientLines) {
-        this.ingredientLines = ingredientLines;
-    }
-
-    public List<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    public Double getCalories() {
-        return calories;
-    }
-
-    public void setCalories(Double calories) {
-        this.calories = calories;
-    }
-
-    public Double getTotalWeight() {
-        return totalWeight;
-    }
-
-    public void setTotalWeight(Double totalWeight) {
-        this.totalWeight = totalWeight;
-    }
-
-    public Double getTotalTime() {
-        return totalTime;
-    }
-
-    public void setTotalTime(Double totalTime) {
-        this.totalTime = totalTime;
-    }
-
-    public List<Digest> getDigest() {
-        return digest;
-    }
-
-    public void setDigest(List<Digest> digest) {
-        this.digest = digest;
-    }
-
+    public void setId(int id) { this.id = id; }
+    public void setPeopleNumber(int peopleNumber) { this.peopleNumber = peopleNumber; }
+    public void setDifficulty(int difficulty) { this.difficulty = difficulty; }
+    public void setPicture(String picture) { this.picture = picture; }
+    public void setVideo(@Nullable String video) { this.video = video; }
+    public void setTitle(String title) { this.title = title; }
+    public void setCookingTime(int cookingTime) { this.cookingTime = cookingTime; }
+    public void setPreparingTime(int preparingTime) { this.preparingTime = preparingTime; }
+    public void setTotalTime(Double totalTime) { this.totalTime = totalTime; }
 }

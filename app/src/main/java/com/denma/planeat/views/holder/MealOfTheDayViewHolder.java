@@ -32,8 +32,8 @@ public class MealOfTheDayViewHolder extends GenericViewHolder<Meal> {
     @Override
     public void updateWithItem(Meal item) {
         try{
-            Glide.with(getContext()).load(item.getRecipe().getImage()).into(this.mainImage);
-            this.mealLabel.setText(item.getRecipe().getLabel());
+            Glide.with(getContext()).load(item.getRecipe().getPicture()).into(this.mainImage);
+            this.mealLabel.setText(item.getRecipe().getTitle());
             deleteMeal.setOnClickListener(view -> onDeleteButtonListener.deleteButtonOnClick(item));
         } catch (Exception e){
             e.printStackTrace();
